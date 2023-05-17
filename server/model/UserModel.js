@@ -1,4 +1,8 @@
 import mongoose from "mongoose";
+import validator from "validator";
+import crypto from "crypto";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -28,7 +32,9 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
+    required: [true, "Please enter a password"],
+    minlength: [8, "Your password must be at least 8 characters long"],
+    select: false,
   },
   bio: {
     type: String,
@@ -50,6 +56,23 @@ const userSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
+
+//hash password if not hased
+userSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+    next();
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
+
+
+
+
+
+
+
 
 const User = mongoose.model("User", userSchema);
 
