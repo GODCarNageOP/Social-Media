@@ -1,6 +1,7 @@
-import app from './app';
+import app from './app.js';
 
 import dotenv from 'dotenv';
+import connectDB from './config/connectDataBase.js';
 
 dotenv.config({ path: "config/config.env" })
 
@@ -22,3 +23,6 @@ app.listen(process.env.PORT, () => {
 
     console.log(`server is listening on ${process.env.PORT}`)
 })
+
+
+connectDB();
