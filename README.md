@@ -1,8 +1,13 @@
 
-
-
 create a file inside config config.env
 insided config.env add this
-PORT=4000 
+Change these all varable accordign you;
 
-DB_URI="mongodb+srv://:@cluster0.4igmnr2.mongodb.net/?retryWrites=true&w=majority" your mongoatlas link
+PORT
+DB_URI "add monogo atlas url"
+CLOUDINARY_NAME
+CLOUDINARY_SECRET_API_KEY
+CLOUDINARY_SECRET_API_SECRET
+JWT_EXPIRE
+COOKIE_EXPIRE
+JWT_SECRET_KEY
