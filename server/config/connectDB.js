@@ -6,7 +6,7 @@ const connectDB = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
-        console.log("MongoDB Connected bri");
+        console.log("MongoDB Connected");
     } catch (error) {
         console.log(`Error: ${error.message}`);
         process.exit(1);
@@ -23,3 +23,4 @@ const connectDB = async () => {
     });
 };
 export default connectDB;
+

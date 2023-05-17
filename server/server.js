@@ -1,12 +1,13 @@
 import app from './app.js';
 
 import dotenv from 'dotenv';
-import connectDB from './config/connectDataBase.js';
+import connectDB from './config/connectDB.js';
 
 dotenv.config({ path: "config/config.env" })
 
 
 
+connectDB();
 
 
 app.get('/', (req, res) => {
@@ -25,4 +26,3 @@ app.listen(process.env.PORT, () => {
 })
 
 
-connectDB();
