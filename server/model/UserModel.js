@@ -48,11 +48,22 @@ const userSchema = new mongoose.Schema({
   avatar: {
     public_id: {
       type: String,
-      required: true,
+      // required: true,
     },
     url: {
       type: String,
-      required: true,
+      // required: true,
+      default: "www.avatar.jpg",
+    },
+  },
+  coverimage: {
+    public_id: {
+      type: String,
+      // required: true,
+    },
+    url: {
+      type: String,
+      // required: true,
     },
   },
   following: [
@@ -76,13 +87,6 @@ userSchema.pre("save", async function (next) {
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });
-
-
-
-
-
-
-
 
 const User = mongoose.model("User", userSchema);
 
