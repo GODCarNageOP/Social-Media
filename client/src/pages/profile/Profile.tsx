@@ -133,12 +133,13 @@ const profile = {
 const Profile = () => {
 
   return (
-    <div className='Profile w-[50%]  '>
+
+    <div className='Profile w-[50%] pt-1 '>
       <div className="back-div flex gap-8 align-center pl-4 ">
         <ArrowBackIcon />
 
         <div className="flex flex-col ">
-          <span className='font-semibold text-2xl'>
+          <span className='font-bold topName '>
             {profile?.name}
           </span>
           <div className='flex gap-2 text-gray-500'>
@@ -195,7 +196,7 @@ const Profile = () => {
           }
         </span>
 
-        <div className="flex address text-gray-500 flex-wrap gap-2 mt-2">
+        <div className="flex address text-gray-500 flex-wrap gap-2 mt-3">
           <div className="flex gap-1">
             <LocationOnIcon />
             <span className='tex-gray-500'>
@@ -205,36 +206,100 @@ const Profile = () => {
             </span>
           </div>
 
-          <div className="flex items-center gap-1 w-[50%]">
-            <InsertLinkIcon/>
-            <span className='text-blue-500'>
-              {
-                profile?.address?.website
-              }
+          <div className="flex gap-1 items-center w-30">
+            <InsertLinkIcon />
+            <span className="text-blue-500 truncate">
+              {profile?.address?.website}
             </span>
-            
-          </div> 
-           <div className="flex gap-1 items-center">
+          </div>
+
+          <div className="flex gap-1 items-center">
             <CakeIcon />
             <span className='tex-gray-500'>
-              {
+              Born   {
                 profile?.address?.dob
               }
             </span>
-          </div> 
-           <div className="flex gap-1 items-center align-center">
+          </div>
+          <div className="flex gap-1 items-center align-center">
             <CalendarTodayIcon />
             <span className='tex-gray-500'>
-              {
+              Joined {
                 profile?.address?.joined
               }
             </span>
           </div>
         </div>
+        <div className="flex mt-3 gap-5">
+          <div className="flex gap-1">
+
+            <span className='text-1xl font-bold text-black'>
+              {
+                profile?.numberOfFollowing
+              }
+            </span>
+
+            <span className='text-gray-600'>
+              Following
+
+            </span>
+          </div>
+          <div className="flex gap-1">
+            <span className='text-1xl font-bold text-black'>
+
+              {
+                profile?.numberOfFollowers
+              }
+
+            </span>
+            <span className='text-gray-600'>
+              Followers
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <ProfileTweet />
+    </div>
+  )
+}
+
+
+
+
+const ProfileTweet = () => {
+
+
+  return (
+    <div className='profile-tweet'>
+
+      <div className="flex ">
+        <button className="grid-1 w-full p-3">
+          <span className="font-bold">Tweets</span>
+        </button>
+        <button className="grid-1 w-full p-3">
+          <span className="font-bold">Replies</span>
+        </button>
+        <button className="grid-1 w-full p-3">
+          <span className="font-bold">Media</span>
+        </button>
+        <button className="grid-1 w-full p-3">
+          <span className="font-bold">Likes</span>
+        </button>
       </div>
 
     </div>
-  )
+
+  );
+}
+
+
+const TweetCard = () => {
+
+  <div>
+
+  </div>
+
 }
 
 export default Profile
