@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div className="navbar w-[20%] border-x flex flex-col h-full">
+    <div className="navbar w-[20%] border-x flex flex-col h-full fixed">
       <Link to="/">
         <div className="logo h-[5%] flex gap-2 p-5">
           <img
@@ -89,10 +89,10 @@ const Navbar = () => {
         </div>
       <div className="profile flex justify-between h-[10%] mx-2 items-center hover:bg-gray-200 hover:rounded-full p-3 cursor-pointer mt-10">
         <div className="profileContainer gap-3 flex">
-          <img src={yash} alt="" className="h-12 w-12 rounded-full mx-2" />
+          <img src={yash} alt="" className="h-12 w-12 rounded-full" />
           <div className="flex flex-col">
             <h1 className="text-lg">Yash Harale</h1>
-            <p className="text-sm">@ig_carnageyt</p>
+            <p className="text-sm text-gray-500">@ig_carnageyt</p>
           </div>
         </div>
         <MoreHorizOutlinedIcon className="" />
