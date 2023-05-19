@@ -21,7 +21,7 @@ const Navbar = () => {
   return (
     <div className="navbar w-[20%] flex flex-col h-full ml-20">
       <Link to="/">
-        <div className="logo h-[5%] flex gap-2 p-5">
+        <div className="logo h-[5%] flex gap-2 p-3">
           {/*<TwitterIcon className="h-12 w-12 bg-white rounded-3xl hover:bg-gray-200 text-blue-500"/>*/}
           <img
             src={twitter}
@@ -98,7 +98,7 @@ const Navbar = () => {
         </div>
       </div>
       <div className="flex items-center justify-center">
-        <span className="h-12 w-64 text-xl bg-blue-500 rounded-3xl hover:bg-blue-600 text-white flex items-center justify-center mt-5 p-3 mr-10 ml-3">
+        <span className="h-12 w-64 text-xl bg-blue-500 rounded-3xl hover:bg-blue-600 text-white flex items-center justify-center mt-2 p-3 mr-10 ml-3">
           Tweet
         </span>
       </div>

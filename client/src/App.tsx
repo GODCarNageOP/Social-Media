@@ -8,21 +8,16 @@ import Messages from "./pages/Messages";
 import Lists from "./pages/Lists";
 import Bookmarks from "./pages/Bookmarks";
 import TwitterBlue from "./pages/TwitterBlue";
-import Profile from "./pages/profile/Profile";
-import './App.css'
 import More from "./pages/More";
-import Login from "./pages/Auth/Login";
-import Signup from "./pages/Auth/Signup";
-import NightModeSwitch from "./NightMode";
+
 function App() {
   const Layout = () => {
     return (
-      <div className="flex justify-between  h-full app">
-        <NightModeSwitch/>
+    <div className="app flex justify-between mx-10 h-full">
         <Navbar />
-        <Outlet />
-        <Footer />
-      </div>
+        <Outlet/>
+        <Footer/>
+        </div>
     );
   };
 
@@ -34,14 +29,6 @@ function App() {
         {
           path: "/",
           element: <Home />,
-        },
-        {
-          path: "/login",
-          element: <Login />,
-        },
-        {
-          path: "/signup",
-          element: <Signup />,
         },
         {
           path: "/explore",
@@ -66,10 +53,6 @@ function App() {
         {
           path: "/twitterblue",
           element: <TwitterBlue />,
-        },
-        {
-          path: "/profile",
-          element: <Profile />,
         },
         {
           path: "/more",
