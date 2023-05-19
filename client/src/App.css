@@ -1,0 +1,68 @@
+.app {
+  width: 100%;
+
+  margin: auto;
+}
+
+.w-100{
+    width: 100%;
+}
+
+.max-w-100{
+    max-width: 100%;
+}
+.night-mode {
+ background-color: black;
+ color: white;
+}
+.night-mode.dark {
+  color: white;
+}
+
+.night-mode.dark .already-black {
+  color: white;
+}
+.nightMode{
+  position: absolute;
+}
+
+
+
+@media screen and (min-width: 800px) {
+  .app {
+    width: 100%;
+    max-width: 700px;
+    margin: auto;
+  }
+}
+
+
+@media screen and (min-width: 1000px) {
+  .app {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+  }
+
+}
+
+@media screen and (min-width: 1300px) {
+    .app {
+        width: 100%;
+        max-width: 1200px;
+        margin: auto;
+    }
+    
+}
+
+
+@media screen and (min-width: 1600px) {
+    .app {
+        width: 100%;
+        max-width: 1300px;
+        margin: auto;
+    }
+    
+}
+
+

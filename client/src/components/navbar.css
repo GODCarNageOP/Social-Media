@@ -1,0 +1,74 @@
+.navbar {
+
+}
+
+
+
+.overlay-relative {
+  position: relative;
+}
+.overlay-show {
+  display: block;
+
+  width: 100%;
+}
+.overlay-hide {
+  display: none;
+}
+.overlay-Nav {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  width: 300px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  /* gap: 25px; */
+
+  box-shadow: 0px 0px 25px 2px gray;
+  padding: 10px 0px;
+
+  font-size: 1.1rem;
+
+  cursor: pointer;
+
+  border-radius: 20px;
+  bottom: 35px;
+  overflow: hidden;
+}
+
+.overlay-Nav p {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.overlay-Nav p:hover {
+  background-color: wheat;
+}
+
+@media screen and (min-width: 1300px) {
+  .small-sc-tweet {
+    display: none !important;
+  }
+}
+@media screen and (max-width: 500px) {
+  .navbar {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .mobile-none {
+    display: none;
+  }
+
+  .round-tweet-div{
+    border-radius: 50% !important;
+    width: 50px;
+  }
+  .mobile-center {
+    align-items: center;
+  }
+  .large-sc-tweet{
+    display: none !important;
+  }
+}

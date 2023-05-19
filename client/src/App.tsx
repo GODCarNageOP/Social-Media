@@ -9,16 +9,20 @@ import Lists from "./pages/Lists";
 import Bookmarks from "./pages/Bookmarks";
 import TwitterBlue from "./pages/TwitterBlue";
 import Profile from "./pages/Profile";
+import './App.css'
 import More from "./pages/More";
-
+import Login from "./pages/Auth/Login";
+import Signup from "./pages/Auth/Signup";
+import NightModeSwitch from "./NightMode";
 function App() {
   const Layout = () => {
     return (
-    <div className="app flex justify-between mx-10 h-full">
+      <div className="flex justify-between  h-full app">
+        <NightModeSwitch/>
         <Navbar />
-        <Outlet/>
-        <Footer/>
-        </div>
+        <Outlet />
+        <Footer />
+      </div>
     );
   };
 
@@ -30,6 +34,14 @@ function App() {
         {
           path: "/",
           element: <Home />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/signup",
+          element: <Signup />,
         },
         {
           path: "/explore",
