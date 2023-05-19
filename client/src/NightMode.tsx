@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 const NightModeSwitch: React.FC = () => {
     const [nightMode, setNightMode] = useState(
@@ -21,8 +20,8 @@ const NightModeSwitch: React.FC = () => {
     };
 
     return (
-        <div className={`nightMode ${nightMode ? "dark" : ""}`}>
-            <label htmlFor="nightModeSwitch"><DarkModeIcon /></label>
+        <div>
+            <label htmlFor="nightModeSwitch">Night Mode</label>
             <input
                 id="nightModeSwitch"
                 type="checkbox"

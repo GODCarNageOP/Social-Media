@@ -14,6 +14,7 @@ import ContactPageOutlinedIcon from "@mui/icons-material/ContactPageOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import NightModeSwitch from "../NightMode";
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
@@ -85,6 +86,7 @@ const Navbar = () => {
           className="icon h-12 text-xl hover:bg-gray-200 hover:rounded-3xl p-5 flex justify-center items-center gap-2"
           onClick={() => setToggle(!toggle)}
         >
+          <NightModeSwitch/>
           {toggle ? (
             <DarkModeOutlinedIcon />
           ) : (
