@@ -8,7 +8,7 @@ import Messages from "./pages/Messages";
 import Lists from "./pages/Lists";
 import Bookmarks from "./pages/Bookmarks";
 import TwitterBlue from "./pages/TwitterBlue";
-import Profile from "./pages/Profile";
+import Profile from "./pages/profile/Profile";
 import './App.css'
 import More from "./pages/More";
 import Login from "./pages/Auth/Login";
