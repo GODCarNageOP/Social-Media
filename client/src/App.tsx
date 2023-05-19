@@ -55,10 +55,6 @@ function App() {
           element: <TwitterBlue />,
         },
         {
-          path: "/profile",
-          element: <Profile />,
-        },
-        {
           path: "/more",
           element: <More />,
         },
