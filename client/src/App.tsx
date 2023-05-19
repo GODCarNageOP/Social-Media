@@ -9,15 +9,16 @@ import Lists from "./pages/Lists";
 import Bookmarks from "./pages/Bookmarks";
 import TwitterBlue from "./pages/TwitterBlue";
 import More from "./pages/More";
+import Profile from "./pages/profile/Profile";
 
 function App() {
   const Layout = () => {
     return (
-    <div className="app flex justify-between mx-10 h-full">
+      <div className="app flex justify-between mx-10 h-full">
         <Navbar />
-        <Outlet/>
-        <Footer/>
-        </div>
+        <Outlet />
+        <Footer />
+      </div>
     );
   };
 
@@ -45,6 +46,11 @@ function App() {
         {
           path: "/lists",
           element: <Lists />,
+        },
+
+        {
+          path: "/profile",
+          element: <Profile />,
         },
         {
           path: "/Bookmarks",
