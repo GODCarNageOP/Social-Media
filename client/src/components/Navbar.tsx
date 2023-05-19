@@ -19,7 +19,7 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <div className="navbar w-[20%] flex flex-col h-full ml-20">
+    <div className="navbar w-[20%] flex flex-col h-full ml-10">
       <Link to="/">
         <div className="logo h-[5%] flex gap-2 p-3">
           {/*<TwitterIcon className="h-12 w-12 bg-white rounded-3xl hover:bg-gray-200 text-blue-500"/>*/}
