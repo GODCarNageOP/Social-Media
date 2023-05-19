@@ -11,6 +11,8 @@ import TwitterBlue from "./pages/TwitterBlue";
 import Profile from "./pages/Profile";
 import './App.css'
 import More from "./pages/More";
+import Login from "./pages/Auth/Login";
+import Signup from "./pages/Auth/Signup";
 function App() {
   const Layout = () => {
     return (
@@ -30,6 +32,14 @@ function App() {
         {
           path: "/",
           element: <Home />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/signup",
+          element: <Signup />,
         },
         {
           path: "/explore",
