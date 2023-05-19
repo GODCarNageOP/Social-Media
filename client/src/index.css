@@ -7,3 +7,43 @@
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@media screen and (min-width: 1300px) {
+  .small-sc-tweet {
+    display: none !important;
+  }
+}
+@media screen and (max-width: 500px) {
+  .navbar {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .mobile-none {
+    display: none;
+  }
+
+  .round-tweet-div{
+    border-radius: 50% !important;
+    width: 50px;
+  }
+  .mobile-center {
+    align-items: center;
+  }
+  .large-sc-tweet{
+    display: none !important;
+  }
+}
+
+.navbar {
+  border-right: 1px solid rgb(234, 234, 234);
+}
+
+.footer {
+  border-left: 1px solid rgb(234, 234, 234);
+}
+
+.homeNavbar {
+  border-bottom: 1px solid rgb(234, 234, 234);
+}
