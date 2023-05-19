@@ -11,6 +11,7 @@ import VerifiedOutlinedIcon from "@mui/icons-material/VerifiedOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
 import { Link } from "react-router-dom";
+import TwitterIcon from '@mui/icons-material/Twitter';
 import { useEffect, useRef, useState } from "react";
 import './navbar.css'
 
@@ -110,11 +111,15 @@ const Navbar = () => {
             </div>
           </Link>
         </div>
-        <div className="flex items-center justify-center max-w-100">
-          <span className="h-12 w-64 text-xl bg-blue-500 rounded-3xl hover:bg-blue-600 text-white flex items-center justify-center mt-2">
+        <div className="flex items-center justify-center max-w-100 rounded-full md:rounded-full sm:rounded-full round-tweet-div">
+          <span className="h-12 w-64 text-xl bg-blue-500 rounded-3xl hover:bg-blue-600 text-white flex items-center justify-center mt-2 large-sc-tweet ">
             Tweet
           </span>
+          <span className="h-12 w-64 text-xl bg-blue-500 rounded-3xl hover:bg-blue-600 text-white flex items-center justify-center mt-2 small-sc-tweet">
+            <TwitterIcon />
+          </span>
         </div>
+ 
         <div className="profile flex justify-between h-[10%] mx-2 items-center hover:bg-gray-200 hover:rounded-full p-3 cursor-pointer mt-5">
 
           <div className="overlay-relative">

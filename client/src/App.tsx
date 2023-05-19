@@ -13,10 +13,12 @@ import './App.css'
 import More from "./pages/More";
 import Login from "./pages/Auth/Login";
 import Signup from "./pages/Auth/Signup";
+import NightModeSwitch from "./NightMode";
 function App() {
   const Layout = () => {
     return (
       <div className="flex justify-between  h-full app">
+        <NightModeSwitch/>
         <Navbar />
         <Outlet />
         <Footer />
