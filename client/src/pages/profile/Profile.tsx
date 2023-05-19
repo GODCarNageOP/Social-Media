@@ -1,10 +1,11 @@
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import './profile.css'
-import profilePic from '../../assets/pofilePic.jpeg';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import InsertLinkIcon from '@mui/icons-material/InsertLink';
-import CakeIcon from '@mui/icons-material/Cake';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import "./profile.css";
+import profilePic from "../../assets/pofilePic.jpeg";
+import InsertLinkIcon from "@mui/icons-material/InsertLink";
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import CakeOutlinedIcon from '@mui/icons-material/CakeOutlined';
+import CelebrationOutlinedIcon from '@mui/icons-material/CelebrationOutlined';
 
 const profile = {
   name: "Aakash Kumar",
@@ -125,181 +126,124 @@ const profile = {
       likes: 12,
       retweets: 6,
       replies: 4,
-    }
+    },
   ],
-}
-
+};
 
 const Profile = () => {
-
   return (
-
-    <div className='Profile w-[50%] pt-1 '>
-      <div className="back-div flex gap-8 align-center pl-4 ">
+    <div className="Profile w-[50%] pt-1 ">
+      <div className="back-div flex gap-8 align-center pl-4 items-center">
         <ArrowBackIcon />
 
-        <div className="flex flex-col ">
-          <span className='font-bold topName '>
-            {profile?.name}
-          </span>
-          <div className='flex gap-2 text-gray-500'>
-            <span className='text-1xl font-thin'>
-              {profile?.numberOfTweets}
-
-            </span>
-            <span className='text-1xl font-thin'>
-              Tweets
-            </span>
-
+        <div className="flex flex-col  cursor-pointer">
+          <span className="font-bold topName text-xl">{profile?.name}</span>
+          <div className="flex gap-1 text-gray-500 items-center">
+            <span className="text-sm font-thin">{profile?.numberOfTweets}</span>
+            <span className="text-sm font-thin">Tweets</span>
           </div>
         </div>
       </div>
 
-      <div className="cover-div h-[20%]  bg-gray-300">
-
-      </div>
+      <div className="cover-div h-[20%]  bg-gray-300  cursor-pointer"></div>
 
       <div className="profile-sec relative">
         <div className="flex justify-between relative items-center w-full profile-absolute-div pl-4">
-
           <div className="profil-image w-[24%] left-5 rounded-full border-4 overflow-hidden  ">
             <img
               src={profilePic}
-              className="object-cover h-full w-full"
+              className="object-cover h-full w-full  cursor-pointer"
               alt=""
             />
           </div>
-          <button className=' h-12 p-2 pl-5 pr-5 mt-8 font-semibold bg-white rounded-3xl  edit-btn-profile   '>
-            Edit Profile
+          <button className=" h-10 p-2 px-5 mt-10 font-semibold bg-white rounded-3xl edit-btn-profile mx-5 hover:bg-gray-200 cursor-pointer">
+            Edit profile
           </button>
         </div>
-
-
       </div>
 
-      <div className="profile-details pl-5 relative">
-        <div className="flex flex-col  pb-5">
-          <span className="font-black text-2xl">
-            {
-              profile?.name
-            }
+      <div className="profile-details pl-5 relative -mb-5">
+        <div className="flex flex-col pb-5 gap-1">
+          <span className="font-black text-xl">{profile?.name}</span>
+          <span className="text-sm text-gray-500">@{profile?.userName}</span>
+        </div>
+        <div className="profileContainer flex flex-col items-start text-gray-600">
+          <span className="text-gray-500 p-2 text-sm">
+            {profile.profession}
           </span>
-          <span className='text-1xl text-gray-500'>
-            @{
-              profile?.userName
-            }</span>
-        </div>
-
-        <span className=''>
-          {
-            profile.profession
-          }
-        </span>
-
-        <div className="flex address text-gray-500 flex-wrap gap-2 mt-3">
-          <div className="flex gap-1">
-            <LocationOnIcon />
-            <span className='tex-gray-500'>
-              {
-                profile?.address?.country
-              }
-            </span>
+          <div className="top flex gap-3">
+            <div className="flex gap-1 items-center">
+              <LocationOnOutlinedIcon />
+              <span className="text-gray-500 text-sm">
+                {profile?.address?.country}
+              </span>
+            </div>
+            <div className="flex gap-1 items-center">
+              <InsertLinkIcon />
+              <span className="text-blue-500 truncate text-sm cursor-pointer hover:underline">
+                {profile?.address?.website}
+              </span>
+            </div>
           </div>
-
-          <div className="flex gap-1 items-center w-30">
-            <InsertLinkIcon />
-            <span className="text-blue-500 truncate">
-              {profile?.address?.website}
-            </span>
+          <div className="center flex items-center text-sm gap-2 mt-2">
+            <div className="flex gap-1 items-center">
+              <CakeOutlinedIcon />
+              <span className="text-gray-500">
+                Born {profile?.address?.dob}
+              </span>
+            </div>
+            <div className="flex gap-1 items-center">
+              <CalendarMonthOutlinedIcon />
+              <span className="text-gray-500">
+                Joined {profile?.address?.joined}
+              </span>
+            </div>
           </div>
+          <div className="bottom flex items-center mt-3 ml-2 gap-2 text-sm">
+            <div className="flex gap-1">
+              <span className="text-1xl font-bold text-black">
+                {profile?.numberOfFollowing}
+              </span>
 
-          <div className="flex gap-1 items-center">
-            <CakeIcon />
-            <span className='tex-gray-500'>
-              Born   {
-                profile?.address?.dob
-              }
-            </span>
-          </div>
-          <div className="flex gap-1 items-center align-center">
-            <CalendarTodayIcon />
-            <span className='tex-gray-500'>
-              Joined {
-                profile?.address?.joined
-              }
-            </span>
-          </div>
-        </div>
-        <div className="flex mt-3 gap-5">
-          <div className="flex gap-1">
-
-            <span className='text-1xl font-bold text-black'>
-              {
-                profile?.numberOfFollowing
-              }
-            </span>
-
-            <span className='text-gray-600'>
-              Following
-
-            </span>
-          </div>
-          <div className="flex gap-1">
-            <span className='text-1xl font-bold text-black'>
-
-              {
-                profile?.numberOfFollowers
-              }
-
-            </span>
-            <span className='text-gray-600'>
-              Followers
-            </span>
+              <span className="text-gray-600 hover:underline cursor-pointer">Following</span>
+            </div>
+            <div className="flex gap-1">
+              <span className="text-1xl font-bold text-black">
+                {profile?.numberOfFollowers}
+              </span>
+              <span className="text-gray-600 hover:underline cursor-pointer">Followers</span>
+            </div>
           </div>
         </div>
       </div>
-
       <ProfileTweet />
     </div>
-  )
-}
-
-
-
+  );
+};
 
 const ProfileTweet = () => {
-
-
   return (
-    <div className='profile-tweet'>
-
-      <div className="flex ">
-        <button className="grid-1 w-full p-3">
-          <span className="font-bold">Tweets</span>
-        </button>
-        <button className="grid-1 w-full p-3">
-          <span className="font-bold">Replies</span>
-        </button>
-        <button className="grid-1 w-full p-3">
-          <span className="font-bold">Media</span>
-        </button>
-        <button className="grid-1 w-full p-3">
-          <span className="font-bold">Likes</span>
-        </button>
+    <div className="profile-tweet">
+      <div className="flex h-14  cursor-pointer">
+      <span className="flex-1 flex justify-center items-center hover:bg-gray-200 font-medium">
+          Tweets
+        </span>
+        <span className="flex-1 flex justify-center items-center hover:bg-gray-200 font-medium">
+          Replies
+        </span>
+        <span className="flex-1 flex justify-center items-center hover:bg-gray-200 font-medium">
+          Media
+        </span>
+        <span className="flex-1 flex justify-center items-center hover:bg-gray-200 font-medium">
+          Likes
+        </span>
       </div>
-
     </div>
-
   );
-}
-
+};
 
 const TweetCard = () => {
+  <div></div>;
+};
 
-  <div>
-
-  </div>
-
-}
-
-export default Profile
+export default Profile;
