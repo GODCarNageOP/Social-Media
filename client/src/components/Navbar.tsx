@@ -22,19 +22,17 @@ const Navbar = () => {
   }
   console.log('over', openOverlay)
   return (
-    <>
-
-      <div className=" w-[20%] border-x flex flex-col h-full mobile-center navbar">
-        <Link to="/">
-          <div className="logo h-[5%] flex gap-2 pl-4 pt-2 pb-5">
-            <img
-              src={twitter}
-              alt=""
-              className="h-9 w-10 hover:bg-gray-200 hover:rounded-full"
-            />
-            {/*<span>Twitter</span>*/}
-          </div>
-        </Link>
+    <div className="navbar w-[20%] border-x flex flex-col h-full">
+      <Link to="/">
+        <div className="logo h-[5%] flex gap-2 p-5">
+          <img
+            src={twitter}
+            alt=""
+            className="h-9 w-10 hover:bg-gray-200 hover:rounded-full"
+          />
+          {/*<span>Twitter</span>*/}
+        </div>
+      </Link>
 
         <div className="pages flex flex-col h-[80%] gap- items-start cursor-pointer justify-center ">
           <Link to="/">
@@ -98,26 +96,12 @@ const Navbar = () => {
             Tweet
           </span>
         </div>
-        <div className="profile flex justify-between h-[10%] mx-2 items-center hover:bg-gray-200 hover:rounded-full p-3 cursor-pointer mt-5">
-
-          <div className="overlay-relative">
-            <div className={`${openOverlay ? "overlay-show" : "overlay-hide"}`}>
-
-              <HandleBurger />
-            </div>
-
-          </div>
-
-          <div className="profileContainer gap-3 flex">
-            <img src={yash} alt="" className="h-12 w-12 rounded-full mx-2" />
-            <div className="flex flex-col mobile-none">
-              <h1 className="text-1xl md:text-3xl lg:text-lg mobile-none">Yash Harale</h1>
-              <p className="text-sm mobile-none">@ig_carnageyt</p>
-            </div>
-          </div>
-          <div className="mobile-none" onClick={(e) => handleOverlay()}>
-
-            <MoreHorizOutlinedIcon className="mobile-none" />
+      <div className="profile flex justify-between h-[10%] mx-2 items-center hover:bg-gray-200 hover:rounded-full p-3 cursor-pointer mt-10">
+        <div className="profileContainer gap-3 flex">
+          <img src={yash} alt="" className="h-12 w-12 rounded-full mx-2" />
+          <div className="flex flex-col">
+            <h1 className="text-lg">Yash Harale</h1>
+            <p className="text-sm">@ig_carnageyt</p>
           </div>
         </div>
       </div>
