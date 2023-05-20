@@ -1,9 +1,9 @@
 
 // how to run client
 
-cd client
-npm install -install all dependencies
-npm run dev- run the app
+cd client,
+npm install -install all dependencies,
+npm run dev- run the app,
 
 // how to run server
 create a file inside config.env ins ided in server config folder cond  config.env
