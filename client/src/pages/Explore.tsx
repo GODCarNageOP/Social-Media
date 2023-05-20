@@ -24,21 +24,7 @@ const Explore = () => {
       </div>
       <div className="exploreNavbar flex justify-between h-14 mt-2">
         <ExploreTab/>
-        {/* <span className="flex-1 flex justify-center items-center hover:bg-gray-200 font-medium">
-          For you
-        </span>
-        <span className="flex-1 flex justify-center items-center hover:bg-gray-200 font-medium">
-          Trending
-        </span>
-        <span className="flex-1 flex justify-center items-center hover:bg-gray-200 font-medium">
-          News
-        </span>
-        <span className="flex-1 flex justify-center items-center hover:bg-gray-200 font-medium">
-          Sports
-        </span>
-        <span className="flex-1 flex justify-center items-center hover:bg-gray-200 font-medium">
-          Entertainment
-        </span> */}
+        
       </div>
     </div>
   );
@@ -49,7 +35,7 @@ const Explore = () => {
 
 
 const ExploreTab = () => {
-  const [openTab, setOpenTabs] = useState("Tweets");
+ 
   const location = useLocation();
   const pathname = location.pathname;
   const urlAfterSlash = pathname.substring(1);
