@@ -19,7 +19,7 @@ const Footer = () => {
         <h1 className="p-3 text-xl font-semibold ml-2">What's happening</h1>
         <div className="flex p-3 justify-between hover:bg-gray-200 cursor-pointer">
           <div className="message flex flex-col items-start text-gray-500 gap-1 ml-2">
-            <span className="text-xs">NBA This morning</span>
+            <span className="text-xs">NBA • This morning</span>
             <h1 className="font-semibold text-black text-sm">
               Lakers at Nuggets
             </h1>
@@ -28,7 +28,7 @@ const Footer = () => {
         </div>
         <div className="flex p-3 justify-between hover:bg-gray-200 cursor-pointer">
           <div className="message flex flex-col items-start text-gray-500 gap-1 ml-2">
-            <span className="text-xs">Gaming Trending</span>
+            <span className="text-xs">Gaming • Trending</span>
             <h1 className="font-semibold text-black text-sm">#BGMI</h1>
             <p className="text-xs">8.036 Tweets</p>
           </div>
@@ -44,7 +44,7 @@ const Footer = () => {
         </div>
         <div className="flex p-3 justify-between hover:bg-gray-200 cursor-pointer">
           <div className="message flex flex-col items-start text-gray-500 gap-1 ml-2">
-            <span className="text-xs">Entertainment Trending</span>
+            <span className="text-xs">Entertainment • Trending</span>
             <h1 className="font-semibold text-black text-sm">#JanhviKapoor</h1>
             <p className="text-xs">57.4K Tweets</p>
           </div>
@@ -67,7 +67,7 @@ const Footer = () => {
           <div className="flex gap-2 ml-2">
             <img src={yash} alt="" className="h-12 w-12 rounded-full" />
             <div className="name flex flex-col">
-              <h1 className="text-base font-semibold">Yash Harale</h1>
+              <h1 className="text-base font-semibold hover:underline">Yash Harale</h1>
               <p className="text-sm text-gray-500">@imCarnage</p>
             </div>
           </div>
@@ -79,7 +79,7 @@ const Footer = () => {
           <div className="flex gap-2 ml-2">
             <img src={yash} alt="" className="h-12 w-12 rounded-full" />
             <div className="name flex flex-col">
-              <h1 className="text-base font-semibold">Yash Harale</h1>
+              <h1 className="text-base font-semibold hover:underline">Yash Harale</h1>
               <p className="text-sm text-gray-500">@imCarnage</p>
             </div>
           </div>
@@ -91,7 +91,7 @@ const Footer = () => {
           <div className="flex gap-2 ml-2">
             <img src={yash} alt="" className="h-12 w-12 rounded-full" />
             <div className="name flex flex-col">
-              <h1 className="text-base font-semibold">Yash Harale</h1>
+              <h1 className="text-base font-semibold hover:underline">Yash Harale</h1>
               <p className="text-sm text-gray-500">@imCarnage</p>
             </div>
           </div>
@@ -103,18 +103,18 @@ const Footer = () => {
       </div>
       <div className="foot mt-3 p-3 flex flex-col text-gray-500 text-xs">
         <div className="top flex justify-between mx-14 items-center">
-          <span className="hover:underline">Terms of Service</span>
-          <span className="hover:underline">Privacy Policy</span>
-          <span className="hover:underline">Cookie Policy</span>
+          <span className="hover:underline cursor-pointer">Terms of Service</span>
+          <span className="hover:underline cursor-pointer">Privacy Policy</span>
+          <span className="hover:underline cursor-pointer">Cookie Policy</span>
         </div>
         <div className="bottom flex justify-between mx-14 items-center">
-          <span className="hover:underline">Accessibilty</span>
-          <span className="hover:underline">Ads info</span>
-          <span className="hover:underline flex items-center">
+          <span className="hover:underline cursor-pointer">Accessibilty</span>
+          <span className="hover:underline cursor-pointer">Ads info</span>
+          <span className="hover:underline flex items-center cursor-pointer">
             More
             <MoreHorizOutlinedIcon className="icon" />
           </span>
-          <span className="hover:underline flex items-center">
+          <span className="hover:underline flex items-center cursor-pointer">
             <CopyrightIcon className="icon" />
             2023 X Corp.
           </span>

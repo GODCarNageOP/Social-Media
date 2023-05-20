@@ -1,9 +1,7 @@
-
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 
 const Notifications = () => {
   return (
-
     <div className="notifications w-[50%]">
       <div className="notificationContainer flex mx-5 justify-between items-center mt-5">
         <h1 className='text-2xl font-semibold cursor-pointer'>Notifications</h1>
