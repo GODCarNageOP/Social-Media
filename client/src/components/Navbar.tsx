@@ -13,13 +13,30 @@ import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 import ContactPageOutlinedIcon from "@mui/icons-material/ContactPageOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import NightModeSwitch from "../NightMode";
 
 const Navbar = () => {
-  const [toggle, setToggle] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(
+    localStorage.getItem("isDarkMode") === "true"
+  );
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark-mode");
+    }
+    localStorage.setItem("isDarkMode", String(isDarkMode));
+  }, [isDarkMode]);
+
+  const toggle = () => {
+    setIsDarkMode(!isDarkMode);
+  };
 
   return (
     <div className="navbar w-[20%] flex flex-col h-full ml-10">
+
       <Link to="/">
         <div className="logo h-[5%] flex gap-2 p-3">
           {/*<TwitterIcon className="h-12 w-12 bg-white rounded-3xl hover:bg-gray-200 text-blue-500"/>*/}
@@ -82,15 +99,19 @@ const Navbar = () => {
           </div>
         </Link>
         <div
-          className="icon h-12 text-xl hover:bg-gray-200 hover:rounded-3xl p-5 flex justify-center items-center gap-2"
-          onClick={() => setToggle(!toggle)}
+          className="icon h-12 text-xl relative hover:bg-gray-200 hover:rounded-3xl p-5 flex justify-center items-center gap-2"
+          onClick={() => toggle()}
         >
-          {toggle ? (
+          <div className="flex absolute opacity- w-full">
+
+
+          </div>
+          {!isDarkMode ? (
             <DarkModeOutlinedIcon />
           ) : (
             <WbSunnyOutlinedIcon className="icon" />
           )}
-          {toggle ? (
+          {isDarkMode ? (
             <span className="">Dark mode</span>
           ) : (
             <span>Light mode</span>
@@ -115,5 +136,8 @@ const Navbar = () => {
     </div>
   );
 };
+
+
+
 
 export default Navbar;
