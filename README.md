@@ -1,5 +1,5 @@
 
-create a file inside config config.env
+create a file inside config.env isided in server config folder cond  config.env
 insided config.env add this
 Change these all varable accordign you;
 
