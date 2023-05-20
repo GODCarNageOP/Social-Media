@@ -48,6 +48,10 @@
 }
 
 
+.TrendindsCard .font-thins{
+  font-size: .8rem;
+}
+
 
 @media screen and (min-width: 1300px) {
   .small-sc-tweet {
