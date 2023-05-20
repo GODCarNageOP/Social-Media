@@ -146,6 +146,8 @@ const profile: Profile = {
     numberOfFollowing: 2,
     numberOfLikes: 2,
     numberOfTweets: 19,
+    // numberOfTweets:25,
+
     tweets: [
         {
             name: "Aakash Kumar",

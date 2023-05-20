@@ -8,7 +8,7 @@ import UploadIcon from '@mui/icons-material/Upload';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { AiOutlineRetweet, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { MdOutlineGraphicEq } from 'react-icons/md'
-import {  GoComment } from "react-icons/go";
+import { GoComment } from "react-icons/go";
 import { BsUpload, BsThreeDots } from "react-icons/bs";
 
 interface Tweet {
@@ -62,30 +62,65 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
 
                     </div>
                     <div className="flex justify-between p-2 w-[85%]">
-                        <span className="cursor-pointer tweet-icon hover:text-blue-500 text-gray-700">
+                        <div className="flex gap-2 item-center justify-center ">
 
-                            <GoComment />
-                        </span>
-                        <span className="cursor-pointer tweet-icon hover:text-blue-500 text-gray-700 ">
 
-                            <AiOutlineRetweet />
-                        </span>
-                        <span className="cursor-pointer tweet-icon hover:text-blue-500 text-gray-700 ">
 
-                            <AiOutlineHeart />
-                        </span>
-                        <span className="cursor-pointer tweet-icon hover:text-blue-500 text-gray-700 ">
-                            <MdOutlineGraphicEq />
-                        </span>
-                        <span className="cursor-pointer tweet-icon hover:text-blue-500 text-gray-700 ">
+                            <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700">
 
-                            <BsUpload />
-                        </span>
+                                <GoComment />
+                            </span>
+                            <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
+
+                                {tweet?.replies}
+                            </span>
+                        </div>
+
+                        <div className="flex gap-2 item-center justify-center">
+                            <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
+
+                                <AiOutlineRetweet />
+                            </span>
+                            <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
+
+                                {tweet?.retweets}
+                            </span>
+                        </div>
+
+                        <div className="flex gap-2 item-center justify-center">
+
+
+                            <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
+
+                                <AiOutlineHeart />
+                            </span>
+                            <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
+
+                                {tweet?.likes}
+                            </span>
+                        </div>
+                        <div className="flex gap-2 item-center justify-center">
+
+                            <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
+                                <MdOutlineGraphicEq />
+                            </span>
+                            <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
+
+                                {tweet?.likes}
+                            </span>
+                        </div>
+                        <div>
+
+                            <span className="cursor-pointer tweet-icon hover:text-blue-500 text-gray-700 ">
+
+                                <BsUpload />
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            
+
 
         </div>
     );
