@@ -1,7 +1,11 @@
 import SearchIcon from "@mui/icons-material/Search";
+
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+
 
 const Explore = () => {
   return (
@@ -14,9 +18,10 @@ const Explore = () => {
             placeholder="Search Twitter"
             className="bg-transparent border-none outline-none"
           />
-
         </div>
-        <SettingsOutlinedIcon className="mr-10 mt-3 hover:bg-gray-200 cursor-pointer hover:rounded-full" />
+        <Link to="/settings">
+          <SettingsOutlinedIcon className="mr-10 mt-3 hover:bg-gray-200 cursor-pointer hover:rounded-full" />
+        </Link>
       </div>
       <div className="exploreNavbar flex justify-between h-14 mt-2">
         <ExploreTab/>
@@ -37,8 +42,11 @@ const Explore = () => {
         </span> */}
       </div>
     </div>
-  )
-}
+  );
+};
+
+
+export default Explore;
 
 
 const ExploreTab = () => {
@@ -123,3 +131,4 @@ const ExploreTab = () => {
 
 
 export default Explore
+
