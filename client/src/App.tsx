@@ -33,11 +33,27 @@ function App() {
           element: <Home />,
         },
         {
+          path: "/home",
+          element: <Home />,
+        },
+        {
+          path: "/home/following",
+          element: <Home />,
+        },
+        {
           path: "/explore",
           element: <Explore />,
         },
         {
           path: "/notifications",
+          element: <Notifications />,
+        },
+        {
+          path: "/notifications/verified",
+          element: <Notifications />,
+        },
+        {
+          path: "/notifications/mentions",
           element: <Notifications />,
         },
         {

@@ -38,7 +38,7 @@ const [open, setOpen] = useState(false)
 
   return (
     <div className="navbar w-[20%] flex flex-col h-full ml-10">
-      <Link to="/">
+      <Link to="/home">
         <div className="logo h-[5%] flex gap-2 p-3">
           {/*<TwitterIcon className="h-12 w-12 bg-white rounded-3xl hover:bg-gray-200 text-blue-500"/>*/}
           <img
@@ -51,7 +51,7 @@ const [open, setOpen] = useState(false)
       </Link>
 
       <div className="pages flex flex-col h-[80%] gap-2 items-start cursor-pointer p-3">
-        <Link to="/">
+        <Link to="/home">
           <div className="icon h-12 text-xl hover:bg-gray-200 hover:rounded-3xl p-5 flex justify-center items-center gap-2">
             <HomeOutlinedIcon className="icon" />
             <span className="">Home</span>
