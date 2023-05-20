@@ -1,6 +1,5 @@
 import SearchIcon from "@mui/icons-material/Search";
 
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import { useState } from "react";
@@ -46,7 +45,7 @@ const Explore = () => {
 };
 
 
-export default Explore;
+
 
 
 const ExploreTab = () => {
@@ -130,5 +129,5 @@ const ExploreTab = () => {
 
 
 
-export default Explore
+export default Explore;
 
