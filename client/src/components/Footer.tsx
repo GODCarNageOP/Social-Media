@@ -219,4 +219,11 @@ const Footer = () => {
   );
 };
 
+/* const TermsOfService=()=>{
+
+  return (
+
+  )
+} */
+
 export default Footer;

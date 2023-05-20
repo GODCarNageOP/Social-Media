@@ -4,6 +4,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import TrendingsCard from "../components/Trendings/TrendingsCard";
+import Foryou from "../components/Trendings/Foryou";
 
 
 const Explore = () => {
@@ -108,6 +110,12 @@ const ExploreTab = () => {
         </Link>
       </div>
   
+      {
+
+        urlAfterSlash === "explore" && (
+          <Foryou />
+        )
+      }
 
     </div>
   );
