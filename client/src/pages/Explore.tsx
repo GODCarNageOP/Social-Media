@@ -4,6 +4,12 @@ import SearchIcon from "@mui/icons-material/Search";
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import TrendingsCard from "../components/Trendings/TrendingsCard";
+import Foryou from "../components/Trendings/Foryou";
+import Trending from "../components/Trendings/Trending";
+import News from "../components/Trendings/News";
+import Sports from "../components/Trendings/Sport";
+import Entertainment from "../components/Trendings/Entertainment";
 
 
 const Explore = () => {
@@ -23,8 +29,8 @@ const Explore = () => {
         </Link>
       </div>
       <div className="exploreNavbar flex justify-between h-14 mt-2">
-        <ExploreTab/>
-        
+        <ExploreTab />
+
       </div>
     </div>
   );
@@ -35,7 +41,7 @@ const Explore = () => {
 
 
 const ExploreTab = () => {
- 
+
   const location = useLocation();
   const pathname = location.pathname;
   const urlAfterSlash = pathname.substring(1);
@@ -107,7 +113,34 @@ const ExploreTab = () => {
           )}
         </Link>
       </div>
-  
+
+      {
+
+        urlAfterSlash === "explore" && (
+          <Foryou />
+        )
+      }
+      {
+        urlAfterSlash === 'explore/trendings' && (
+          <Trending />
+        )
+      }
+      {
+        urlAfterSlash === 'explore/news' && (
+          <News />
+        )
+      }
+      {
+        urlAfterSlash === 'explore/sports' && (
+          <Sports />
+        )
+
+      }
+      {
+        urlAfterSlash === 'explore/entertainment' && (
+          <Entertainment />
+        )
+      }
 
     </div>
   );
