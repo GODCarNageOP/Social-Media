@@ -134,9 +134,9 @@ const profile = {
 
 const Profile = () => {
   return (
-    <div className="Profile w-[50%] pt-1 ">
-      <div className="back-div flex gap-8 align-center pl-4 items-center pb-1">
-        <ArrowBackIcon />
+    <div className="Profile w-[50%] pt-1">
+      <div className="back-div flex gap-8 align-center pl-4 items-center">
+               <ArrowBackIcon />
 
         <div className="flex flex-col  cursor-pointer">
           <span className="font-bold topName text-xl">{profile?.name}</span>
