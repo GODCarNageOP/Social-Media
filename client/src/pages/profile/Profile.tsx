@@ -5,7 +5,6 @@ import InsertLinkIcon from "@mui/icons-material/InsertLink";
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import CakeOutlinedIcon from '@mui/icons-material/CakeOutlined';
-import CelebrationOutlinedIcon from '@mui/icons-material/CelebrationOutlined';
 
 const profile = {
   name: "Aakash Kumar",
