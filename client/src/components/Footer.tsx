@@ -19,7 +19,7 @@ const Footer = () => {
         <h1 className="p-3 text-xl font-semibold ml-2">What's happening</h1>
         <div className="flex p-3 justify-between hover:bg-gray-200 cursor-pointer">
           <div className="message flex flex-col items-start text-gray-500 gap-1 ml-2">
-            <span className="text-xs">NBA This morning</span>
+            <span className="text-xs">NBA • This morning</span>
             <h1 className="font-semibold text-black text-sm">
               Lakers at Nuggets
             </h1>
@@ -28,7 +28,7 @@ const Footer = () => {
         </div>
         <div className="flex p-3 justify-between hover:bg-gray-200 cursor-pointer">
           <div className="message flex flex-col items-start text-gray-500 gap-1 ml-2">
-            <span className="text-xs">Gaming Trending</span>
+            <span className="text-xs">Gaming • Trending</span>
             <h1 className="font-semibold text-black text-sm">#BGMI</h1>
             <p className="text-xs">8.036 Tweets</p>
           </div>
@@ -44,7 +44,7 @@ const Footer = () => {
         </div>
         <div className="flex p-3 justify-between hover:bg-gray-200 cursor-pointer">
           <div className="message flex flex-col items-start text-gray-500 gap-1 ml-2">
-            <span className="text-xs">Entertainment Trending</span>
+            <span className="text-xs">Entertainment • Trending</span>
             <h1 className="font-semibold text-black text-sm">#JanhviKapoor</h1>
             <p className="text-xs">57.4K Tweets</p>
           </div>

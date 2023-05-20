@@ -131,7 +131,7 @@ const profile = {
 
 const Profile = () => {
   return (
-    <div className="Profile w-[50%] pt-1 ">
+    <div className="Profile w-[50%] pt-1">
       <div className="back-div flex gap-8 align-center pl-4 items-center">
         <ArrowBackIcon />
 
