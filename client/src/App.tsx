@@ -79,9 +79,38 @@ function App() {
           element: <Profile />,
         },
         {
+
           path: "/settings",
           element: <Settings/>,
-        }
+        },
+        {
+          path: "/more",
+          element: <More />,
+        },
+
+        {
+          path: "/explore",
+          element: <Explore />,
+        }, {
+          path: "/explore/trendings",
+          element: <Explore />,
+
+        }, {
+          path: "/explore/sports",
+          element: <Explore />,
+
+        },
+        {
+          path: "/explore/entertainment",
+          element: <Explore />,
+
+        },
+        {
+          path: "/explore/news",
+          element: <Explore />,
+
+        },
+
       ],
     },
   ]);
