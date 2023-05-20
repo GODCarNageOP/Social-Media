@@ -1,6 +1,10 @@
 import React from "react";
 import "./TweetCard.css";
 import profilePic from "../../assets/pofilePic.jpeg";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import PushPinIcon from '@mui/icons-material/PushPin';
+import { BiPin } from 'react-icons/bi';
+import {TbMessageCircle2} from 'react-icons/tb';
 
 import { AiOutlineRetweet, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { MdOutlineGraphicEq } from "react-icons/md";
@@ -32,7 +36,7 @@ interface TweetCardProps {
 
 const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
     return (
-        <div className="Tweets-card flex w-full jusitfy-between hover:bg-gray-200">
+        <div className="Tweets-card flex w-full gap-2 jusitfy-between hover:bg-gray-200">
             <div className="left mr-3">
                 <img src={profilePic} alt="" className="w-11 h-11 rounded-full ml-5 mt-2" />
             </div>
@@ -62,9 +66,9 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
 
                             <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700">
 
-                                <GoComment />
+                                <TbMessageCircle2 />
                             </span>
-                            <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
+                            <span className="cursor-pointer flex items-center text-sm tweet-icon hover:text-blue-500 text-gray-700 ">
 
                                 {tweet?.replies}
                             </span>
@@ -75,7 +79,7 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
 
                                 <AiOutlineRetweet />
                             </span>
-                            <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
+                            <span className="cursor-pointer text-sm flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
 
                                 {tweet?.retweets}
                             </span>
@@ -88,7 +92,7 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
 
                                 <AiOutlineHeart />
                             </span>
-                            <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
+                            <span className="cursor-pointer flex text-sm items-center tweet-icon hover:text-blue-500 text-gray-700 ">
 
                                 {tweet?.likes}
                             </span>
@@ -98,7 +102,7 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
                             <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
                                 <MdOutlineGraphicEq />
                             </span>
-                            <span className="cursor-pointer flex items-center font-thin tweet-icon hover:text-blue-500 text-gray-700 ">
+                            <span className="cursor-pointer flex text-sm items-center font-thin tweet-icon hover:text-blue-500 text-gray-700 ">
 
                                 {tweet?.likes}
                             </span>
@@ -136,6 +140,19 @@ const More = () => {
                     <SentimentVeryDissatisfiedIcon />
                     <h1>This trend is harmful or spammy</h1>
                 </div>
+                <div className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
+                    <SentimentVeryDissatisfiedIcon />
+                    <h1>Not interested in this</h1>
+                </div>
+                <div className="bottom hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
+                    <SentimentVeryDissatisfiedIcon />
+                    <h1>This trend is harmful or spammy</h1>
+                </div>
+                <div className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
+                    <SentimentVeryDissatisfiedIcon />
+                    <h1>Not interested in this</h1>
+                </div>
+
             </div>
         </div>
     )
