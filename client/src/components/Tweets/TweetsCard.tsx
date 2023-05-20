@@ -52,22 +52,55 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
                     <span>{tweet?.content}</span>
                 </div>
                 <div className="bottom mt-2">
-                    <div className="flex justify-between p-2 w-[85%]">
-                        <span className="cursor-pointer tweet-icon hover:text-blue-500 text-gray-700">
+                    <div className="flex justify-between p-2 w-[85%] ">
+                        <div className="flex gap-2 item-center justify-center ">
 
-                            <GoComment />
-                        </span>
-                        <span className="cursor-pointer tweet-icon hover:text-blue-500 text-gray-700 ">
 
-                            <AiOutlineRetweet />
-                        </span>
-                        <span className="cursor-pointer tweet-icon hover:text-blue-500 text-gray-700 ">
 
-                            <AiOutlineHeart />
-                        </span>
-                        <span className="cursor-pointer tweet-icon hover:text-blue-500 text-gray-700 ">
-                            <MdOutlineGraphicEq />
-                        </span>
+                            <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700">
+
+                                <GoComment />
+                            </span>
+                            <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
+
+                                {tweet?.replies}
+                            </span>
+                        </div>
+
+                        <div className="flex gap-2 item-center justify-center">
+                            <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
+
+                                <AiOutlineRetweet />
+                            </span>
+                            <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
+
+                                {tweet?.retweets}
+                            </span>
+                        </div>
+
+                        <div className="flex gap-2 item-center justify-center">
+
+
+                            <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
+
+                                <AiOutlineHeart />
+                            </span>
+                            <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
+
+                                {tweet?.likes}
+                            </span>
+                        </div>
+                        <div className="flex gap-2 item-center justify-center">
+
+                            <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
+                                <MdOutlineGraphicEq />
+                            </span>
+                            <span className="cursor-pointer flex items-center font-thin tweet-icon hover:text-blue-500 text-gray-700 ">
+
+                                {tweet?.likes}
+                            </span>
+                        </div>
+                        
                         <span className="cursor-pointer tweet-icon hover:text-blue-500 text-gray-700 ">
 
                             <BsUpload />
