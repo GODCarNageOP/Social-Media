@@ -68,6 +68,19 @@ function App() {
           path: "/more",
           element: <More />,
         },
+        
+        {
+          path: "/profile/with_replies",
+          element: <Profile />,
+        }, {
+          path: "/profile/media",
+          element: <Profile />,
+
+        }, {
+          path: "/profile/likes",
+          element: <Profile />,
+
+        },
       ],
     },
   ]);

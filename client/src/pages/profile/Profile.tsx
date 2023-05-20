@@ -6,6 +6,8 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import CakeOutlinedIcon from '@mui/icons-material/CakeOutlined';
 import CelebrationOutlinedIcon from '@mui/icons-material/CelebrationOutlined';
+import { useState } from "react";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 const profile = {
   name: "Aakash Kumar",
@@ -133,7 +135,7 @@ const profile = {
 const Profile = () => {
   return (
     <div className="Profile w-[50%] pt-1 ">
-      <div className="back-div flex gap-8 align-center pl-4 items-center">
+      <div className="back-div flex gap-8 align-center pl-4 items-center pb-1">
         <ArrowBackIcon />
 
         <div className="flex flex-col  cursor-pointer">
@@ -221,26 +223,72 @@ const Profile = () => {
   );
 };
 
+
 const ProfileTweet = () => {
+  const [openTab, setOpenTabs] = useState("Tweets");
+  const location = useLocation();
+  const pathname = location.pathname;
+  const urlAfterSlash = pathname.substring(1);
+
   return (
     <div className="profile-tweet">
-      <div className="flex h-14  cursor-pointer">
-      <span className="flex-1 flex justify-center items-center hover:bg-gray-200 font-medium">
-          Tweets
-        </span>
-        <span className="flex-1 flex justify-center items-center hover:bg-gray-200 font-medium">
-          Replies
-        </span>
-        <span className="flex-1 flex justify-center items-center hover:bg-gray-200 font-medium">
-          Media
-        </span>
-        <span className="flex-1 flex justify-center items-center hover:bg-gray-200 font-medium">
-          Likes
-        </span>
+      <div className="flex h-14 cursor-pointer">
+        <Link
+          to="/profile"
+          className={`flex-1 flex flex-col relative ${urlAfterSlash === "profile" ? "active-link" : "inactive-link"
+            }`}
+        >
+          <span className={`flex-1 flex justify-center items-center hover:bg-gray-200 font-medium ${urlAfterSlash === "profile" ? "activeTabs" : "deactivate-tabs"
+            }`}>
+            Tweets
+          </span>
+          {urlAfterSlash === "profile" && <div className="activelines"></div>}
+        </Link>
+        <Link
+          to="/profile/with_replies"
+          className={`flex-1 flex flex-col relative ${urlAfterSlash === "profile/with_replies" ? "active-link" : "inactive-link"
+            }`}
+        >
+          <span className={`flex-1 flex justify-center items-center hover:bg-gray-200 font-medium ${urlAfterSlash === "profile/with_replies" ? "activeTabs" : "deactivate-tabs"
+            }`}>
+            Replies
+          </span>
+          {urlAfterSlash === "profile/with_replies" && (
+            <div className="activelines"></div>
+          )}
+        </Link>
+        <Link
+          to="/profile/media"
+          className={`flex-1 flex flex-col relative ${urlAfterSlash === "profile/media" ? "active-link" : "inactive-link"
+            }`}
+        >
+          <span className={`flex-1 flex justify-center items-center hover:bg-gray-200 font-medium ${urlAfterSlash === "profile/media" ? "activeTabs" : "deactivate-tabs"
+            }`}>
+            Media
+          </span>
+          {urlAfterSlash === "profile/media" && (
+            <div className="activelines"></div>
+          )}
+        </Link>
+        <Link
+          to="/profile/likes"
+          className={`flex-1 flex flex-col relative ${urlAfterSlash === "profile/likes" ? "active-link" : "inactive-link"
+            }`}
+        >
+          <span className={`flex-1 flex justify-center items-center hover:bg-gray-200 font-medium ${urlAfterSlash === "profile/likes" ? "activeTabs" : "deactivate-tabs"
+            }`}>
+            Likes
+          </span>
+          {urlAfterSlash === "profile/likes" && (
+            <div className="activelines"></div>
+          )}
+        </Link>
       </div>
     </div>
   );
 };
+
+
 
 const TweetCard = () => {
   <div></div>;
