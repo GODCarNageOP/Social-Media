@@ -1,36 +1,34 @@
 import React, { useState, useEffect } from "react";
-import DarkModeIcon from '@mui/icons-material/DarkMode';
 
-const NightModeSwitch: React.FC = () => {
-    const [nightMode, setNightMode] = useState(
-        localStorage.getItem("nightMode") === "true"
+const DarkModeSwitcher: React.FC = () => {
+    const [isDarkMode, setIsDarkMode] = useState(
+        localStorage.getItem("isDarkMode") === "true"
     );
 
     useEffect(() => {
-        if (nightMode) {
-            document.documentElement.classList.add("night-mode");
-            localStorage.setItem("nightMode", "true");
+        if (isDarkMode) {
+            document.body.classList.add("dark-mode");
         } else {
-            document.documentElement.classList.remove("night-mode");
-            localStorage.setItem("nightMode", "false");
+            document.body.classList.remove("dark-mode");
         }
-    }, [nightMode]);
+        localStorage.setItem("isDarkMode", String(isDarkMode));
+    }, [isDarkMode]);
 
-    const handleToggle = () => {
-        setNightMode(!nightMode);
+    const toggleDarkMode = () => {
+        setIsDarkMode(!isDarkMode);
     };
 
     return (
-        <div className={`nightMode ${nightMode ? "dark" : ""}`}>
-            <label htmlFor="nightModeSwitch"><DarkModeIcon /></label>
+        <div>
+            <label htmlFor="darkModeSwitch">Dark Mode</label>
             <input
-                id="nightModeSwitch"
+                id="darkModeSwitch"
                 type="checkbox"
-                checked={nightMode}
-                onChange={handleToggle}
+                checked={isDarkMode}
+                onChange={toggleDarkMode}
             />
         </div>
     );
 };
 
-export default NightModeSwitch;
+export default DarkModeSwitcher;

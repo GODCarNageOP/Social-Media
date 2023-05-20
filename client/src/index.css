@@ -2,11 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
   padding: 0;
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+
+:root {
+  --blue: rgb(1, 9, 17);
+  --white: rgb(255, 255, 255);
+}
+
+
+
+.dark-mode{
+  background-color: var(--blue);
+  color: white;
+}
+
+
+.exploreNavbar {
+  border-bottom: 1px solid rgb(234, 234, 234);
+}
+
+.notificationNavbar {
+  border-bottom: 1px solid rgb(234, 234, 234);
+}
+
+.profile-tweet {
+  border-bottom: 1px solid rgb(234, 234, 234);
+}
+
+.navbar {
+  border-right: 1px solid rgb(234, 234, 234);
+}
+
+.footer {
+  border-left: 1px solid rgb(234, 234, 234);
+}
+
+.homeNavbar {
+  border-bottom: 1px solid rgb(234, 234, 234);
+}
+
+
 
 @media screen and (min-width: 1300px) {
   .small-sc-tweet {
@@ -24,38 +65,17 @@
     display: none;
   }
 
-  .round-tweet-div{
+  .round-tweet-div {
     border-radius: 50% !important;
     width: 50px;
   }
   .mobile-center {
     align-items: center;
   }
-  .large-sc-tweet{
+  .large-sc-tweet {
     display: none !important;
   }
 }
 
-.navbar {
-  border-right: 1px solid rgb(234, 234, 234);
-}
 
-.footer {
-  border-left: 1px solid rgb(234, 234, 234);
-}
 
-.homeNavbar {
-  border-bottom: 1px solid rgb(234, 234, 234);
-}
-
-.exploreNavbar {
-  border-bottom: 1px solid rgb(234, 234, 234);
-}
-
-.notificationNavbar {
-  border-bottom: 1px solid rgb(234, 234, 234);
-}
-
-.profile-tweet {
-  border-bottom: 1px solid rgb(234, 234, 234);
-}
