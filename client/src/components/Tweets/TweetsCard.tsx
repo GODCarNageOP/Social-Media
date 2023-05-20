@@ -1,36 +1,35 @@
 import React from "react";
-import './TweetCard.css'
+import "./TweetCard.css";
 import profilePic from "../../assets/pofilePic.jpeg";
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
-import UploadIcon from '@mui/icons-material/Upload';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
+import UploadIcon from "@mui/icons-material/Upload";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { AiOutlineRetweet, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { MdOutlineGraphicEq } from 'react-icons/md'
-import { GoComment } from "react-icons/go";
+import {  GoComment } from "react-icons/go";
 import { BsUpload, BsThreeDots } from "react-icons/bs";
+import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 
 interface Tweet {
+  name: string;
+  userName: string;
+  profession: string;
+  profilepic: string;
+  joined: string;
+  id: string;
+  content: string;
+  timestamp: string;
+  likes: number;
+  retweets: number;
+  replies: number;
 
-    name: string;
-    userName: string;
-    profession: string;
-    profilepic: string;
-    joined: string,
-    id: string;
-    content: string;
-    timestamp: string;
-    likes: number;
-    retweets: number;
-    replies: number;
-
-
-    // Rest of the profile object properties
+  // Rest of the profile object properties
 }
 
 interface TweetCardProps {
-    tweet: Tweet;
+  tweet: Tweet;
 }
 
 const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
@@ -62,11 +61,7 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
 
                     </div>
                     <div className="flex justify-between p-2 w-[85%]">
-                        <div className="flex gap-2 item-center justify-center ">
-
-
-
-                            <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700">
+                        <span className="cursor-pointer tweet-icon hover:text-blue-500 text-gray-700">
 
                                 <GoComment />
                             </span>
@@ -113,14 +108,13 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
 
                             <span className="cursor-pointer tweet-icon hover:text-blue-500 text-gray-700 ">
 
-                                <BsUpload />
-                            </span>
-                        </div>
+                            <BsUpload />
+                        </span>
                     </div>
                 </div>
             </div>
 
-
+            
 
         </div>
     );

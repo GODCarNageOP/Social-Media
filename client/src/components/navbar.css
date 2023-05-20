@@ -1,10 +1,5 @@
-.navbar {
-
-}
 .overlay-relative {
   position: relative;
-  z-index: 10;
-  
 }
 .overlay-show {
   display: block;
@@ -15,8 +10,8 @@
   display: none;
 }
 .overlay-Nav {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
   position: absolute;
   width: 300px;
   background-color: rgb(255, 255, 255);
@@ -33,7 +28,6 @@
   border-radius: 20px;
   bottom: 35px;
   overflow: hidden;
-  
 }
 
 .overlay-Nav p {
@@ -43,21 +37,6 @@
 
 .overlay-Nav p:hover {
   background-color: wheat;
-}
-
-@media screen and (max-width: 500px) {
-  .navbar {
-    display: none !important;
-  }
-}
-
-@media screen and (max-width: 1300px) {
-  .mobile-none {
-    display: none;
-  }
-  .mobile-center {
-    align-items: center;
-  }
 }
 
 @media screen and (min-width: 1300px) {
@@ -76,14 +55,18 @@
     display: none;
   }
 
-  .round-tweet-div{
+  .round-tweet-div {
     border-radius: 50% !important;
     width: 50px;
   }
   .mobile-center {
     align-items: center;
   }
-  .large-sc-tweet{
+  .large-sc-tweet {
     display: none !important;
   }
+}
+
+.overlay {
+  box-shadow: rgba(0, 0, 0,1) 0px 5px 15px;
 }

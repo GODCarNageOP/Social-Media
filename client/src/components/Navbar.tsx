@@ -1,5 +1,4 @@
 import twitter from "../assets/twitter.png";
-import './navbar.css'
 import yash from "../assets/yashXD.jpg";
 import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -15,14 +14,11 @@ import ContactPageOutlinedIcon from "@mui/icons-material/ContactPageOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import NightModeSwitch from "../NightMode";
 
 const Navbar = () => {
-  const [openOverlay, setOpenOverlay] = useState(false);
 
-  const handleOverlay = () => {
-    setOpenOverlay(!openOverlay)
-  }
+const [open, setOpen] = useState(false)
+
   const [isDarkMode, setIsDarkMode] = useState(
     localStorage.getItem("isDarkMode") === "true"
   );
@@ -42,7 +38,6 @@ const Navbar = () => {
 
   return (
     <div className="navbar w-[20%] flex flex-col h-full ml-10">
-
       <Link to="/">
         <div className="logo h-[5%] flex gap-2 p-3">
           {/*<TwitterIcon className="h-12 w-12 bg-white rounded-3xl hover:bg-gray-200 text-blue-500"/>*/}
@@ -108,10 +103,7 @@ const Navbar = () => {
           className="icon h-12 text-xl relative hover:bg-gray-200 hover:rounded-3xl p-5 flex justify-center items-center gap-2"
           onClick={() => toggle()}
         >
-          <div className="flex absolute opacity- w-full">
-
-
-          </div>
+          <div className="flex absolute opacity- w-full"></div>
           {!isDarkMode ? (
             <DarkModeOutlinedIcon />
           ) : (
@@ -125,19 +117,19 @@ const Navbar = () => {
         </div>
       </div>
       <div className="flex items-center justify-center">
-        <span className="h-12 w-64 text-xl bg-blue-500 rounded-3xl hover:bg-blue-600 text-white flex items-center justify-center mt-2 p-3 mr-10 ml-3">
+        <span className="h-12 w-64 text-xl bg-blue-500 rounded-3xl hover:bg-blue-600 text-white flex items-center justify-center mt-2 p-3 mr-10 ml-3 cursor-pointer">
           Tweet
         </span>
       </div>
-      <div className="profile flex justify-between h-[10%] mx-2 items-center hover:bg-gray-200 hover:rounded-full p-3 cursor-pointer mt-10">
-        <div className="overlay-relative">
-          <div className={`${openOverlay ? "overlay-show" : "overlay-hide"}`}>
-
-            <HandleBurger />
+      {open && 
+        <div className="overlay h-28 w-80 bg-white absolute shadow-lg border rounded-xl z-10 flex flex-col top-[550px]">
+          <div className="overlayContainer my-5 gap-5">
+          <div className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer">Add an Existing account</div>
+          <div className="bottom hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer">Log out @ig_carnageyt</div>
           </div>
-
         </div>
-
+        }
+      <div className="profile flex justify-between h-[10%] mx-2 items-center hover:bg-gray-200 hover:rounded-full p-3 cursor-pointer mt-10">
         <div className="profileContainer gap-3 flex">
           <img src={yash} alt="" className="h-12 w-12 rounded-full" />
           <div className="flex flex-col">
@@ -145,37 +137,12 @@ const Navbar = () => {
             <p className="text-sm text-gray-500">@ig_carnageyt</p>
           </div>
         </div>
-        <div className="mobile-none" onClick={(e) => handleOverlay()}>
-
-          <MoreHorizOutlinedIcon className="mobile-none" />
+        <div onClick={()=> setOpen(!open)} className="relative">
+        <MoreHorizOutlinedIcon className="icon"/>
         </div>
       </div>
     </div>
   );
 };
 
-
-const HandleBurger = () => {
-
-
-  return (
-    <div className="overlay-Nav flex flex-col">
-
-      <Link to='/add-an-existing-account'>
-
-        <p>
-          Add an existing account
-        </p>
-      </Link>
-      <Link to='/logout'>
-        <p>
-          Log out @Yash Harale
-        </p>
-      </Link>
-    </div>
-  )
-}
 export default Navbar;
-
-
-

@@ -5,10 +5,8 @@ import InsertLinkIcon from "@mui/icons-material/InsertLink";
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import CakeOutlinedIcon from '@mui/icons-material/CakeOutlined';
-
-import CelebrationOutlinedIcon from '@mui/icons-material/CelebrationOutlined';
 import { useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ProfileTweet from "../../components/Tweets/ProfileTweets";
 
 
@@ -192,7 +190,7 @@ const Profile = () => {
   return (
     <div className="Profile w-[50%] pt-1">
       <div className="back-div flex gap-8 align-center pl-4 items-center">
-        <ArrowBackIcon />
+        <ArrowBackIcon className=" hover:bg-gray-200 cursor-pointer hover:rounded-full"/>
 
         <div className="flex flex-col  cursor-pointer">
           <span className="font-bold topName text-xl">{profile?.name}</span>
