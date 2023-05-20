@@ -67,7 +67,7 @@ const Footer = () => {
           <div className="flex gap-2 ml-2">
             <img src={yash} alt="" className="h-12 w-12 rounded-full" />
             <div className="name flex flex-col">
-              <h1 className="text-base font-semibold">Yash Harale</h1>
+              <h1 className="text-base font-semibold hover:underline">Yash Harale</h1>
               <p className="text-sm text-gray-500">@imCarnage</p>
             </div>
           </div>
@@ -79,7 +79,7 @@ const Footer = () => {
           <div className="flex gap-2 ml-2">
             <img src={yash} alt="" className="h-12 w-12 rounded-full" />
             <div className="name flex flex-col">
-              <h1 className="text-base font-semibold">Yash Harale</h1>
+              <h1 className="text-base font-semibold hover:underline">Yash Harale</h1>
               <p className="text-sm text-gray-500">@imCarnage</p>
             </div>
           </div>
@@ -91,7 +91,7 @@ const Footer = () => {
           <div className="flex gap-2 ml-2">
             <img src={yash} alt="" className="h-12 w-12 rounded-full" />
             <div className="name flex flex-col">
-              <h1 className="text-base font-semibold">Yash Harale</h1>
+              <h1 className="text-base font-semibold hover:underline">Yash Harale</h1>
               <p className="text-sm text-gray-500">@imCarnage</p>
             </div>
           </div>
@@ -103,18 +103,18 @@ const Footer = () => {
       </div>
       <div className="foot mt-3 p-3 flex flex-col text-gray-500 text-xs">
         <div className="top flex justify-between mx-14 items-center">
-          <span className="hover:underline">Terms of Service</span>
-          <span className="hover:underline">Privacy Policy</span>
-          <span className="hover:underline">Cookie Policy</span>
+          <span className="hover:underline cursor-pointer">Terms of Service</span>
+          <span className="hover:underline cursor-pointer">Privacy Policy</span>
+          <span className="hover:underline cursor-pointer">Cookie Policy</span>
         </div>
         <div className="bottom flex justify-between mx-14 items-center">
-          <span className="hover:underline">Accessibilty</span>
-          <span className="hover:underline">Ads info</span>
-          <span className="hover:underline flex items-center">
+          <span className="hover:underline cursor-pointer">Accessibilty</span>
+          <span className="hover:underline cursor-pointer">Ads info</span>
+          <span className="hover:underline flex items-center cursor-pointer">
             More
             <MoreHorizOutlinedIcon className="icon" />
           </span>
-          <span className="hover:underline flex items-center">
+          <span className="hover:underline flex items-center cursor-pointer">
             <CopyrightIcon className="icon" />
             2023 X Corp.
           </span>
