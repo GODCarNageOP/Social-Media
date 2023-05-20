@@ -10,9 +10,7 @@ import Bookmarks from "./pages/Bookmarks";
 import TwitterBlue from "./pages/TwitterBlue";
 import More from "./pages/More";
 import Profile from "./pages/profile/Profile";
-import NightModeSwitch from "./NightMode";
 
-import './App.css';
 function App() {
   const Layout = () => {
     return (
