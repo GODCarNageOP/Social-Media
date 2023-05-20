@@ -1,4 +1,5 @@
 import twitter from "../assets/twitter.png";
+import './navbar.css'
 import yash from "../assets/yashXD.jpg";
 import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -17,6 +18,11 @@ import { useEffect, useState } from "react";
 import NightModeSwitch from "../NightMode";
 
 const Navbar = () => {
+  const [openOverlay, setOpenOverlay] = useState(false);
+
+  const handleOverlay = () => {
+    setOpenOverlay(!openOverlay)
+  }
   const [isDarkMode, setIsDarkMode] = useState(
     localStorage.getItem("isDarkMode") === "true"
   );
@@ -124,6 +130,14 @@ const Navbar = () => {
         </span>
       </div>
       <div className="profile flex justify-between h-[10%] mx-2 items-center hover:bg-gray-200 hover:rounded-full p-3 cursor-pointer mt-10">
+        <div className="overlay-relative">
+          <div className={`${openOverlay ? "overlay-show" : "overlay-hide"}`}>
+
+            <HandleBurger />
+          </div>
+
+        </div>
+
         <div className="profileContainer gap-3 flex">
           <img src={yash} alt="" className="h-12 w-12 rounded-full" />
           <div className="flex flex-col">
@@ -131,13 +145,37 @@ const Navbar = () => {
             <p className="text-sm text-gray-500">@ig_carnageyt</p>
           </div>
         </div>
-        <MoreHorizOutlinedIcon className="icon" />
+        <div className="mobile-none" onClick={(e) => handleOverlay()}>
+
+          <MoreHorizOutlinedIcon className="mobile-none" />
+        </div>
       </div>
     </div>
   );
 };
 
 
+const HandleBurger = () => {
 
 
+  return (
+    <div className="overlay-Nav flex flex-col">
+
+      <Link to='/add-an-existing-account'>
+
+        <p>
+          Add an existing account
+        </p>
+      </Link>
+      <Link to='/logout'>
+        <p>
+          Log out @Yash Harale
+        </p>
+      </Link>
+    </div>
+  )
+}
 export default Navbar;
+
+
+
