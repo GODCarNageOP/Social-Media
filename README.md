@@ -1,3 +1,4 @@
+SOCIAL MEDIA APP
 
 // how to run client
 
@@ -10,7 +11,7 @@ npm run dev- run the app,
 
 create a file inside config.env ins ided in server config folder cond  config.env
 insided config.env add this
-Change these all varable accordign you;
+Change these all varable according you;
 
 PORT
 DB_URI "add monogo atlas url"
