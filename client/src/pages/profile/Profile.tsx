@@ -9,9 +9,63 @@ import CakeOutlinedIcon from '@mui/icons-material/CakeOutlined';
 import CelebrationOutlinedIcon from '@mui/icons-material/CelebrationOutlined';
 import { useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
+import ProfileTweet from "../../components/Tweets/ProfileTweets";
 
 
-const profile = {
+interface Profile {
+  name: string;
+  userName: string;
+  profession: string;
+  profilepic: string;
+  address: {
+    country: string;
+    website: string;
+    dob: string;
+    joined: string;
+  };
+  followers: {
+    id: string;
+    profilePic: string;
+    name: string;
+    userName: string;
+  }[];
+  following: {
+    id: string;
+    profilePic: string;
+    name: string;
+    userName: string;
+  }[];
+  likes: {
+    id: string;
+    profilePic: string;
+    name: string;
+    userName: string;
+    postId: string;
+    content: string;
+  }[];
+  replies: {
+    id: string;
+    profilePic: string;
+    name: string;
+    userName: string;
+    commentId: string;
+    content: string;
+  }[];
+  numberOfFollowers: number;
+  numberOfFollowing: number;
+  numberOfLikes: number;
+  numberOfTweets: number;
+  tweets: {
+    id: string;
+    content: string;
+    timestamp: string;
+    likes: number;
+    retweets: number;
+    replies: number;
+  }[];
+}
+
+const profile: Profile = {
   name: "Aakash Kumar",
   userName: "Akashkumar58906666",
   profession: "FULL STACK DEVELOPER",
@@ -138,7 +192,7 @@ const Profile = () => {
   return (
     <div className="Profile w-[50%] pt-1">
       <div className="back-div flex gap-8 align-center pl-4 items-center">
-               <ArrowBackIcon />
+        <ArrowBackIcon />
 
         <div className="flex flex-col  cursor-pointer">
           <span className="font-bold topName text-xl">{profile?.name}</span>
@@ -220,27 +274,30 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <ProfileTweet />
+      {
+
+      }
+      <ProfileTab />
     </div>
   );
 };
 
 
-const ProfileTweet = () => {
+const ProfileTab = () => {
   const [openTab, setOpenTabs] = useState("Tweets");
   const location = useLocation();
   const pathname = location.pathname;
   const urlAfterSlash = pathname.substring(1);
 
   return (
-    <div className="profile-tweet">
+    <div className="profile-tweet w-full">
       <div className="flex h-14 cursor-pointer">
         <Link
           to="/profile"
           className={`flex-1 flex flex-col relative ${urlAfterSlash === "profile" ? "active-link" : "inactive-link"
             }`}
         >
-          <span className={`flex-1 flex justify-center items-center hover:bg-gray-200 font-medium ${urlAfterSlash === "profile" ? "activeTabs" : "deactivate-tabs"
+          <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "profile" ? "activeTabs" : "deactivate-tabs"
             }`}>
             Tweets
           </span>
@@ -251,7 +308,7 @@ const ProfileTweet = () => {
           className={`flex-1 flex flex-col relative ${urlAfterSlash === "profile/with_replies" ? "active-link" : "inactive-link"
             }`}
         >
-          <span className={`flex-1 flex justify-center items-center hover:bg-gray-200 font-medium ${urlAfterSlash === "profile/with_replies" ? "activeTabs" : "deactivate-tabs"
+          <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "profile/with_replies" ? "activeTabs" : "deactivate-tabs"
             }`}>
             Replies
           </span>
@@ -261,10 +318,10 @@ const ProfileTweet = () => {
         </Link>
         <Link
           to="/profile/media"
-          className={`flex-1 flex flex-col relative ${urlAfterSlash === "profile/media" ? "active-link" : "inactive-link"
+          className={`flex-1  flex flex-col relative ${urlAfterSlash === "profile/media" ? "active-link" : "inactive-link"
             }`}
         >
-          <span className={`flex-1 flex justify-center items-center hover:bg-gray-200 font-medium ${urlAfterSlash === "profile/media" ? "activeTabs" : "deactivate-tabs"
+          <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "profile/media" ? "activeTabs" : "deactivate-tabs"
             }`}>
             Media
           </span>
@@ -277,7 +334,7 @@ const ProfileTweet = () => {
           className={`flex-1 flex flex-col relative ${urlAfterSlash === "profile/likes" ? "active-link" : "inactive-link"
             }`}
         >
-          <span className={`flex-1 flex justify-center items-center hover:bg-gray-200 font-medium ${urlAfterSlash === "profile/likes" ? "activeTabs" : "deactivate-tabs"
+          <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "profile/likes" ? "activeTabs" : "deactivate-tabs"
             }`}>
             Likes
           </span>
@@ -286,14 +343,18 @@ const ProfileTweet = () => {
           )}
         </Link>
       </div>
+      {
+
+        urlAfterSlash === "profile" &&(
+          <ProfileTweet  />
+        )
+      }
+     
     </div>
   );
 };
 
 
 
-const TweetCard = () => {
-  <div></div>;
-};
 
 export default Profile;
