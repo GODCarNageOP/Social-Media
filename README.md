@@ -9,9 +9,8 @@ npm run dev- run the app,
 // how to run server
 
 
-create a file inside config.env ins ided in server config folder cond  config.env
-insided config.env add this
-Change these all varable according you;
+create a file inside config folder config.env. 
+inside config.env Change these all varable according you;
 
 PORT
 DB_URI "add monogo atlas url"
