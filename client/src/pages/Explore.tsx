@@ -27,7 +27,7 @@ const Explore = () => {
 
   ];
   return (
-    <div className="explore w-[50%]">
+    <div className="explore mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%]">
       <div className="exploreContainer flex justify-between items-center">
         <div className="search h-[5%] flex-1 rounded-full bg-gray-100 flex mt-3 items-center p-3 gap-2 mx-10 justify-start">
           <SearchIcon className="icon text-gray-500" />

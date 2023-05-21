@@ -11,7 +11,7 @@ const Notifications = () => {
   ];
 
   return (
-    <div className="notifications w-[50%]">
+    <div className="notifications mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%]">
       <div className="notificationContainer flex mx-10 justify-between items-center mt-5">
         <h1 className='text-2xl font-semibold cursor-pointer'>Notifications</h1>
         <Link to="/settings">

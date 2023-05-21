@@ -58,7 +58,7 @@ const TwitterBlue: React.FC = () => {
   };
 
   return (
-    <div className="contact w-[50%]">
+    <div className="contact mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%]">
       <div className="contactContainer flex mx-10 justify-between items-center mt-5">
         <h1 className="text-2xl font-semibold cursor-pointer">Contact</h1>
         <Link to="/settings">
