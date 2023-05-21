@@ -10,9 +10,22 @@ import Trending from "../components/Trendings/Trending";
 import News from "../components/Trendings/News";
 import Sports from "../components/Trendings/Sport";
 import Entertainment from "../components/Trendings/Entertainment";
+import TabBar from '../components/Tabbar';
 
 
 const Explore = () => {
+  const location = useLocation();
+  const pathname = location.pathname;
+  const urlAfterSlash = pathname.substring(1);
+
+  const tabs = [
+    { label: "For You", path: "/explore" },
+    { label: "Trendings", path: "/explore/trendings" },
+    { label: "News", path: "/explore/news" },
+    { label: "Sports", path: "/explore/sports" },
+    { label: "Entertainment", path: "/explore/entertainment" },
+
+  ];
   return (
     <div className="explore w-[50%]">
       <div className="exploreContainer flex justify-between items-center">
@@ -28,8 +41,35 @@ const Explore = () => {
           <SettingsOutlinedIcon className="mr-10 mt-3 hover:bg-gray-200 cursor-pointer hover:rounded-full" />
         </Link>
       </div>
-      <div className="exploreNavbar flex justify-between h-14 mt-2">
-        <ExploreTab />
+      <div className="exploreNavbar  justify-between h-14 mt-2">
+        <TabBar tabs={tabs} />
+        {
+
+          urlAfterSlash === "explore" && (
+            <Foryou />
+          )
+        }
+        {
+          urlAfterSlash === 'explore/trendings' && (
+            <Trending />
+          )
+        }
+        {
+          urlAfterSlash === 'explore/news' && (
+            <News />
+          )
+        }
+        {
+          urlAfterSlash === 'explore/sports' && (
+            <Sports />
+          )
+
+        }
+        {
+          urlAfterSlash === 'explore/entertainment' && (
+            <Entertainment />
+          )
+        }
 
       </div>
     </div>
@@ -40,111 +80,137 @@ const Explore = () => {
 
 
 
-const ExploreTab = () => {
 
-  const location = useLocation();
-  const pathname = location.pathname;
-  const urlAfterSlash = pathname.substring(1);
 
-  return (
-    <div className="explore-tab w-full">
-      <div className="flex h-14 cursor-pointer">
-        <Link
-          to="/explore"
-          className={`flex-1 flex flex-col relative ${urlAfterSlash === "explore" ? "active-link" : "inactive-link"
-            }`}
-        >
-          <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "explore" ? "activeTabs" : "deactivate-tabs"
-            }`}>
-            For you
-          </span>
-          {urlAfterSlash === "explore" && <div className="activelines"></div>}
-        </Link>
-        <Link
-          to="/explore/trendings"
-          className={`flex-1 flex flex-col relative ${urlAfterSlash === "explore/trendings" ? "active-link" : "inactive-link"
-            }`}
-        >
-          <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "explore/trendings" ? "activeTabs" : "deactivate-tabs"
-            }`}>
-            Trending
-          </span>
-          {urlAfterSlash === "explore/trendings" && (
-            <div className="activelines"></div>
-          )}
-        </Link>
-        <Link
-          to="/explore/news"
-          className={`flex-1  flex flex-col relative ${urlAfterSlash === "explore/news" ? "active-link" : "inactive-link"
-            }`}
-        >
-          <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "explore/news" ? "activeTabs" : "deactivate-tabs"
-            }`}>
-            News
-          </span>
-          {urlAfterSlash === "explore/news" && (
-            <div className="activelines"></div>
-          )}
-        </Link>
-        <Link
-          to="/explore/sports"
-          className={`flex-1 flex flex-col relative ${urlAfterSlash === "explore/sports" ? "active-link" : "inactive-link"
-            }`}
-        >
-          <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "explore/sports" ? "activeTabs" : "deactivate-tabs"
-            }`}>
-            Sports
-          </span>
-          {urlAfterSlash === "explore/sports" && (
-            <div className="activelines"></div>
-          )}
-        </Link>
-        <Link
-          to="/explore/entertainment"
-          className={`flex-1 flex flex-col relative ${urlAfterSlash === "explore/entertainment" ? "active-link" : "inactive-link"
-            }`}
-        >
-          <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "explore/entertainment" ? "activeTabs" : "deactivate-tabs"
-            }`}>
-            Entertainment
-          </span>
-          {urlAfterSlash === "explore/entertainment" && (
-            <div className="activelines"></div>
-          )}
-        </Link>
-      </div>
+// const ExploreTab = () => {
 
-      {
+//   const location = useLocation();
+//   const pathname = location.pathname;
+//   const urlAfterSlash = pathname.substring(1);
 
-        urlAfterSlash === "explore" && (
-          <Foryou />
-        )
-      }
-      {
-        urlAfterSlash === 'explore/trendings' && (
-          <Trending />
-        )
-      }
-      {
-        urlAfterSlash === 'explore/news' && (
-          <News />
-        )
-      }
-      {
-        urlAfterSlash === 'explore/sports' && (
-          <Sports />
-        )
+//   return (
+//     <div className="explore-tab w-full">
+//       <div className="flex h-14 cursor-pointer">
+//         <Link
+//           to="/explore"
+//           className={`flex-1 flex flex-col relative ${urlAfterSlash === "explore" ? "active-link" : "inactive-link"
+//             }`}
+//         >
+//           <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "explore" ? "activeTabs" : "deactivate-tabs"
+//             }`}>
+//             For you
+//           </span>
+//           {urlAfterSlash === "explore" ? (
 
-      }
-      {
-        urlAfterSlash === 'explore/entertainment' && (
-          <Entertainment />
-        )
-      }
+//             <div className="activelines"></div>
+//           ) : (
+//             <div className="deactivatelines"></div>
+//           )
+//           }
+//         </Link>
+//         <Link
+//           to="/explore/trendings"
+//           className={`flex-1 flex flex-col relative ${urlAfterSlash === "explore/trendings" ? "active-link" : "inactive-link"
+//             }`}
+//         >
+//           <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "explore/trendings" ? "activeTabs" : "deactivate-tabs"
+//             }`}>
+//             Trending
+//           </span>
+//           {urlAfterSlash === "explore/trendings" ? (
 
-    </div>
-  );
-};
+//             <div className="activelines"></div>
+//           ) : (
+//             <div className="deactivatelines"></div>
+//           )
+//           }
+//         </Link>
+//         <Link
+//           to="/explore/news"
+//           className={`flex-1  flex flex-col relative ${urlAfterSlash === "explore/news" ? "active-link" : "inactive-link"
+//             }`}
+//         >
+//           <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "explore/news" ? "activeTabs" : "deactivate-tabs"
+//             }`}>
+//             News
+//           </span>
+//           {urlAfterSlash === "explore/news" ? (
+
+//             <div className="activelines"></div>
+//           ) : (
+//             <div className="deactivatelines"></div>
+//           )
+//           }
+//         </Link>
+//         <Link
+//           to="/explore/sports"
+//           className={`flex-1 flex flex-col relative ${urlAfterSlash === "explore/sports" ? "active-link" : "inactive-link"
+//             }`}
+//         >
+//           <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "explore/sports" ? "activeTabs" : "deactivate-tabs"
+//             }`}>
+//             Sports
+//           </span>
+//           {urlAfterSlash === "explore/sports" ? (
+
+//             <div className="activelines"></div>
+//           ) : (
+//             <div className="deactivatelines"></div>
+//           )
+//           }
+
+//         </Link>
+//         <Link
+//           to="/explore/entertainment"
+//           className={`flex-1 flex flex-col relative ${urlAfterSlash === "explore/entertainment" ? "active-link" : "inactive-link"
+//             }`}
+//         >
+//           <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "explore/entertainment" ? "activeTabs" : "deactivate-tabs"
+//             }`}>
+//             Entertainment
+//           </span>
+//           {urlAfterSlash === "explore/entertainment" ? (
+
+//             <div className="activelines"></div>
+//           ) : (
+//             <div className="deactivatelines"></div>
+//           )
+//           }
+
+//         </Link>
+//       </div>
+
+//       {
+
+//         urlAfterSlash === "explore" && (
+//           <Foryou />
+//         )
+//       }
+//       {
+//         urlAfterSlash === 'explore/trendings' && (
+//           <Trending />
+//         )
+//       }
+//       {
+//         urlAfterSlash === 'explore/news' && (
+//           <News />
+//         )
+//       }
+//       {
+//         urlAfterSlash === 'explore/sports' && (
+//           <Sports />
+//         )
+
+//       }
+//       {
+//         urlAfterSlash === 'explore/entertainment' && (
+//           <Entertainment />
+//         )
+//       }
+
+//     </div>
+//   );
+// };
 
 
 

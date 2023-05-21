@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 
@@ -21,10 +21,25 @@ interface TrendingsFun {
 
 const TrendingsCard: React.FC<TrendingsFun> = ({ item }) => {
     const [isMoreOpen, setIsMoreOpen] = useState(false);
-    const handleMore = () => {
-        setIsMoreOpen(!isMoreOpen)
-    }
+    const moreRef = useRef<HTMLDivElement>(null);
 
+    const handleMore = () => {
+        setIsMoreOpen(!isMoreOpen);
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (moreRef.current && !moreRef.current.contains(event.target as Node)) {
+                setIsMoreOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
     return (
         <div className=' flex flex-col TrendindsCard'>
             <div className="flex relative justify-between">
@@ -39,7 +54,7 @@ const TrendingsCard: React.FC<TrendingsFun> = ({ item }) => {
                     {isMoreOpen && (
 
 
-                        <div className="absolute right-0" onClick={(e) => handleMore()}>
+                        <div ref={moreRef} className="absolute right-0" onClick={(e) => handleMore()}>
 
                             <More />
                         </div>

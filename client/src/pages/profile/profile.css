@@ -24,12 +24,18 @@
   width: 50%;
   border-radius: 60px;
 }
-
-.activeTabs{
+.deactivatelines {
+  visibility: hidden;
+   height: 4px;
+  margin: auto;
+  background-color: rgb(0, 174, 255);
+  width: 50%;
+  border-radius: 60px;
+}
+.activeTabs {
   color: black;
 }
 
-.deactivate-tabs{
+.deactivate-tabs {
   color: rgb(126, 126, 126);
-
 }
