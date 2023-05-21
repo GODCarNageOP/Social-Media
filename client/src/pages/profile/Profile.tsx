@@ -202,7 +202,7 @@ const Profile = () => {
   ];
 
   return (
-    <div className="Profile  mobile:w-[100%]  w-[80%]  lg:w-[50%] xl:w-[50%] pt-1">
+    <div className="Profile  mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%] pt-1">
       <div className="back-div flex gap-8 align-center pl-4 items-center">
         <ArrowBackIcon className=" hover:bg-gray-200 cursor-pointer hover:rounded-full" />
 
