@@ -1,5 +1,5 @@
 import SearchIcon from "@mui/icons-material/Search";
-
+import profilePic from '../assets/pofilePic.jpeg'
 
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import { useState } from "react";
@@ -13,74 +13,99 @@ import Entertainment from "../components/Trendings/Entertainment";
 import TabBar from '../components/Tabbar';
 
 
+const tabs = [
+  { label: "For You", path: "/explore" },
+  { label: "Trendings", path: "/explore/trendings" },
+  { label: "News", path: "/explore/news" },
+  { label: "Sports", path: "/explore/sports" },
+  { label: "Entertainment", path: "/explore/entertainment" },
+
+];
 const Explore = () => {
-  const location = useLocation();
-  const pathname = location.pathname;
-  const urlAfterSlash = pathname.substring(1);
 
-  const tabs = [
-    { label: "For You", path: "/explore" },
-    { label: "Trendings", path: "/explore/trendings" },
-    { label: "News", path: "/explore/news" },
-    { label: "Sports", path: "/explore/sports" },
-    { label: "Entertainment", path: "/explore/entertainment" },
 
-  ];
   return (
     <div className="explore mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%]">
-      <div className="exploreContainer flex justify-between items-center">
-        <div className="search h-[5%] flex-1 rounded-full bg-gray-100 flex mt-3 items-center p-3 gap-2 mx-10 justify-start">
-          <SearchIcon className="icon text-gray-500" />
-          <input
-            type="text"
-            placeholder="Search Twitter"
-            className="bg-transparent border-none outline-none"
-          />
-        </div>
-        <Link to="/settings">
-          <SettingsOutlinedIcon className="mr-10 mt-3 hover:bg-gray-200 cursor-pointer hover:rounded-full" />
-        </Link>
+      <div className="relative">
+        <ExploreTab />
       </div>
-      <div className="exploreNavbar  justify-between h-14 mt-2">
-        <TabBar tabs={tabs} />
-        {
 
-          urlAfterSlash === "explore" && (
-            <Foryou />
-          )
-        }
-        {
-          urlAfterSlash === 'explore/trendings' && (
-            <Trending />
-          )
-        }
-        {
-          urlAfterSlash === 'explore/news' && (
-            <News />
-          )
-        }
-        {
-          urlAfterSlash === 'explore/sports' && (
-            <Sports />
-          )
-
-        }
-        {
-          urlAfterSlash === 'explore/entertainment' && (
-            <Entertainment />
-          )
-        }
-
-      </div>
     </div>
   );
 };
 
 
 
+const ExploreTab = () => {
 
 
+  return (
+    <div className="w-full relative">
+    
 
+        <div className="exploreContainer flex justify-between items-center">
+          <div className="search h-[5%] flex-1 rounded-full bg-gray-100 flex mt-3 items-center p-3 gap-2 mx-10 justify-start">
+            <div className=" sm:hidden profile-circle rounded-full overflow-hidden">
+              <img src={profilePic} className="w-full h-full object-cover" alt="" />
+              </div>
+            <SearchIcon className="icon text-gray-500" />
+            <input
+              type="text"
+              placeholder="Search Twitter"
+              className="bg-transparent border-none outline-none"
+            />
+          </div>
+          <Link to="/settings">
+            <SettingsOutlinedIcon className="mr-10 mt-3 hover:bg-gray-200 cursor-pointer hover:rounded-full" />
+          </Link>
+        </div>
+        <TabBar tabs={tabs} />
+    
+
+      <div className="">
+        <ShowTabs />
+      </div>
+    </div>
+  )
+}
+
+const ShowTabs = () => {
+  const location = useLocation();
+  const pathname = location.pathname;
+  const urlAfterSlash = pathname.substring(1);
+  return (
+    <div className="exploreNavbar  justify-between h-14 mt-2">
+      {
+
+        urlAfterSlash === "explore" && (
+          <Foryou />
+        )
+      }
+      {
+        urlAfterSlash === 'explore/trendings' && (
+          <Trending />
+        )
+      }
+      {
+        urlAfterSlash === 'explore/news' && (
+          <News />
+        )
+      }
+      {
+        urlAfterSlash === 'explore/sports' && (
+          <Sports />
+        )
+
+      }
+      {
+        urlAfterSlash === 'explore/entertainment' && (
+          <Entertainment />
+        )
+      }
+
+    </div>
+  )
+}
 
 // const ExploreTab = () => {
 
