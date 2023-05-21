@@ -55,9 +55,9 @@
  
 }
 @media screen and (max-width: 500px) {
-  .navbar {
+  /* .navbar {
     display: none !important;
-  }
+  } */
 }
 
 .overlay {

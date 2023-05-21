@@ -11,7 +11,7 @@ import TwitterBlue from "./pages/TwitterBlue";
 import More from "./pages/More";
 import Profile from "./pages/profile/Profile";
 import Settings from "./pages/Settings";
-
+import './App.css'
 function App() {
   const Layout = () => {
     return (

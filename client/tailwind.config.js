@@ -11,7 +11,7 @@ export default {
         lg: "1024px",
         xl: "1280px",
         "2xl": "1536px",
-        mobile: { max: "500px" },
+        mobile: { max: "640px" },
         tablet: { min: "640px", max: "1023px" },
         desktop: { min: "1024px", max: "1279px" },
         wide: { min: "1280px" },

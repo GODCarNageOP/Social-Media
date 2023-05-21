@@ -57,21 +57,20 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
     }, []);
 
     return (
-        <div className="Tweets-card flex w-full gap-2 jusitfy-between hover:bg-gray-200">
-            <div className="left mr-3">
-                <img src={profilePic} alt="" className="w-11 h-11 rounded-full ml-5 mt-2" />
+        <div className="Tweets-card p- flex w-full gap-2 jusitfy-between  hover:bg-gray-200">
+            <div className="left flex items-center justify-center mt-2 tweet-profile  overflow-hidden rounded-full ">
+                <img src={profilePic} alt="" className="tweet-profile object-cover " />
             </div>
-            <div className="center flex flex-col flex-2 mt-2 w-full ">
-                <div className="flex gap-2 w-full   justify-between">
-                    <div className="profile-details-tweets flex gap-2 w-full">
-                        <span className="font-bold hover:underline cursor-pointer">{tweet?.name}</span>
-                        <span className="text-gray-600"> @{tweet?.userName}</span>
-                        <span>
-                            .
-                        </span>
-                        <span className="text-gray-600">{tweet?.joined}</span>
+            <div className="center flex flex-col flex-1  mt-2">
+                <div className="flex w-full   justify-between  sm:w-full">
+                    <div className="profile-details-tweets flex xs:max-w-[300px] overflow-hidden items-start">
+                        <span className="font-bold text-sm hover:underline cursor-pointer">{tweet?.name}</span>
+                        <span className="text-gray-600 text-sm  sm:text-base  "> @{tweet?.userName}</span>
+                        <span>.</span>
+                        <span className="text-gray-600 text-sm sm:text-base ">{tweet?.joined}</span>
                     </div>
-                    <span className="cursor-pointer  tweet-icon hover:text-blue-500 text-gray-500" onClick={(e) => handleMore()}>
+
+                    <span className="cursor-pointer  tweet-icon hover:text-blue-500 text-gray-500" onClick={() => handleMore()}>
 
                         <BsThreeDots />
                     </span>
@@ -80,7 +79,7 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
                     {isMoreOpen && (
 
 
-                        <div ref={moreRef} className="absolute right-0" onClick={(e) => handleMore()}>
+                        <div ref={moreRef} className="absolute right-0" onClick={() => handleMore()}>
 
                             <More />
                         </div>
@@ -148,7 +147,7 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
                     </div>
                 </div>
             </div>
-            <div className="right flex flex-6 ml-10 items-s">
+            <div className="right flex flex-6  items-s">
 
             </div>
         </div>

@@ -1,0 +1,12 @@
+.sm-text{
+    font-size: 5px;
+}
+
+.tweet-profile{
+   min-width: 60px;
+   min-height:60px;
+   max-width: 60px;
+   max-height: 60px;
+
+
+}
