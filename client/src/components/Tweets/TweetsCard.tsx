@@ -63,7 +63,7 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
             </div>
             <div className="center flex flex-col flex-1  mt-2">
                 <div className="flex w-full   justify-between  sm:w-full">
-                    <div className="profile-details-tweets flex xs:max-w-[300px] overflow-hidden items-start">
+                    <div className="profile-details-tweets flex  items-start justify-center">
                         <span className="font-bold text-sm hover:underline cursor-pointer">{tweet?.name}</span>
                         <span className="text-gray-600 text-sm  sm:text-base  "> @{tweet?.userName}</span>
                         <span>.</span>
