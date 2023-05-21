@@ -45,7 +45,7 @@
   border-radius: 50%;
   overflow: hidden;
 }
-@media screen and (min-width: 1300px) {
+@media screen and (min-width: 1280px) {
   .large-device-tweet{
     display: flex !important;
   }
@@ -64,7 +64,7 @@
   box-shadow: rgba(0, 0, 0, 1) 0px 5px 15px;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1280px) {
   .mobile-none {
     display: none;
   }

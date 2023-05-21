@@ -39,9 +39,11 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar sm:w-[10%] md:w-[15%] lg:w-[20%] flex flex-col h-full ">
+   <div className="navbar w-[13%] sm:w-[10%] md:w-[10%] xl:w-[20%]  mr-7 flex flex-col h-full">
+
+
       <Link to="/">
-        <div className="logo items-center justify-center lg:items-start lg:justify-start h-[5%] flex gap-2 p-3">
+        <div className="logo items-center justify-center xl:items-start xl:justify-start h-[5%] flex gap-2 p-3">
           {/*<TwitterIcon className="h-12 w-12 bg-white rounded-3xl hover:bg-gray-200 text-blue-500"/>*/}
           <img
             src={twitter}
@@ -120,10 +122,10 @@ const Navbar = () => {
       </div>
       <div className="flex items-center justify-center">
 
-        <span className="h-12 w-64 text-xl bg-blue-500 rounded-3xl hover:bg-blue-600 text-white flex items-center justify-center mt-2 p-3 mr-10 ml-3 cursor-pointer large-device-tweet">
+        <span className=" h-12 w-64 text-xl bg-blue-500 rounded-3xl hover:bg-blue-600 text-white flex items-center justify-center mt-2 p-3 mr-10 ml-3 cursor-pointer large-device-tweet">
           Tweet
         </span>
-        <div className="h-12 w-12  flex items-center text-2xl justify-center text-white bg-blue-500 small-device-tweet">
+        <div className="cursor-pointer h-12 w-12  flex items-center text-2xl justify-center text-white bg-blue-500 small-device-tweet">
           <TwitterIcon />
         </div>
       </div>
@@ -135,15 +137,18 @@ const Navbar = () => {
           </div>
         </div>
       }
-      <div className="profile flex justify-between h-[10%] mx-2 items-center hover:bg-gray-200 hover:rounded-full p-3 cursor-pointer mt-10">
-        <div className="profileContainer gap-3 flex">
-          <img src={yash} alt="" className="h-12 w-12 rounded-full" />
-          <div className="flex flex-col">
+      <div className="profile flex justify-center xl:justify-between  h-[10%] mx-2 items-center hover:bg-gray-200 hover:rounded-full p-3 cursor-pointer mt-10">
+        <div className="profileContainer gap-3 flex items-center justify-center">
+          <div className="w-14 h-14 flex item-center justify-center    rounded-full overflow-hidden">
+          <img src={yash} alt="" className="h-full w-full object-cover" />
+          </div>
+
+          <div className="flex flex-col hidden xl:flex">
             <h1 className="text-lg">Yash Harale</h1>
             <p className="text-sm text-gray-500">@ig_carnageyt</p>
           </div>
         </div>
-        <div onClick={() => setOpen(!open)} className="relative">
+        <div onClick={() => setOpen(!open)} className="relative hidden xl:flex">
           <MoreHorizOutlinedIcon className="icon" />
         </div>
       </div>

@@ -82,18 +82,18 @@
   }
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1024px) {
   .app {
     width: 100%;
-    max-width: 1000px;
+    max-width: 1024px;
     margin: auto !important;
   }
 }
 
-@media screen and (min-width: 1300px) {
+@media screen and (min-width: 1280px) {
   .app {
     width: 100%;
-    max-width: 1300px;
+    max-width: 1280px;
     margin: auto !important;
   }
 }
@@ -101,7 +101,7 @@
 @media screen and (min-width: 1600px) {
   .app {
     width: 100%;
-    max-width: 1300px;
+    max-width: 1280px;
     margin: auto !important;
   }
 }
@@ -122,12 +122,12 @@
     display: none !important;
   }
 }
-@media screen and (max-width:1000px) {
+@media screen and (max-width:1024px) {
   .footer{
     display: none;
   }
 }
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1280px) {
   .mobile-none {
     display: none;
   }
