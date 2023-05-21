@@ -8,6 +8,7 @@ import CakeOutlinedIcon from '@mui/icons-material/CakeOutlined';
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import ProfileTweet from "../../components/Tweets/ProfileTweets";
+import TabBar from "../../components/Tabbar";
 
 
 interface Profile {
@@ -187,6 +188,19 @@ const profile: Profile = {
 };
 
 const Profile = () => {
+  const [openTab, setOpenTabs] = useState("Tweets");
+  const location = useLocation();
+  const pathname = location.pathname;
+  const urlAfterSlash = pathname.substring(1);
+
+  const tabs = [
+    { label: "Tweets", path: "/profile" },
+    { label: "Replies", path: "/profile/with_replies" },
+    { label: "Media", path: "/profile/media" },
+    { label: "Likes", path: "/profile/likes" },
+
+  ];
+
   return (
     <div className="Profile w-[50%] pt-1">
       <div className="back-div flex gap-8 align-center pl-4 items-center">
@@ -272,94 +286,8 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      {
-
-      }
-      <ProfileTab />
-    </div>
-  );
-};
-
-
-const ProfileTab = () => {
-  const [openTab, setOpenTabs] = useState("Tweets");
-  const location = useLocation();
-  const pathname = location.pathname;
-  const urlAfterSlash = pathname.substring(1);
-
-  return (
-    <div className="profile-tweet w-full">
-      <div className="flex h-14 cursor-pointer">
-        <Link
-          to="/profile"
-          className={`flex-1 flex flex-col relative ${urlAfterSlash === "profile" ? "active-link" : "inactive-link"
-            }`}
-        >
-          <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "profile" ? "activeTabs" : "deactivate-tabs"
-            }`}>
-            Tweets
-          </span>
-          {urlAfterSlash === "profile" ? (
-
-            <div className="activelines"></div>
-          ) : (
-            <div className="deactivatelines"></div>
-          )
-          }
-
-        </Link>
-        <Link
-          to="/profile/with_replies"
-          className={`flex-1 flex flex-col relative ${urlAfterSlash === "profile/with_replies" ? "active-link" : "inactive-link"
-            }`}
-        >
-          <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "profile/with_replies" ? "activeTabs" : "deactivate-tabs"
-            }`}>
-            Replies
-          </span>
-          {urlAfterSlash === "profile/with_replies" ? (
-
-            <div className="activelines"></div>
-          ) : (
-            <div className="deactivatelines"></div>
-          )
-          }
-        </Link>
-        <Link
-          to="/profile/media"
-          className={`flex-1  flex flex-col relative ${urlAfterSlash === "profile/media" ? "active-link" : "inactive-link"
-            }`}
-        >
-          <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "profile/media" ? "activeTabs" : "deactivate-tabs"
-            }`}>
-            Media
-          </span>
-          {urlAfterSlash === "profile/media" ? (
-
-            <div className="activelines"></div>
-          ) : (
-            <div className="deactivatelines"></div>
-          )
-          }
-        </Link>
-        <Link
-          to="/profile/likes"
-          className={`flex-1 flex flex-col relative ${urlAfterSlash === "profile/likes" ? "active-link" : "inactive-link"
-            }`}
-        >
-          <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "profile/likes" ? "activeTabs" : "deactivate-tabs"
-            }`}>
-            Likes
-          </span>
-          {urlAfterSlash === "profile/likes" ? (
-
-            <div className="activelines"></div>
-          ) : (
-            <div className="deactivatelines"></div>
-          )
-          }
-        </Link>
-      </div>
+     
+      <TabBar tabs={tabs} />
       {
 
         urlAfterSlash === "profile" && (
@@ -386,10 +314,129 @@ const ProfileTab = () => {
           <ProfileTweet />
         )
       }
-
     </div>
   );
 };
+
+
+
+
+
+
+
+
+
+
+
+// const ProfileTab = () => {
+//   const [openTab, setOpenTabs] = useState("Tweets");
+//   const location = useLocation();
+//   const pathname = location.pathname;
+//   const urlAfterSlash = pathname.substring(1);
+
+//   return (
+//     <div className="profile-tweet w-full">
+//       <div className="flex h-14 cursor-pointer">
+//         <Link
+//           to="/profile"
+//           className={`flex-1 flex flex-col relative ${urlAfterSlash === "profile" ? "active-link" : "inactive-link"
+//             }`}
+//         >
+//           <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "profile" ? "activeTabs" : "deactivate-tabs"
+//             }`}>
+//             Tweets
+//           </span>
+//           {urlAfterSlash === "profile" ? (
+
+//             <div className="activelines"></div>
+//           ) : (
+//             <div className="deactivatelines"></div>
+//           )
+//           }
+
+//         </Link>
+//         <Link
+//           to="/profile/with_replies"
+//           className={`flex-1 flex flex-col relative ${urlAfterSlash === "profile/with_replies" ? "active-link" : "inactive-link"
+//             }`}
+//         >
+//           <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "profile/with_replies" ? "activeTabs" : "deactivate-tabs"
+//             }`}>
+//             Replies
+//           </span>
+//           {urlAfterSlash === "profile/with_replies" ? (
+
+//             <div className="activelines"></div>
+//           ) : (
+//             <div className="deactivatelines"></div>
+//           )
+//           }
+//         </Link>
+//         <Link
+//           to="/profile/media"
+//           className={`flex-1  flex flex-col relative ${urlAfterSlash === "profile/media" ? "active-link" : "inactive-link"
+//             }`}
+//         >
+//           <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "profile/media" ? "activeTabs" : "deactivate-tabs"
+//             }`}>
+//             Media
+//           </span>
+//           {urlAfterSlash === "profile/media" ? (
+
+//             <div className="activelines"></div>
+//           ) : (
+//             <div className="deactivatelines"></div>
+//           )
+//           }
+//         </Link>
+//         <Link
+//           to="/profile/likes"
+//           className={`flex-1 flex flex-col relative ${urlAfterSlash === "profile/likes" ? "active-link" : "inactive-link"
+//             }`}
+//         >
+//           <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "profile/likes" ? "activeTabs" : "deactivate-tabs"
+//             }`}>
+//             Likes
+//           </span>
+//           {urlAfterSlash === "profile/likes" ? (
+
+//             <div className="activelines"></div>
+//           ) : (
+//             <div className="deactivatelines"></div>
+//           )
+//           }
+//         </Link>
+//       </div>
+//       {
+
+//         urlAfterSlash === "profile" && (
+//           <ProfileTweet />
+//         )
+//       }
+//       {
+
+//         urlAfterSlash === "profile/likes" && (
+//           <ProfileTweet />
+//         )
+//       }
+
+//       {
+
+//         urlAfterSlash === "profile/with_replies" && (
+//           <ProfileTweet />
+//         )
+//       }
+
+//       {
+
+//         urlAfterSlash === "profile/media" && (
+//           <ProfileTweet />
+//         )
+//       }
+
+//     </div>
+//   );
+// };
 
 
 
