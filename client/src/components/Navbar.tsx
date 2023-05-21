@@ -112,9 +112,9 @@ const Navbar = () => {
             <WbSunnyOutlinedIcon className="icon" />
           )}
           {isDarkMode ? (
-            <span className="">Dark mode</span>
+            <span className="">Light mode</span>
           ) : (
-            <span className="small-sc-tweet">Light mode</span>
+            <span className="small-sc-tweet">Dark mode</span>
           )}
         </div>
       </div>
