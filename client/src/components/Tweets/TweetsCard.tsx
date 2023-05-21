@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./TweetCard.css";
 import profilePic from "../../assets/pofilePic.jpeg";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import PushPinIcon from '@mui/icons-material/PushPin';
-import { BiPin } from 'react-icons/bi';
-import {TbMessageCircle2} from 'react-icons/tb';
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import { TbMessageCircle2 } from 'react-icons/tb';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import { AiOutlineRetweet, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { MdOutlineGraphicEq } from "react-icons/md";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 
-import { GoComment } from "react-icons/go";
 import { BsUpload, BsThreeDots } from "react-icons/bs";
 import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 
@@ -35,6 +35,27 @@ interface TweetCardProps {
 }
 
 const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
+    const [isMoreOpen, setIsMoreOpen] = useState(false);
+    const moreRef = useRef<HTMLDivElement>(null);
+
+    const handleMore = () => {
+        setIsMoreOpen(!isMoreOpen);
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (moreRef.current && !moreRef.current.contains(event.target as Node)) {
+                setIsMoreOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
     return (
         <div className="Tweets-card flex w-full gap-2 jusitfy-between hover:bg-gray-200">
             <div className="left mr-3">
@@ -50,10 +71,22 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
                         </span>
                         <span className="text-gray-600">{tweet?.joined}</span>
                     </div>
-                    <span className="cursor-pointer  tweet-icon hover:text-blue-500 text-gray-500">
+                    <span className="cursor-pointer  tweet-icon hover:text-blue-500 text-gray-500" onClick={(e) => handleMore()}>
 
                         <BsThreeDots />
                     </span>
+
+                    {/* <div className="relative w-full"> */}
+                    {isMoreOpen && (
+
+
+                        <div ref={moreRef} className="absolute right-0" onClick={(e) => handleMore()}>
+
+                            <More />
+                        </div>
+                    )
+
+                    }
                 </div>
                 <div className="middle flex">
                     <span>{tweet?.content}</span>
@@ -130,23 +163,26 @@ const More = () => {
 
 
     return (
-        <div className="overlay h-21 w-76 p-2 bg-white  shadow-lg border rounded-xl z-10 flex flex-col top-[465px] ml-[60px]">
-            <div className="overlayContainer gap-5">
+        <div className="overlay h-33 w-80 p-5 bg-white  shadow-lg border rounded-xl z-10 flex flex-col top-[465px] ml-[60px]">
+            <div className="overlayContainer gap-8">
                 <div className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
-                    <SentimentVeryDissatisfiedIcon />
-                    <h1>Not interested in this</h1>
+                    < DeleteIcon />
+                    <h1>Delete</h1>
                 </div>
                 <div className="bottom hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
-                    <SentimentVeryDissatisfiedIcon />
-                    <h1>This trend is harmful or spammy</h1>
+                    <PushPinIcon />
+                    <h1>Pin to Your Profile</h1>
                 </div>
                 <div className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
-                    <SentimentVeryDissatisfiedIcon />
-                    <h1>Not interested in this</h1>
+                 
+                        <ChatBubbleOutlineIcon  />
+               
+                    
+                    <h1>Changes who can reply</h1>
                 </div>
                 <div className="bottom hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
-                    <SentimentVeryDissatisfiedIcon />
-                    <h1>This trend is harmful or spammy</h1>
+                    <GraphicEqIcon />
+                    <h1>View Tweet Analsytic</h1>
                 </div>
                 <div className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
                     <SentimentVeryDissatisfiedIcon />
