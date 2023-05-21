@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import emailjs from '@emailjs/browser';
 
+
 interface FormValues {
   name: string;
   email: string;
@@ -44,7 +45,7 @@ const TwitterBlue: React.FC = () => {
           message: '',
         });
       })
-      .catch((error) => {
+      .catch((error:Error) => {
         setLoading(false);
         console.log(error);
         alert('Something went wrong !');
