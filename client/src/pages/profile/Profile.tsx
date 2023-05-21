@@ -241,7 +241,7 @@ const Profile = () => {
           <span className="text-gray-500 p-2 text-sm">
             {profile.profession}
           </span>
-          <div className="top flex gap-3">
+          <div className="top flex flex-wrap gap-3">
             <div className="flex gap-1 items-center">
               <LocationOnOutlinedIcon />
               <span className="text-gray-500 text-sm">
@@ -255,21 +255,21 @@ const Profile = () => {
               </span>
             </div>
           </div>
-          <div className="center flex items-center text-sm gap-2 mt-2">
+          <div className="center flex flex-wrap items-center text-sm gap-2 mt-2">
             <div className="flex gap-1 items-center">
               <CakeOutlinedIcon />
               <span className="text-gray-500">
                 Born {profile?.address?.dob}
               </span>
             </div>
-            <div className="flex gap-1 items-center">
+            <div className="flex gap-1 flex-wrap items-center">
               <CalendarMonthOutlinedIcon />
               <span className="text-gray-500">
                 Joined {profile?.address?.joined}
               </span>
             </div>
           </div>
-          <div className="bottom flex items-center mt-3 ml-2 gap-2 text-sm">
+          <div className="bottom flex items-center flex-wrap mt-3 ml-2 gap-2 text-sm">
             <div className="flex gap-1">
               <span className="text-1xl font-bold text-black">
                 {profile?.numberOfFollowing}
