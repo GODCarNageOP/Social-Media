@@ -190,7 +190,7 @@ const Profile = () => {
   return (
     <div className="Profile w-[50%] pt-1">
       <div className="back-div flex gap-8 align-center pl-4 items-center">
-        <ArrowBackIcon className=" hover:bg-gray-200 cursor-pointer hover:rounded-full"/>
+        <ArrowBackIcon className=" hover:bg-gray-200 cursor-pointer hover:rounded-full" />
 
         <div className="flex flex-col  cursor-pointer">
           <span className="font-bold topName text-xl">{profile?.name}</span>
@@ -299,7 +299,14 @@ const ProfileTab = () => {
             }`}>
             Tweets
           </span>
-          {urlAfterSlash === "profile" && <div className="activelines"></div>}
+          {urlAfterSlash === "profile" ? (
+
+            <div className="activelines"></div>
+          ) : (
+            <div className="deactivatelines"></div>
+          )
+          }
+
         </Link>
         <Link
           to="/profile/with_replies"
@@ -310,9 +317,13 @@ const ProfileTab = () => {
             }`}>
             Replies
           </span>
-          {urlAfterSlash === "profile/with_replies" && (
+          {urlAfterSlash === "profile/with_replies" ? (
+
             <div className="activelines"></div>
-          )}
+          ) : (
+            <div className="deactivatelines"></div>
+          )
+          }
         </Link>
         <Link
           to="/profile/media"
@@ -323,9 +334,13 @@ const ProfileTab = () => {
             }`}>
             Media
           </span>
-          {urlAfterSlash === "profile/media" && (
+          {urlAfterSlash === "profile/media" ? (
+
             <div className="activelines"></div>
-          )}
+          ) : (
+            <div className="deactivatelines"></div>
+          )
+          }
         </Link>
         <Link
           to="/profile/likes"
@@ -336,18 +351,42 @@ const ProfileTab = () => {
             }`}>
             Likes
           </span>
-          {urlAfterSlash === "profile/likes" && (
+          {urlAfterSlash === "profile/likes" ? (
+
             <div className="activelines"></div>
-          )}
+          ) : (
+            <div className="deactivatelines"></div>
+          )
+          }
         </Link>
       </div>
       {
 
-        urlAfterSlash === "profile" &&(
-          <ProfileTweet  />
+        urlAfterSlash === "profile" && (
+          <ProfileTweet />
         )
       }
-     
+      {
+
+        urlAfterSlash === "profile/likes" && (
+          <ProfileTweet />
+        )
+      }
+
+      {
+
+        urlAfterSlash === "profile/with_replies" && (
+          <ProfileTweet />
+        )
+      }
+
+      {
+
+        urlAfterSlash === "profile/media" && (
+          <ProfileTweet />
+        )
+      }
+
     </div>
   );
 };

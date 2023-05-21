@@ -163,7 +163,7 @@ const More = () => {
 
 
     return (
-        <div className="overlay h-33 w-80 p-5 bg-white  shadow-lg border rounded-xl z-10 flex flex-col top-[465px] ml-[60px]">
+        <div className="overlay h-33 w-80 p-3 bg-white  shadow-lg border rounded-xl z-10 flex flex-col top-[465px] ml-[60px]">
             <div className="overlayContainer gap-8">
                 <div className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
                     < DeleteIcon />
