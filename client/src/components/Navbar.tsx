@@ -39,7 +39,7 @@ const Navbar = () => {
   };
 
   return (
-   <div className="navbar w-[13%] sm:w-[10%] md:w-[10%] xl:w-[20%]  mr-7 flex flex-col h-full">
+   <div className="navbar w-[13%] sm:w-[10%] md:w-[10%] xl:w-[20%] flex flex-col h-full">
 
 
       <Link to="/">
