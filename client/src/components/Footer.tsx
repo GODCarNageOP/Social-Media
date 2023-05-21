@@ -13,13 +13,13 @@ const Footer = () => {
   const [open4, setOpen4] = useState(false);
 
   return (
-    <div className="footer ml-7 w-[30%] flex flex-col h-full ">
-      <div className="search h-[3%] w-84 rounded-full bg-gray-100 flex mt-3 items-center justify-start p-3 gap-2 mx-10">
+    <div className="footer ml-7 w-[30%] flex flex-col h-full pl-2 pr-2">
+      <div className="search h-[3%] w-full rounded-full bg-gray-100 flex mt-3 items-center justify-start p-3 gap-2 ">
         <SearchIcon className="icon text-gray-500" />
         <input
           type="text"
           placeholder="Search Twitter"
-          className="bg-transparent border-none outline-none"
+          className="bg-transparent border-none outline-none w-full"
         />
       </div>
       {open1 && (
@@ -78,7 +78,7 @@ const Footer = () => {
           </div>
         </div>
       )}
-      <div className="updates mx-10 bg-gray-100 rounded-lg h-[50%] mt-3 flex flex-col">
+      <div className="updates  bg-gray-100 rounded-lg h-[50%] mt-3 flex flex-col">
         <h1 className="p-3 text-xl font-semibold ml-2">What's happening</h1>
         <div className="flex p-3 justify-between hover:bg-gray-200 cursor-pointer">
           <div className="message flex flex-col items-start text-gray-500 gap-1 ml-2">
@@ -162,12 +162,12 @@ const Footer = () => {
 const WhoToFollow = () => {
 
   return (
-    <div className="follow mt-3 mx-10 bg-gray-100 rounded-lg h-[30%] flex flex-col ">
+    <div className="follow mt-3  bg-gray-100 rounded-lg h-[30%] flex flex-col ">
       <h1 className="text-xl font-semibold p-3 mx-2">Who to follow</h1>
       <div className="profile flex justify-between items-center p-3 h-16  hover:bg-gray-200 cursor-pointer">
         <div className="flex gap-2 ml-2">
           <img src={yash} alt="" className="h-12 w-12 rounded-full" />
-          <div className="name flex flex-col">
+          <div className="name flex flex-col w-full overflow-hidden whitespace-nowrap text-ellipsis  ">
             <h1 className="text-base font-semibold hover:underline">
               Yash Harale
             </h1>
@@ -217,15 +217,15 @@ const WhoToFollow = () => {
 const TermsOfService = () => {
 
   return (
-    <div className="foot mt-3 p-3 flex flex-col text-gray-500 text-xs">
-      <div className="top flex justify-between mx-14 items-center">
+    <div className="foot w-full mt-3 p-3 flex gap-2 flex-col text-gray-500 text-xs">
+      <div className="top flex justify-between  items-center">
         <span className="hover:underline cursor-pointer">
           Terms of Service
         </span>
         <span className="hover:underline cursor-pointer">Privacy Policy</span>
         <span className="hover:underline cursor-pointer">Cookie Policy</span>
       </div>
-      <div className="bottom flex justify-between mx-14 items-center">
+      <div className="bottom flex justify-between items-center">
         <span className="hover:underline cursor-pointer">Accessibilty</span>
         <span className="hover:underline cursor-pointer">Ads info</span>
         <span className="hover:underline flex items-center cursor-pointer">
