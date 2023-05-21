@@ -41,7 +41,7 @@ const Navbar = () => {
   return (
     <div className="navbar sm:w-[10%] md:w-[15%] lg:w-[20%] flex flex-col h-full ">
       <Link to="/">
-        <div className="logo h-[5%] flex gap-2 p-3">
+        <div className="logo items-center justify-center lg:items-start lg:justify-start h-[5%] flex gap-2 p-3">
           {/*<TwitterIcon className="h-12 w-12 bg-white rounded-3xl hover:bg-gray-200 text-blue-500"/>*/}
           <img
             src={twitter}

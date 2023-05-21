@@ -122,7 +122,11 @@
     display: none !important;
   }
 }
-
+@media screen and (max-width:1000px) {
+  .footer{
+    display: none;
+  }
+}
 @media screen and (max-width: 1300px) {
   .mobile-none {
     display: none;
