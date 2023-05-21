@@ -8,20 +8,15 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
-
 :root {
   --blue: rgb(1, 9, 17);
   --white: rgb(255, 255, 255);
 }
 
-
-
-.dark-mode{
+.dark-mode {
   background-color: var(--blue);
   color: white;
 }
-
 
 .exploreNavbar {
   border-bottom: 1px solid rgb(234, 234, 234);
@@ -47,17 +42,81 @@
   border-bottom: 1px solid rgb(234, 234, 234);
 }
 
-
-.TrendindsCard .font-thins{
-  font-size: .8rem;
+.TrendindsCard .font-thins {
+  font-size: 0.8rem;
 }
 
 
-@media screen and (min-width: 1300px) {
-  .small-sc-tweet {
-    display: none !important;
+
+.app {
+  width: 100%;
+
+  margin: auto;
+  padding: 0.5rem
+}
+.font-thins {
+  font-size: 0.5rem;
+}
+.w-100 {
+  width: 100%;
+}
+.align-center {
+  align-items: center;
+}
+.max-w-100 {
+  max-width: 100%;
+}
+.night-mode {
+}
+.night-mode {
+  /* Night mode styles */
+  color: white;
+  background-color: black;
+}
+
+@media screen and (min-width: 800px) {
+  .app {
+    width: 100%;
+    max-width: 800px;
+    margin: auto !important;
   }
 }
+
+@media screen and (min-width: 1000px) {
+  .app {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto !important;
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .app {
+    width: 100%;
+    max-width: 1300px;
+    margin: auto !important;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .app {
+    width: 100%;
+    max-width: 1300px;
+    margin: auto !important;
+  }
+}
+
+@media screen and (min-width: 2500px) {
+  .app {
+    width: 100%;
+    max-width: 1600px;
+    margin: auto !important;
+  }
+}
+
+
+
+
 @media screen and (max-width: 500px) {
   .navbar {
     display: none !important;
@@ -68,7 +127,9 @@
   .mobile-none {
     display: none;
   }
-
+ .small-sc-tweet {
+    display: none !important;
+  }
   .round-tweet-div {
     border-radius: 50% !important;
     width: 50px;
@@ -80,4 +141,3 @@
     display: none !important;
   }
 }
-

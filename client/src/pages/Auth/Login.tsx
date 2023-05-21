@@ -1,4 +1,6 @@
 import React from 'react'
+import twitter from '../../assets/twitter.png'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
     return (
@@ -22,10 +24,10 @@ const Login = () => {
 }
 
 
-const GoogleButton=()=>{
+const GoogleButton = () => {
 
-    
-    return(
+
+    return (
         <div className="googlebutton">
 
         </div>

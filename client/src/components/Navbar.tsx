@@ -1,5 +1,7 @@
 import twitter from "../assets/twitter.png";
 import yash from "../assets/yashXD.jpg";
+import './navbar.css'
+import TwitterIcon from '@mui/icons-material/Twitter';
 import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import TagOutlinedIcon from "@mui/icons-material/TagOutlined";
@@ -17,7 +19,7 @@ import { useEffect, useState } from "react";
 
 const Navbar = () => {
 
-const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false)
 
   const [isDarkMode, setIsDarkMode] = useState(
     localStorage.getItem("isDarkMode") === "true"
@@ -37,7 +39,7 @@ const [open, setOpen] = useState(false)
   };
 
   return (
-    <div className="navbar w-[20%] flex flex-col h-full ml-10">
+    <div className="navbar sm:w-[10%] md:w-[15%] lg:w-[20%] flex flex-col h-full ">
       <Link to="/">
         <div className="logo h-[5%] flex gap-2 p-3">
           {/*<TwitterIcon className="h-12 w-12 bg-white rounded-3xl hover:bg-gray-200 text-blue-500"/>*/}
@@ -50,53 +52,53 @@ const [open, setOpen] = useState(false)
         </div>
       </Link>
 
-      <div className="pages flex flex-col h-[80%] gap-2 items-start cursor-pointer p-3">
+      <div className="flex flex-col h-[80%] gap-2 items-start cursor-pointer p-3 pages">
         <Link to="/">
           <div className="icon h-12 text-xl hover:bg-gray-200 hover:rounded-3xl p-5 flex justify-center items-center gap-2">
             <HomeOutlinedIcon className="icon" />
-            <span className="">Home</span>
+            <span className="small-sc-tweet">Home</span>
           </div>
         </Link>
         <Link to="/explore">
           <div className="icon h-12 text-xl hover:bg-gray-200 hover:rounded-3xl p-5 flex justify-center items-center gap-2">
             <TagOutlinedIcon className="icon" />
-            <span className="">Explore</span>
+            <span className="small-sc-tweet">Explore</span>
           </div>
         </Link>
         <Link to="/notifications">
           <div className="icon h-12 text-xl hover:bg-gray-200 hover:rounded-3xl p-5 flex justify-center items-center gap-2">
             <NotificationsOutlinedIcon className="icon" />
-            <span className="">Notifications</span>
+            <span className="small-sc-tweet">Notifications</span>
           </div>
         </Link>
         <Link to="/messages">
           <div className="icon h-12 text-xl hover:bg-gray-200 hover:rounded-3xl p-5 flex justify-center items-center gap-2">
             <MailOutlineOutlinedIcon className="icon" />
-            <span className="">Messages</span>
+            <span className="small-sc-tweet">Messages</span>
           </div>
         </Link>
         <Link to="/lists">
           <div className="icon h-12 text-xl hover:bg-gray-200 hover:rounded-3xl p-5 flex justify-center items-center gap-2">
             <AddCircleOutlineIcon className="icon" />
-            <span className="">Create</span>
+            <span className="small-sc-tweet">Create</span>
           </div>
         </Link>
         <Link to="/bookmarks">
           <div className="icon h-12 text-xl hover:bg-gray-200 hover:rounded-3xl p-5 flex justify-center items-center gap-2">
             <BookmarkBorderOutlinedIcon className="icon" />
-            <span className="">Bookmarks</span>
+            <span className="small-sc-tweet">Bookmarks</span>
           </div>
         </Link>
         <Link to="/twitterblue">
           <div className="icon h-12 text-xl hover:bg-gray-200 hover:rounded-3xl p-5 flex justify-center items-center gap-2">
             <ContactPageOutlinedIcon className="icon" />
-            <span className="">Contact</span>
+            <span className="small-sc-tweet">Contact</span>
           </div>
         </Link>
         <Link to="/profile">
           <div className="icon h-12 text-xl hover:bg-gray-200 hover:rounded-3xl p-5 flex justify-center items-center gap-2">
             <PersonOutlineOutlinedIcon className="icon" />
-            <span className="">Profile</span>
+            <span className="small-sc-tweet">Profile</span>
           </div>
         </Link>
         <div
@@ -112,23 +114,27 @@ const [open, setOpen] = useState(false)
           {isDarkMode ? (
             <span className="">Dark mode</span>
           ) : (
-            <span>Light mode</span>
+            <span className="small-sc-tweet">Light mode</span>
           )}
         </div>
       </div>
       <div className="flex items-center justify-center">
-        <span className="h-12 w-64 text-xl bg-blue-500 rounded-3xl hover:bg-blue-600 text-white flex items-center justify-center mt-2 p-3 mr-10 ml-3 cursor-pointer">
+
+        <span className="h-12 w-64 text-xl bg-blue-500 rounded-3xl hover:bg-blue-600 text-white flex items-center justify-center mt-2 p-3 mr-10 ml-3 cursor-pointer large-device-tweet">
           Tweet
         </span>
+        <div className="h-12 w-12  flex items-center text-2xl justify-center text-white bg-blue-500 small-device-tweet">
+          <TwitterIcon />
+        </div>
       </div>
-      {open && 
+      {open &&
         <div className="overlay h-28 w-80 bg-white absolute shadow-lg border rounded-xl z-10 flex flex-col top-[550px]">
           <div className="overlayContainer my-5 gap-5">
-          <div className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer">Add an Existing account</div>
-          <div className="bottom hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer">Log out @ig_carnageyt</div>
+            <div className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer">Add an Existing account</div>
+            <div className="bottom hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer">Log out @ig_carnageyt</div>
           </div>
         </div>
-        }
+      }
       <div className="profile flex justify-between h-[10%] mx-2 items-center hover:bg-gray-200 hover:rounded-full p-3 cursor-pointer mt-10">
         <div className="profileContainer gap-3 flex">
           <img src={yash} alt="" className="h-12 w-12 rounded-full" />
@@ -137,8 +143,8 @@ const [open, setOpen] = useState(false)
             <p className="text-sm text-gray-500">@ig_carnageyt</p>
           </div>
         </div>
-        <div onClick={()=> setOpen(!open)} className="relative">
-        <MoreHorizOutlinedIcon className="icon"/>
+        <div onClick={() => setOpen(!open)} className="relative">
+          <MoreHorizOutlinedIcon className="icon" />
         </div>
       </div>
     </div>
