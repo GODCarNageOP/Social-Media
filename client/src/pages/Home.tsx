@@ -31,7 +31,13 @@ const HomeTabs = () => {
             }`}>
             For you
           </span>
-          {urlAfterSlash === "" && <div className="activelines"></div>}
+          {urlAfterSlash === "" ? (
+
+            <div className="activelines"></div>
+          ) : (
+            <div className="deactivatelines"></div>
+          )
+          }
         </Link>
         <Link
           to="/following"
@@ -42,9 +48,13 @@ const HomeTabs = () => {
             }`}>
             Trending
           </span>
-          {urlAfterSlash === "following" && (
+          {urlAfterSlash === "following" ? (
+
             <div className="activelines"></div>
-          )}
+          ) : (
+            <div className="deactivatelines"></div>
+          )
+          }
         </Link>
      
 

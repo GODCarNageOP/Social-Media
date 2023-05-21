@@ -35,9 +35,15 @@ const NotificationTab = () => {
         >
           <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "notifications" ? "activeTabs" : "deactivate-tabs"
             }`}>
-            For you
+            All
           </span>
-          {urlAfterSlash === "notifications" && <div className="activelines"></div>}
+          {urlAfterSlash === "notifications" ? (
+
+            <div className="activelines"></div>
+          ) : (
+            <div className="deactivatelines"></div>
+          )
+          }
         </Link>
         <Link
           to="/notifications/verified"
@@ -46,11 +52,15 @@ const NotificationTab = () => {
         >
           <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "notifications/verified" ? "activeTabs" : "deactivate-tabs"
             }`}>
-            Trending
+            Verified
           </span>
-          {urlAfterSlash === "notifications/verified" && (
+          {urlAfterSlash === "notifications/verified" ? (
+
             <div className="activelines"></div>
-          )}
+          ) : (
+            <div className="deactivatelines"></div>
+          )
+          }
         </Link>
         <Link
           to="/notifications/mentions"
@@ -59,11 +69,15 @@ const NotificationTab = () => {
         >
           <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "notifications/mentions" ? "activeTabs" : "deactivate-tabs"
             }`}>
-            News
+            Mentions
           </span>
-          {urlAfterSlash === "notifications/mentions" && (
+          {urlAfterSlash === "notifications/mentions" ? (
+
             <div className="activelines"></div>
-          )}
+          ) : (
+            <div className="deactivatelines"></div>
+          )
+          }
         </Link>
     
       </div>

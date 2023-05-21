@@ -58,7 +58,13 @@ const ExploreTab = () => {
             }`}>
             For you
           </span>
-          {urlAfterSlash === "explore" && <div className="activelines"></div>}
+          {urlAfterSlash === "explore" ? (
+
+            <div className="activelines"></div>
+          ) : (
+            <div className="deactivatelines"></div>
+          )
+          }
         </Link>
         <Link
           to="/explore/trendings"
@@ -69,9 +75,13 @@ const ExploreTab = () => {
             }`}>
             Trending
           </span>
-          {urlAfterSlash === "explore/trendings" && (
+          {urlAfterSlash === "explore/trendings" ? (
+
             <div className="activelines"></div>
-          )}
+          ) : (
+            <div className="deactivatelines"></div>
+          )
+          }
         </Link>
         <Link
           to="/explore/news"
@@ -82,9 +92,13 @@ const ExploreTab = () => {
             }`}>
             News
           </span>
-          {urlAfterSlash === "explore/news" && (
+          {urlAfterSlash === "explore/news" ? (
+
             <div className="activelines"></div>
-          )}
+          ) : (
+            <div className="deactivatelines"></div>
+          )
+          }
         </Link>
         <Link
           to="/explore/sports"
@@ -95,9 +109,14 @@ const ExploreTab = () => {
             }`}>
             Sports
           </span>
-          {urlAfterSlash === "explore/sports" && (
+          {urlAfterSlash === "explore/sports" ? (
+
             <div className="activelines"></div>
-          )}
+          ) : (
+            <div className="deactivatelines"></div>
+          )
+          }
+
         </Link>
         <Link
           to="/explore/entertainment"
@@ -108,9 +127,14 @@ const ExploreTab = () => {
             }`}>
             Entertainment
           </span>
-          {urlAfterSlash === "explore/entertainment" && (
+          {urlAfterSlash === "explore/entertainment" ? (
+
             <div className="activelines"></div>
-          )}
+          ) : (
+            <div className="deactivatelines"></div>
+          )
+          }
+
         </Link>
       </div>
 
