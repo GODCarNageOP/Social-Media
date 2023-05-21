@@ -15,7 +15,7 @@ import Settings from "./pages/Settings";
 function App() {
   const Layout = () => {
     return (
-      <div className="app flex justify-between mx-10 h-full">
+      <div className="flex justify-between h-full app">
         <Navbar />
         <Outlet />
         <Footer />

@@ -38,11 +38,21 @@
 .overlay-Nav p:hover {
   background-color: wheat;
 }
-
+.large-device-tweet{
+  display: none !important;
+}
+.small-device-tweet{
+  border-radius: 50%;
+  overflow: hidden;
+}
 @media screen and (min-width: 1300px) {
-  .small-sc-tweet {
+  .large-device-tweet{
+    display: flex !important;
+  }
+  .small-device-tweet {
     display: none !important;
   }
+ 
 }
 @media screen and (max-width: 500px) {
   .navbar {
@@ -50,11 +60,17 @@
   }
 }
 
+.overlay {
+  box-shadow: rgba(0, 0, 0, 1) 0px 5px 15px;
+}
+
 @media screen and (max-width: 1300px) {
   .mobile-none {
     display: none;
   }
-
+ .pages{
+    align-items: center !important;
+  }
   .round-tweet-div {
     border-radius: 50% !important;
     width: 50px;
@@ -65,8 +81,4 @@
   .large-sc-tweet {
     display: none !important;
   }
-}
-
-.overlay {
-  box-shadow: rgba(0, 0, 0,1) 0px 5px 15px;
 }

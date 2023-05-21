@@ -13,7 +13,7 @@ const Footer = () => {
   const [open4, setOpen4] = useState(false);
 
   return (
-    <div className="footer w-[30%] flex flex-col h-full mr-10">
+    <div className="footer w-[30%] flex flex-col h-full ">
       <div className="search h-[3%] w-84 rounded-full bg-gray-100 flex mt-3 items-center justify-start p-3 gap-2 mx-10">
         <SearchIcon className="icon text-gray-500" />
         <input
