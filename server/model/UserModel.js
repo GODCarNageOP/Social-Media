@@ -42,12 +42,7 @@ const userSchema = new Schema(
     bio: {
       type: String,
     },
-    followers: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
+
     avatar: {
       public_id: {
         type: String,
@@ -65,20 +60,32 @@ const userSchema = new Schema(
         type: String,
       },
     },
-    following: [
+    followers: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "User",
       },
     ],
+
+    following: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
+
     createdAt: {
       type: Date,
       default: Date.now,
     },
     otp: {
-      code: String,
-      expiresAt: Date,
+      type: Number,
     },
+
+    otpExpiration: {
+      type: Date,
+    },
+
     isVerified: {
       type: Boolean,
       default: false,
@@ -107,17 +114,19 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
 };
 
 // methods for verifying otps
+// Methods for verifying otp
 userSchema.methods.verifyOtp = function (enteredOtp) {
-  if (
-    this.otp &&
-    this.otp.code === enteredOtp &&
-    this.otp.expiresAt > new Date()
-  ) {
+  console.log(enteredOtp, typeof enteredOtp, this.otp, typeof this.otp);
+  if (this.otp === parseInt(enteredOtp) && this.otpExpiration > new Date()) {
     return true; // OTP is valid
   }
   return false; // OTP is invalid or expired
 };
 
+// userSchema.methods.setOtpExpire = function () {
+//   this.otpExpiration = Date.now() + 15 * 60 * 1000;
+// };
+// Background task to nullify otp after 2 minutes
 
 // Send user token if login or register
 userSchema.methods.getJWTToken = function () {
@@ -132,6 +141,21 @@ userSchema.methods.getJWTToken = function () {
       expiresIn: Number(process.env.JWT_EXPIRE) * 24 * 60 * 60 * 1000,
     }
   );
+};
+
+userSchema.methods.getResetPasswordToken = function () {
+  // Generating Token
+  const resetToken = crypto.randomBytes(20).toString("hex");
+
+  // Hashing and adding resetPasswordToken to userSchema
+  this.resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+
+  this.resetPasswordExpire = Date.now() + 15 * 60 * 1000;
+
+  return resetToken;
 };
 
 const User = mongoose.model("User", userSchema);
