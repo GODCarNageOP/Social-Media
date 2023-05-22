@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 
 const userSchema = new Schema(
   {
-    username: {
+    userName: {
       type: String,
       required: true,
       unique: true,
@@ -52,7 +52,7 @@ const userSchema = new Schema(
         default: "www.avatar.jpg",
       },
     },
-    coverimage: {
+    coverImage: {
       public_id: {
         type: String,
       },
@@ -116,17 +116,13 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
 // methods for verifying otps
 // Methods for verifying otp
 userSchema.methods.verifyOtp = function (enteredOtp) {
-  console.log(enteredOtp, typeof enteredOtp, this.otp, typeof this.otp);
+ 
   if (this.otp === parseInt(enteredOtp) && this.otpExpiration > new Date()) {
     return true; // OTP is valid
   }
   return false; // OTP is invalid or expired
 };
 
-// userSchema.methods.setOtpExpire = function () {
-//   this.otpExpiration = Date.now() + 15 * 60 * 1000;
-// };
-// Background task to nullify otp after 2 minutes
 
 // Send user token if login or register
 userSchema.methods.getJWTToken = function () {

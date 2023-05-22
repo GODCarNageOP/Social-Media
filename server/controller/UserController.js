@@ -19,12 +19,12 @@ function generateOTP() {
 // Example usage
 
 export const registerUser = asyncHandler(async (req, res, next) => {
-  const { username, email, name, password, gender, phoneNumber } = req.body;
+  const { userName, email, name, password, gender, phoneNumber } = req.body;
 
   // Check if the username, email, or phone number already exists in the database
   const userExists = await User.findOne({
     $or: [
-      { username: username },
+      { userName: userName },
       { email: email },
       { phoneNumber: phoneNumber },
     ],
@@ -43,9 +43,9 @@ export const registerUser = asyncHandler(async (req, res, next) => {
     message,
   });
 
-  const otpExpiration = Date.now() + 15 * 60 * 1000;
+  const otpExpiration = Date.now() + 30 * 1000;
   const user = await User.create({
-    username,
+    userName,
     name,
     email,
     gender,
@@ -88,7 +88,7 @@ export const verifyOtp = asyncHandler(async (req, res, next) => {
 
   user.isVerified = true;
   user.otp = null;
-  user.otpExpiration=null;
+  user.otpExpiration = null;
   await user.save();
 
   res.json({ success: true, message: "verified successfully" });
@@ -129,3 +129,165 @@ export const loginUser = asyncHandler(async (req, res, next) => {
   // If the username, email, and phone number are unique, proceed with registration
   // ... (code to create a new user and save it to the database)
 });
+
+export const updateProfile = asyncHandler(async (req, res, next) => {
+  const {
+    userName,
+    name,
+    email,
+    phoneNumber,
+    gender,
+    bio,
+    dob,
+    avatar,
+    coverImage,
+  } = req.body;
+  const user = await User.findById(req.user.id);
+
+  const newUserData = {
+    name: name || user?.name,
+    email: email || user?.email,
+    gender: gender || user.gender,
+    userName: userName || user.userName,
+    phoneNumber: phoneNumber || user.phoneNumber,
+    dob: dob || user.dob,
+    bio: bio || user.bio,
+  };
+
+  if (email) {
+    newUserData.isVerified = false;
+  }
+
+  await User.findByIdAndUpdate(req.user.id, newUserData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  if (!user) {
+    return next(new CustomError("User Not Found", 404));
+  }
+
+  res.status(200).json({
+    success: true,
+  });
+});
+
+export const getUserProfile = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+
+  if (!user) {
+    return next(new CustomError("User not found", StatusCodes.NOT_FOUND));
+  }
+});
+
+export const updatePassword = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.user.id).select("+password");
+
+  const { oldPassword, newPassword } = req.body;
+
+  const isMatched = await user.matchPassword(oldPassword);
+
+  if (!isMatched) {
+    return next(new CustomError("Invalid Original Password ", 404));
+  }
+
+  user.password = newPassword;
+  const updatedUser = await user.save();
+
+  res.status(200).json({ success: true, data: updatedUser });
+});
+
+export const logout = asyncHandler(async (req, res, next) => {
+  res.cookie("token", null, {
+    expires: new Date(Date.now()),
+    httpOnly: true,
+  });
+
+  res.status(200).json({
+    success: true,
+    message: "Logged Out",
+  });
+});
+
+export const forgotPassword = asyncHandler(async (req, res, next) => {
+  const user = await User.findOne({
+    email: req.body.email,
+  });
+
+  if (!user) {
+    return next(new CustomError("User Not found", 404));
+  }
+
+  const resetToken = user.getResetPasswordToken();
+
+  await user.save({
+    validateBeforeSave: false,
+  });
+
+  const resetPasswordUrl = `${req.protocol}://${req.get(
+    "host"
+  )}//password/reset/${resetToken}`;
+
+  const message = `Your Password reset token is :- \n\n ${resetPasswordUrl} \n\n If You have not requested this email then, Pleaser Ignore Balraj`;
+
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: "Ecommerce Password Recovery",
+      message,
+    });
+    res.status(200).json({
+      success: true,
+      message: `Email sent to ${user.email} successfully `,
+    });
+  } catch (error) {
+    user.resetPasswordExpire = undefined;
+    user.resetPasswordToken = undefined;
+    await User.save({
+      validateBeforeSave: false,
+    });
+
+    return next(new CustomError(error.message, 500));
+  }
+});
+
+
+// Reset Password
+export const ResetPassword = asyncHandler(async (req, res, next) => {
+
+
+
+  const resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(req.params.token)
+    .digest("hex");
+
+  const user = await User.findOne({
+    resetPasswordToken,
+    resetPasswordExpire: { $gt: Date.now() },
+  });
+
+  if (!user) {
+    return next(
+      new ErrorHandler("reset password token is expire or invalid", 400)
+    );
+  }
+
+  const { password } = req.body;
+
+
+
+  user.password = password;
+  user.resetPasswordExpire = undefined;
+  user.resetPasswordToken = undefined;
+  await user.save();
+  const payload = {
+    id: user._id,
+    name: user.name,
+    email: user.email,
+  };
+
+  sendToken(user, 200, res);
+});
+

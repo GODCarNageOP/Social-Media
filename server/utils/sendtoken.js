@@ -1,5 +1,5 @@
 const sendToken = (user, statusCode, res) => {
-console.log("1", process.env.COOKIE_EXPIRE);
+
 
   const token = user.getJWTToken();
 
