@@ -1,13 +1,10 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
 import validator from "validator";
 import crypto from "crypto";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { timeStamp } from "console";
-// import dotenv from "dotenv";
-// dotenv.config({ path: "config/config.env" });
 
-const userSchema = new mongoose.Schema(
+const userSchema = new Schema(
   {
     username: {
       type: String,
@@ -30,7 +27,6 @@ const userSchema = new mongoose.Schema(
     },
     phoneNumber: {
       type: String,
-
       unique: true,
       validate: [validator.isMobilePhone, "Please enter a valid phone number"],
     },
@@ -39,6 +35,9 @@ const userSchema = new mongoose.Schema(
       required: [true, "Please enter a password"],
       minlength: [8, "Your password must be at least 8 characters long"],
       select: false,
+    },
+    dob: {
+      type: String,
     },
     bio: {
       type: String,
@@ -52,22 +51,18 @@ const userSchema = new mongoose.Schema(
     avatar: {
       public_id: {
         type: String,
-        // required: true,
       },
       url: {
         type: String,
-        // required: true,
         default: "www.avatar.jpg",
       },
     },
     coverimage: {
       public_id: {
         type: String,
-        // required: true,
       },
       url: {
         type: String,
-        // required: true,
       },
     },
     following: [
@@ -80,15 +75,23 @@ const userSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
+    otp: {
+      code: String,
+      expiresAt: Date,
+    },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
   },
   {
-    timeStamp: true,
+    timestamps: true,
   }
 );
 
-//hash password if not hased
+// Hash password if not hashed
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
@@ -98,26 +101,35 @@ userSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
 });
 
-//method for mathch password
-
+// Method for matching password
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-// send user token if login or register
-console.log("11", process.env.COOKIE_EXPIRE);
-console.log("12", process.env.JWT_SECRET_KEY);
+// methods for verifying otps
+userSchema.methods.verifyOtp = function (enteredOtp) {
+  if (
+    this.otp &&
+    this.otp.code === enteredOtp &&
+    this.otp.expiresAt > new Date()
+  ) {
+    return true; // OTP is valid
+  }
+  return false; // OTP is invalid or expired
+};
 
+
+// Send user token if login or register
 userSchema.methods.getJWTToken = function () {
   return jwt.sign(
     {
       id: this._id,
-      userName: this.userName,
+      userName: this.username,
       name: this.name,
     },
     process.env.JWT_SECRET_KEY,
     {
-      expiresIn: process.env.JWT_EXPIRE * 24 * 60 * 60 * 1000,
+      expiresIn: Number(process.env.JWT_EXPIRE) * 24 * 60 * 60 * 1000,
     }
   );
 };

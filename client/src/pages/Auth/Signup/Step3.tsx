@@ -28,7 +28,7 @@ const Step3 = () => {
 
             <div className="w-full relative max-w-[600px] border-2  p-2 pb-9 flex gap-8 items-center justify-between min-h-[600px] border-1 border-solid border-gray-300  flex-col step-3">
                 <Link to='/step/2' className="icon cursor-pointer  absolute w-100 p-5"  >
-                    <ArrowBackIcon className='absolute top-0' />
+                    <ArrowBackIcon className='absolute' />
                 </Link>
               <div className="flex flex-col w-full pt-5 gap-10 items-center">
 
