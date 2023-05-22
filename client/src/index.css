@@ -5,7 +5,10 @@
 * {
   padding: 0;
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-family: "Lato", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 :root {
@@ -46,13 +49,11 @@
   font-size: 0.8rem;
 }
 
-
-
 .app {
   width: 100%;
 
   margin: auto;
-  padding: 0.5rem
+  padding: 0.5rem;
 }
 .font-thins {
   font-size: 0.5rem;
@@ -114,16 +115,13 @@
   }
 }
 
-
-
-
 @media screen and (max-width: 500px) {
   .navbar {
     display: none !important;
   }
 }
-@media screen and (max-width:1024px) {
-  .footer{
+@media screen and (max-width: 1024px) {
+  .footer {
     display: none;
   }
 }
@@ -131,7 +129,7 @@
   .mobile-none {
     display: none;
   }
- .small-sc-tweet {
+  .small-sc-tweet {
     display: none !important;
   }
   .round-tweet-div {

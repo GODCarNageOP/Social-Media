@@ -12,13 +12,20 @@ import More from "./pages/More";
 import Profile from "./pages/profile/Profile";
 import Settings from "./pages/Settings";
 import './App.css'
+import Login from "./pages/Auth/Login";
+import Signup from "./pages/Auth/Signup";
+import { useState } from "react";
 function App() {
   const Layout = () => {
+    const [isloggedIn, setIsLoggedIn] = useState<boolean>(false);
     return (
       <div className="flex gap-2 h-full app">
-        <Navbar />
-        <Outlet />
-        <Footer />
+       
+              {/* <Navbar /> */}
+              <Outlet />
+              {/* <Footer /> */}
+          
+        
       </div>
     );
   };
@@ -31,6 +38,14 @@ function App() {
         {
           path: "/",
           element: <Home />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/signup",
+          element: <Signup />,
         },
         {
           path: "/following",
@@ -85,7 +100,7 @@ function App() {
         {
 
           path: "/settings",
-          element: <Settings/>,
+          element: <Settings />,
         },
         {
 
