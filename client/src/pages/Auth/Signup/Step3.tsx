@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import twitterIcon from '../../../assets//twitter.png'
 import GoogleIcon from '@mui/icons-material/Google';
 import { TextField } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 
 
@@ -25,7 +26,10 @@ const Step3 = () => {
         <div className="w-full flex items-center justify-center  min-h-[100vh]  h-full signup">
 
 
-            <div className="w-full max-w-[600px] border-2  p-2 pb-9 flex gap-8 items-center justify-between min-h-[600px] border-1 border-solid border-gray-300  flex-col step-3">
+            <div className="w-full relative max-w-[600px] border-2  p-2 pb-9 flex gap-8 items-center justify-between min-h-[600px] border-1 border-solid border-gray-300  flex-col step-3">
+                <Link to='/step/2' className="icon cursor-pointer  absolute w-100 p-5"  >
+                    <ArrowBackIcon className='absolute top-0' />
+                </Link>
               <div className="flex flex-col w-full pt-5 gap-10 items-center">
 
 
