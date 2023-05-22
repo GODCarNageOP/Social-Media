@@ -2,13 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import twitterIcon from '../../assets/twitter.png'
 import GoogleIcon from '@mui/icons-material/Google';
+import { TextField } from '@mui/material';
 
 const Login = () => {
     return (
         <div className="w-full flex items-center justify-center  min-h-[100vh]  h-full login">
 
 
-            <div className="w-full max-w-[600px] flex gap-8 items-center max-h-[500px] border-1 border-solid border-gray-500  flex-col ">
+            <div className="w-full max-w-[600px] border-2  p-2 pb-9 flex gap-8 items-center justify-between min-h-[600px] border-1 border-solid border-gray-300  flex-col Login">
                 <img src={twitterIcon} className='h-[50px]' alt="" />
                 <p className='text-3xl font-bold text-center'>Sign in to Twitter</p>
                 <Button value="Sign in with Google" class="" icon={<GoogleIcon />} />
@@ -18,7 +19,11 @@ const Login = () => {
                     <div className="w-[200px] h-[2px] bg-gray-300 "></div>
 
                 </div>
-                <Input />
+                {/* <div className="flex"> */}
+
+                <TextField placeholder='Phone,Email or Username' className='w-full max-w-[450px]' id="outlined-basic" label="Email" variant="outlined" />
+                {/* </div> */}
+                {/* <Input /> */}
                 <Button value="Next" class="bg-black text-white" />
                 <Button value="Forgot Password?" class=" text-black " />
 
@@ -51,15 +56,15 @@ const Button = ({ value, icon, class: additionalClass }: { value: string; class:
     );
 };
 
-const Input = () => {
+// const Input = () => {
 
-    return (
-        <div className="Input w-full max-w-[450px] h-12 border-2  border-solid flex border-gray-300 cursor-pointer rounded-sm">
+//     return (
+//         <div className="Input w-full max-w-[450px] h-12 border-2  border-solid flex border-gray-300 cursor-pointer rounded-sm">
 
-            <input type="text" className='w-full h-full pl-5 pt-5 pb-5' placeholder='Phone,Email or Username' />
-        </div>
-    )
-}
+//             <input type="text" className='w-full h-full pl-5 pt-5 pb-5' placeholder='Phone,Email or Username' />
+//         </div>
+//     )
+// }
 
 
 export default Login;

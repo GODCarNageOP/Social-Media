@@ -13,8 +13,11 @@ import Profile from "./pages/profile/Profile";
 import Settings from "./pages/Settings";
 import './App.css'
 import Login from "./pages/Auth/Login";
-import Signup from "./pages/Auth/Signup";
+import Signup from "./pages/Auth/Signup/Signup";
 import { useState } from "react";
+import CreateYouAccount from "./pages/Auth/Signup/CreateAccount";
+import Step2 from "./pages/Auth/Signup/Step2";
+import Step3 from "./pages/Auth/Signup/Step3";
 function App() {
   const Layout = () => {
     const [isloggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -46,6 +49,18 @@ function App() {
         {
           path: "/signup",
           element: <Signup />,
+        },
+        {
+          path: "/create/account",
+          element: <CreateYouAccount />,
+        },
+        {
+          path: "/step/2",
+          element: <Step2 />,
+        },
+        {
+          path: "/step/3",
+          element: <Step3 />,
         },
         {
           path: "/following",
