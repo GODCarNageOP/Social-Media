@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import twitterIcon from '../../../assets//twitter.png'
 import GoogleIcon from '@mui/icons-material/Google';
 import { TextField } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const months = [
     {
@@ -93,7 +94,10 @@ const CreateYouAccount = () => {
         <div className="w-full flex items-center justify-center  min-h-[100vh]  h-full signup">
 
 
-            <div className="w-full max-w-[600px] border-2  p-2 pb-9 flex gap-8 items-center justify-between min-h-[600px] border-1 border-solid border-gray-300  flex-col Create=account">
+            <div className="w-full relative max-w-[600px] border-2  p-2 pb-9 flex gap-8 items-center justify-between min-h-[600px] border-1 border-solid border-gray-300  flex-col Create=account">
+                <Link to='/signup' className="icon cursor-pointer  absolute w-100 p-5"  >
+                    <ArrowBackIcon className='absolute top-0' />
+                </Link>
                 <div className="w-full  max-w-[450px] flex flex-col gap-2 item-start">
                     <p className='text-2xl font-bold'>Step 1 out of 5</p>
                     <p className='text-3xl font-bold '>Create Your Account</p>

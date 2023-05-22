@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import twitterIcon from '../../assets/twitter.png'
 import GoogleIcon from '@mui/icons-material/Google';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 import { TextField } from '@mui/material';
 
 const Login = () => {
@@ -9,7 +11,7 @@ const Login = () => {
         <div className="w-full flex items-center justify-center  min-h-[100vh]  h-full login">
 
 
-            <div className="w-full max-w-[600px] border-2  p-2 pb-9 flex gap-8 items-center justify-between min-h-[600px] border-1 border-solid border-gray-300  flex-col Login">
+            <div className="w-full  max-w-[600px] border-2  p-2 pb-9 flex gap-8 items-center justify-between min-h-[600px] border-1 border-solid border-gray-300  flex-col Login">
                 <img src={twitterIcon} className='h-[50px]' alt="" />
                 <p className='text-3xl font-bold text-center'>Sign in to Twitter</p>
                 <Button value="Sign in with Google" class="" icon={<GoogleIcon />} />
