@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import twitterIcon from '../../assets/twitter.png'
+import twitterIcon from '../../../assets//twitter.png'
 import GoogleIcon from '@mui/icons-material/Google';
 
 const Signup = () => {
@@ -8,7 +8,7 @@ const Signup = () => {
     <div className="w-full flex items-center justify-center  min-h-[100vh]  h-full signup">
 
 
-      <div className="w-full max-w-[600px] flex gap-8 items-center max-h-[500px] border-1 border-solid border-gray-500  flex-col ">
+      <div className="w-full max-w-[600px] border-2  p-2 pb-9 flex gap-8 items-center justify-between min-h-[600px] border-1 border-solid border-gray-300  flex-col Signup ">
         <img src={twitterIcon} className='h-[50px]' alt="" />
         <p className='text-3xl font-bold text-center'>Join Twitter Today</p>
         <Button value="Sign up with Google" class="" icon={<GoogleIcon />} />
@@ -18,9 +18,11 @@ const Signup = () => {
           <div className="w-[200px] h-[2px] bg-gray-300 "></div>
 
         </div>
-        {/* <Input /> */}
+
         <div className="flex flex-col gap-2">
+          <Link to='/create/account'>
           <Button value="Create an account" class="bg-black text-white" />
+          </Link>
 
           <p className='w-[450px] text-gray-500 text-sm '>
             By signing up, you agree to the
@@ -71,15 +73,9 @@ const Button = ({ value, icon, class: additionalClass }: { value: string; class:
   );
 };
 
-const Input = () => {
 
-  return (
-    <div className="Input w-full max-w-[450px] h-12 border-2  border-solid flex border-gray-300 cursor-pointer rounded-sm">
 
-      <input type="text" className='w-full h-full pl-5 pt-5 pb-5' placeholder='Phone,Email or Username' />
-    </div>
-  )
-}
+
 
 
 export default Signup;
