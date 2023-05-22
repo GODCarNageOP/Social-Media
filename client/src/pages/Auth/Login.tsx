@@ -13,9 +13,9 @@ const Login = () => {
                 <p className='text-3xl font-bold text-center'>Sign in to Twitter</p>
                 <Button value="Sign in with Google" class="" icon={<GoogleIcon />} />
                 <div className="flex items-center justify-center gap-2">
-                    <div className="w-[200px] h-[1px] bg-gray-300 "></div>
+                    <div className="w-[200px] h-[2px] bg-gray-300 "></div>
                     or
-                    <div className="w-[200px] h-[1px] bg-gray-300 "></div>
+                    <div className="w-[200px] h-[2px] bg-gray-300 "></div>
 
                 </div>
                 <Input />
@@ -27,10 +27,10 @@ const Login = () => {
                         Don't have an account?
                     </span>
 
-                    <span className='text-blue-500 cursor-pointer hover:underline-dark-500'>
+                    <Link to='/signup' className='text-blue-500 cursor-pointer hover:underline-dark-500'>
                         Signup
 
-                    </span>
+                    </Link>
                 </p>
 
             </div>

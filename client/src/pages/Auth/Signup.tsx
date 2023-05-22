@@ -10,27 +10,47 @@ const Signup = () => {
 
       <div className="w-full max-w-[600px] flex gap-8 items-center max-h-[500px] border-1 border-solid border-gray-500  flex-col ">
         <img src={twitterIcon} className='h-[50px]' alt="" />
-        <p className='text-3xl font-bold text-center'>Sign in to Twitter</p>
-        <Button value="Sign in with Google" class="" icon={<GoogleIcon />} />
+        <p className='text-3xl font-bold text-center'>Join Twitter Today</p>
+        <Button value="Sign up with Google" class="" icon={<GoogleIcon />} />
         <div className="flex items-center justify-center gap-2">
-          <div className="w-[200px] h-[1px] bg-gray-300 "></div>
+          <div className="w-[200px] h-[2px] bg-gray-300 "></div>
           or
-          <div className="w-[200px] h-[1px] bg-gray-300 "></div>
+          <div className="w-[200px] h-[2px] bg-gray-300 "></div>
 
         </div>
-        <Input />
-        <Button value="Next" class="bg-black text-white" />
-        <Button value="Forgot Password?" class=" text-black " />
+        {/* <Input /> */}
+        <div className="flex flex-col gap-2">
+          <Button value="Create an account" class="bg-black text-white" />
+
+          <p className='w-[450px] text-gray-500 text-sm '>
+            By signing up, you agree to the
+            <span className='text-blue-500 pl-1 pr-1 hover:underline cursor-pointer'>
+
+              Terms of Service
+
+            </span>
+            <span className='text-blue-500 pl-1 pr-1 hover:underline'>
+
+              and Privacy Policy,
+            </span>
+            including
+            <span className='text-blue-500 pl-1 pr-1 hover:underline'>
+
+              Cookie Use.
+            </span>
+          </p>
+        </div>
+        {/* <Button value="Forgot Password?" class=" text-black " /> */}
 
         <p>
           <span className='text-gray-500'>
-            Don't have an account?
+            Already have an account?
           </span>
 
-          <span className='text-blue-500 cursor-pointer hover:underline-dark-500'>
-            Signup
+          <Link to='/login' className='text-blue-500 cursor-pointer hover:underline-dark-500'>
+            Login
 
-          </span>
+          </Link>
         </p>
 
       </div>
