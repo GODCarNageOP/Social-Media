@@ -117,6 +117,7 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
 // Methods for verifying otp
 userSchema.methods.verifyOtp = function (enteredOtp) {
  
+  console.log("Verifying",enteredOtp,this.otp)
   if (this.otp === parseInt(enteredOtp) && this.otpExpiration > new Date()) {
     return true; // OTP is valid
   }

@@ -6,6 +6,7 @@ import CustomError from "../utils/CustomError.js";
 import { StatusCodes } from "http-status-codes";
 import sendToken from "../utils/sendtoken.js";
 import sendEmail from "../utils/sendEmail.js";
+import { STATUS_CODES } from "http";
 // Register User
 
 // FUNCTION FOR CREATING OTP WHILE SIGNUP
@@ -16,22 +17,80 @@ function generateOTP() {
   return otp;
 }
 
-// Example usage
+// Register User
 
 export const registerUser = asyncHandler(async (req, res, next) => {
-  const { userName, email, name, password, gender, phoneNumber } = req.body;
+  const { userName, email, password, name, gender, phoneNumber, dob } =
+    req.body;
 
   // Check if the username, email, or phone number already exists in the database
-  const userExists = await User.findOne({
-    $or: [
-      { userName: userName },
-      { email: email },
-      { phoneNumber: phoneNumber },
-    ],
+  const userN = await User.findOne({ userName: userName});
+
+
+  if (userN) {
+    return next(new CustomError("UserName already exists", StatusCodes.CONFLICT));
+  }
+  const userE = await User.findOne({ email: email });
+
+ if (userE) {
+   return next(
+     new CustomError("Email already register", StatusCodes.CONFLICT)
+   );
+ }
+
+  const userP = await User.findOne({ phoneNumber: phoneNumber });
+
+
+  if (userP) {
+    return next(
+      new CustomError("Phone already register", StatusCodes.CONFLICT)
+    );
+  }
+  const code = generateOTP();
+
+  const message = `Your Otp is  :- \n\n ${code} \n\n If You have not requested this email then, Pleaser Ignore Balraj`;
+
+  await sendEmail({
+    email: email,
+    subject: "Twitter Verification code",
+    message,
+  });
+  const otpExpiration = Date.now() + 5 * 60 * 1000;
+
+  const newUserData = {
+    name: name,
+    email: email,
+    gender: gender,
+    userName: userName,
+    password: password,
+    phoneNumber: phoneNumber,
+    dob: dob,
+    bio: req.body.bio || "",
+    otpExpiration: otpExpiration,
+    otp: code,
+    isVerified: false,
+  };
+  const newUser = await User.create(newUserData);
+
+  res.status(200).json({
+    success: true,
+    message: `Verification code  sent to ${email} successfully`,
   });
 
-  if (userExists) {
-    return next(new CustomError("User already exists", StatusCodes.CONFLICT));
+  // If the username, email, and phone number are unique, proceed with registration
+  // ... (code to create a new user and save it to the database)
+});
+
+// send otp
+export const sendCode = asyncHandler(async (req, res, next) => {
+  const { email } = req.param;
+
+  console.log("email", req.body,req.body.email);
+
+  const user = await User.findOne({ email: email });
+
+  if (!user) {
+    return next(new CustomError("User Not exists", StatusCodes.CONFLICT));
   }
 
   const code = generateOTP();
@@ -43,35 +102,30 @@ export const registerUser = asyncHandler(async (req, res, next) => {
     message,
   });
 
-  const otpExpiration = Date.now() + 30 * 1000;
-  const user = await User.create({
-    userName,
-    name,
-    email,
-    gender,
-    otpExpiration,
-    phoneNumber,
-    password,
-    otp: code,
-    isVerified: false,
-  });
-  res.status(200).json({
-    success: true,
-    message: `Verification code  sent to ${email} successfully`,
-  });
+  const otpExpiration = Date.now() + 5 * 60 * 1000;
 
+  console.log("code", code);
+
+  // Update the user data
+  user.otpExpiration = otpExpiration;
+  user.otp = code;
+  user.isVerified = false;
+
+  // Save the updated user to the database
   await user.save();
 
-  // If the username, email, and phone number are unique, proceed with registration
-  // ... (code to create a new user and save it to the database)
+  res.status(200).json({
+    success: true,
+    message: `Verification code sent to ${email} successfully`,
+  });
 });
 
-// verify Otp
-
+//verifyOtp
 export const verifyOtp = asyncHandler(async (req, res, next) => {
-  const { phoneNumber, otp } = req.body;
+  const { email, otp } = req.body;
 
-  const user = await User.findOne({ phoneNumber });
+  console.log("otp", email, otp);
+  const user = await User.findOne({ email });
 
   if (!user) {
     return next(new CustomError("User Not exists", StatusCodes.NOT_FOUND));
@@ -82,16 +136,22 @@ export const verifyOtp = asyncHandler(async (req, res, next) => {
   console.log(otp, otpMatched);
   if (!otpMatched) {
     return next(
-      new CustomError("Otp is invalid or expire", StatusCodes.NOT_FOUND)
+      new CustomError("Otp is invalid or expired", StatusCodes.NOT_FOUND)
     );
   }
 
+  // Update the user data
   user.isVerified = true;
   user.otp = null;
   user.otpExpiration = null;
+
+  // Save the updated user to the database
   await user.save();
 
-  res.json({ success: true, message: "verified successfully" });
+  // Optionally, you can send a new token to the client
+  sendToken(user, StatusCodes.ACCEPTED, res);
+
+  // res.json({ success: true, message: "verified successfully", user });
 });
 
 //Login User Controller
@@ -130,6 +190,8 @@ export const loginUser = asyncHandler(async (req, res, next) => {
   // ... (code to create a new user and save it to the database)
 });
 
+//update use profile
+
 export const updateProfile = asyncHandler(async (req, res, next) => {
   const {
     userName,
@@ -145,8 +207,8 @@ export const updateProfile = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.user.id);
 
   const newUserData = {
-    name: name || user?.name,
-    email: email || user?.email,
+    name: name || user.name,
+    email: email || user.email,
     gender: gender || user.gender,
     userName: userName || user.userName,
     phoneNumber: phoneNumber || user.phoneNumber,
@@ -173,13 +235,31 @@ export const updateProfile = asyncHandler(async (req, res, next) => {
   });
 });
 
+// get user profile
 export const getUserProfile = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.user.id);
 
   if (!user) {
     return next(new CustomError("User not found", StatusCodes.NOT_FOUND));
   }
+  res.json(user);
 });
+
+//  user exists
+
+export const userExists = asyncHandler(async (req, res, next) => {
+  const user = await User.findOne(req.body.email);
+
+  if (user) {
+    return next(new CustomError("User Exists", 404));
+  }
+
+  res.json({
+    success: true,
+  });
+});
+
+// update password
 
 export const updatePassword = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.user.id).select("+password");
@@ -252,12 +332,8 @@ export const forgotPassword = asyncHandler(async (req, res, next) => {
   }
 });
 
-
 // Reset Password
 export const ResetPassword = asyncHandler(async (req, res, next) => {
-
-
-
   const resetPasswordToken = crypto
     .createHash("sha256")
     .update(req.params.token)
@@ -276,8 +352,6 @@ export const ResetPassword = asyncHandler(async (req, res, next) => {
 
   const { password } = req.body;
 
-
-
   user.password = password;
   user.resetPasswordExpire = undefined;
   user.resetPasswordToken = undefined;
@@ -290,4 +364,3 @@ export const ResetPassword = asyncHandler(async (req, res, next) => {
 
   sendToken(user, 200, res);
 });
-

@@ -14,21 +14,40 @@ import Settings from "./pages/Settings";
 import './App.css'
 import Login from "./pages/Auth/Login";
 import Signup from "./pages/Auth/Signup/Signup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CreateYouAccount from "./pages/Auth/Signup/CreateAccount";
-import Step2 from "./pages/Auth/Signup/Step2";
-import Step3 from "./pages/Auth/Signup/Step3";
+import Step2 from "./pages/Auth/Signup/SignUpTwo";
+import Step3 from "./pages/Auth/Signup/SignUpThree";
+import SignUpOne from "./pages/Auth/Signup/SignUpOne";
+import SingUpTwo from "./pages/Auth/Signup/SignUpTwo";
+import SignUpThree from "./pages/Auth/Signup/SignUpThree";
+import Loader from "./components/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { loadUser } from "./redux/action/UserAction";
+import store from "./Store";
 function App() {
+
+
   const Layout = () => {
-    const [isloggedIn, setIsLoggedIn] = useState<boolean>(false);
+
+  
+
+    useEffect(() => {
+      store.dispatch(loadUser());
+    }, [])
+
+
     return (
       <div className="flex gap-2 h-full app">
-       
-              {/* <Navbar /> */}
-              <Outlet />
-              {/* <Footer /> */}
-          
+
+       <Navbar />
         
+        <Outlet />
+         <Footer />
+        
+
+
+
       </div>
     );
   };
@@ -43,6 +62,10 @@ function App() {
           element: <Home />,
         },
         {
+          path: "/loader",
+          element: <Loader />,
+        },
+        {
           path: "/login",
           element: <Login />,
         },
@@ -55,12 +78,17 @@ function App() {
           element: <CreateYouAccount />,
         },
         {
-          path: "/step/2",
-          element: <Step2 />,
+          path: "/Signup/first-page",
+
+          element: <SignUpOne />,
         },
         {
-          path: "/step/3",
-          element: <Step3 />,
+          path: "/Signup/second-page",
+          element: <SingUpTwo />,
+        },
+        {
+          path: "/Email/verify/:params",
+          element: <SignUpThree />,
         },
         {
           path: "/following",
