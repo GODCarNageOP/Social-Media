@@ -96,7 +96,7 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                user: action.payload.user,
+                user: action.payload,
                 isLoggedIn: true,
                 codeSended: false,
                 error: null,

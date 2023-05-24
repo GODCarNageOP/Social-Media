@@ -27,7 +27,7 @@ const SignUpThree = () => {
 
     const [code, setCode] = useState();
     const existingData = JSON.parse(sessionStorage.getItem('UserData') || '{}');
-   
+
 
 
 
@@ -43,8 +43,8 @@ const SignUpThree = () => {
         if (code) {
 
             const userData = {
-                otp:code,
-                email:emailSecond
+                otp: code,
+                email: emailSecond
             }
 
             dispatch(verify(userData));
@@ -59,13 +59,14 @@ const SignUpThree = () => {
 
     useEffect(() => {
         if (error) {
-            alert.error(error);
+           
             dispatch(clearUserErrors())
+
         }
 
         if (isLoggedIn) {
-            alert.success("email Verified");
 
+            alert.success("Email Verified")
             Navigate('/profile');
 
         }

@@ -20,6 +20,9 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
+    profession: {
+      type: String,
+    },
     gender: {
       type: String,
       enum: ["male", "female"],
@@ -42,7 +45,14 @@ const userSchema = new Schema(
     bio: {
       type: String,
     },
-
+    website: {
+      type: String,
+      default: "Add your site",
+    },
+    country: {
+      type: String,
+      default: "Chose Country",
+    },
     avatar: {
       public_id: {
         type: String,
@@ -60,21 +70,8 @@ const userSchema = new Schema(
         type: String,
       },
     },
-    followers: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
 
-    following: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
-
-    createdAt: {
+    joined: {
       type: Date,
       default: Date.now,
     },
@@ -85,7 +82,26 @@ const userSchema = new Schema(
     otpExpiration: {
       type: Date,
     },
-
+    numberOfFollowers: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    numberOfFollowing: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    numberOfLikes: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    numberOfTweets: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
     isVerified: {
       type: Boolean,
       default: false,
@@ -116,32 +132,21 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
 // methods for verifying otps
 // Methods for verifying otp
 userSchema.methods.verifyOtp = function (enteredOtp) {
- 
-  console.log("Verifying",enteredOtp,this.otp)
   if (this.otp === parseInt(enteredOtp) && this.otpExpiration > new Date()) {
     return true; // OTP is valid
   }
   return false; // OTP is invalid or expired
 };
 
-
 // Send user token if login or register
 userSchema.methods.getJWTToken = function () {
-  return jwt.sign(
-    {
-      id: this._id,
-      userName: this.username,
-      name: this.name,
-    },
-    process.env.JWT_SECRET_KEY,
-    {
-      expiresIn: Number(process.env.JWT_EXPIRE) * 24 * 60 * 60 * 1000,
-    }
-  );
+  return jwt.sign({ id: this._id }, process.env.SECRET_KEY, {
+    expiresIn: process.env.JWT_EXPIRE * 24 * 60 * 60 * 1000,
+  });
 };
 
+// Generating Token
 userSchema.methods.getResetPasswordToken = function () {
-  // Generating Token
   const resetToken = crypto.randomBytes(20).toString("hex");
 
   // Hashing and adding resetPasswordToken to userSchema

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useAlert } from 'react-alert';
 import { Link, useNavigate } from 'react-router-dom';
 import twitterIcon from '../../../assets//twitter.png'
 import GoogleIcon from '@mui/icons-material/Google';
 import { TextField } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useDispatch, useSelector } from 'react-redux';
-import { useAlert } from 'react-alert';
 import { clearUserErrors, register } from '../../../redux/action/UserAction';
 import Loader from '../../../components/Loader';
 import { USER_SUCCESS_RESET } from '../../../redux/constants/UserConstants';
@@ -18,11 +18,11 @@ import { USER_SUCCESS_RESET } from '../../../redux/constants/UserConstants';
 const SingUpTwo = () => {
     const alert = useAlert();
     const dispatch = useDispatch();
-
+    const Navigate = useNavigate();
     const { userCreated, isLoggedIn, error, loading } = useSelector((state) => state.user)
 
+
     const existingData = JSON.parse(sessionStorage.getItem('UserData') || '{}');
-    const Navigate = useNavigate();
 
 
     const [name, setName] = useState(existingData.name);
@@ -76,8 +76,12 @@ const SingUpTwo = () => {
             Navigate(path)
         }
         if (error) {
-            alert.error(error)
+           
             dispatch(clearUserErrors())
+        }
+        if (isLoggedIn) {
+            Navigate('/profile')
+
         }
     }, [isLoggedIn, userCreated, error, dispatch])
 

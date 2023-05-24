@@ -85,7 +85,6 @@ export const registerUser = asyncHandler(async (req, res, next) => {
 export const sendCode = asyncHandler(async (req, res, next) => {
   const { email } = req.param;
 
-  console.log("email", req.body,req.body.email);
 
   const user = await User.findOne({ email: email });
 
@@ -104,7 +103,6 @@ export const sendCode = asyncHandler(async (req, res, next) => {
 
   const otpExpiration = Date.now() + 5 * 60 * 1000;
 
-  console.log("code", code);
 
   // Update the user data
   user.otpExpiration = otpExpiration;
@@ -124,7 +122,6 @@ export const sendCode = asyncHandler(async (req, res, next) => {
 export const verifyOtp = asyncHandler(async (req, res, next) => {
   const { email, otp } = req.body;
 
-  console.log("otp", email, otp);
   const user = await User.findOne({ email });
 
   if (!user) {
@@ -149,7 +146,7 @@ export const verifyOtp = asyncHandler(async (req, res, next) => {
   await user.save();
 
   // Optionally, you can send a new token to the client
-  sendToken(user, StatusCodes.ACCEPTED, res);
+  sendToken(user,200, res);
 
   // res.json({ success: true, message: "verified successfully", user });
 });
@@ -157,7 +154,10 @@ export const verifyOtp = asyncHandler(async (req, res, next) => {
 //Login User Controller
 
 export const loginUser = asyncHandler(async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email } = req.query;
+  
+  const {password } = req.body;
+ 
 
   if (!email || !password) {
     return next(
@@ -181,9 +181,9 @@ export const loginUser = asyncHandler(async (req, res, next) => {
       new CustomError("Invalid Credentials", StatusCodes.UNAUTHORIZED)
     );
   }
+  // const secretKey = process.env.SECRET_KEY;
 
-  //   const secretKey = process.env.SECRET_KEY;
-  sendToken(user, StatusCodes.ACCEPTED, res);
+  sendToken(user,200, res);
   //   res.status(201).json({ message: "User login successfully" });
 
   // If the username, email, and phone number are unique, proceed with registration
@@ -235,6 +235,10 @@ export const updateProfile = asyncHandler(async (req, res, next) => {
   });
 });
 
+
+
+
+
 // get user profile
 export const getUserProfile = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.user.id);
@@ -244,6 +248,11 @@ export const getUserProfile = asyncHandler(async (req, res, next) => {
   }
   res.json(user);
 });
+
+
+
+
+
 
 //  user exists
 
@@ -258,6 +267,11 @@ export const userExists = asyncHandler(async (req, res, next) => {
     success: true,
   });
 });
+
+
+
+
+
 
 // update password
 
@@ -278,6 +292,13 @@ export const updatePassword = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, data: updatedUser });
 });
 
+
+
+
+
+
+
+//logout 
 export const logout = asyncHandler(async (req, res, next) => {
   res.cookie("token", null, {
     expires: new Date(Date.now()),
@@ -290,6 +311,14 @@ export const logout = asyncHandler(async (req, res, next) => {
   });
 });
 
+
+
+
+
+
+
+
+//forgot password
 export const forgotPassword = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({
     email: req.body.email,
@@ -331,6 +360,10 @@ export const forgotPassword = asyncHandler(async (req, res, next) => {
     return next(new CustomError(error.message, 500));
   }
 });
+
+
+
+
 
 // Reset Password
 export const ResetPassword = asyncHandler(async (req, res, next) => {

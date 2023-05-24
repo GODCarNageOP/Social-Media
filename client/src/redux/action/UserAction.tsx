@@ -1,3 +1,5 @@
+import axios, { AxiosResponse } from 'axios';
+import { Dispatch } from 'redux';
 import {
     USER_LOGIN_REQUEST,
     USER_LOGIN_SUCCESS,
@@ -22,20 +24,16 @@ import {
     USER_SEND_CODE_REQUEST,
     USER_SEND_CODE_SUCCESS,
     USER_SEND_CODE_FAILURE,
-} from '../constants/UserConstants.tsx';
+    CHECK_USER_REQUEST,
+    CHECK_USER_SUCCESS,
+    CHECK_USER_FAILURE,
+} from '../constants/UserConstants';
 
-import axios from 'axios';
-import { Dispatch } from 'redux';
-import { CHECK_USER_FAILURE, CHECK_USER_SUCCESS, CHECK_USER_REQUEST } from '../constants/UserConstants';
-
-
-export const register = (userData: any) => async (dispatch) => {
+export const register = (userData: any) => async (dispatch: Dispatch) => {
     try {
         dispatch({ type: USER_REGISTER_REQUEST });
 
-        console.log("email",userData)
-        const { data } = await axios.post('/api/v1/register', userData);
-
+        const { data }: AxiosResponse = await axios.post('/api/v1/register', userData);
 
         dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
     } catch (error: any) {
@@ -46,12 +44,11 @@ export const register = (userData: any) => async (dispatch) => {
     }
 };
 
-export const verify = (userData: any) => async (dispatch) => {
+export const verify = (userData: any) => async (dispatch: Dispatch) => {
     try {
         dispatch({ type: USER_VERIFY_REQUEST });
 
-        const {data} = await axios.post('/api/v1/verify', userData);
-        
+        const { data }: AxiosResponse = await axios.post('/api/v1/verify', userData);
 
         dispatch({ type: USER_VERIFY_SUCCESS, payload: data });
     } catch (error: any) {
@@ -62,20 +59,16 @@ export const verify = (userData: any) => async (dispatch) => {
     }
 };
 
-export const sendCode = (email: any) => async (dispatch) => {
+export const sendCode = (email: any) => async (dispatch: Dispatch) => {
     try {
-        console.log("userEmail",email)
         dispatch({ type: USER_SEND_CODE_REQUEST });
-console.log("1");
-   
-        const queryParams = new URLSearchParams({ email: email }).toString();
+
+        const queryParams = new URLSearchParams({ email }).toString();
         const url = `/api/v1/send/otp?${queryParams}`;
 
-await axios.post(url);
-console.log("2");
+        await axios.post(url);
 
         dispatch({ type: USER_SEND_CODE_SUCCESS, payload: true });
-
     } catch (error: any) {
         dispatch({
             type: USER_SEND_CODE_FAILURE,
@@ -84,61 +77,60 @@ console.log("2");
     }
 };
 
-
-
-
-
-export const loadUser = () => async (dispatch) => {
+export const loadUser = () => async (dispatch: Dispatch) => {
     try {
         dispatch({ type: LOAD_USER_REQUEST });
 
-        const { data } = await axios.get(`/api/v1/me`);
+        const { data }: AxiosResponse = await axios.get(`/api/v1/profile`);
 
         dispatch({ type: LOAD_USER_SUCCESS, payload: data });
-    } catch (error) {
-        const errorMessage = error.response && error.response.data.message ? error.response.data.message : error.message;
+    } catch (error:any) {
+        const errorMessage =
+            error.response && error.response.data.message ? error.response.data.message : error.message;
 
         dispatch({ type: LOAD_USER_FAIL, payload: errorMessage });
     }
 };
 
-
-
-
-// userActions.js
-
-export const checkUser = (email) => {
-    return async (dispatch) => {
+export const checkUser = (email: any) => {
+    return async (dispatch: Dispatch) => {
         dispatch({ type: CHECK_USER_REQUEST });
 
         try {
-            // Perform an asynchronous request to check if the user exists
-            // You can use fetch, axios, or any other HTTP library here
-            const { data } = await axios.post(`/api/v1/userExists`, email);
-
+            const { data }: AxiosResponse = await axios.post(`/api/v1/userExists`, email);
 
             dispatch({ type: CHECK_USER_SUCCESS, payload: data.success });
-        } catch (error) {
-            const errorMessage = error.response && error.response.data.message ? error.response.data.message : error.message;
+        } catch (error:any) {
+            const errorMessage =
+                error.response && error.response.data.message ? error.response.data.message : error.message;
 
             dispatch({ type: CHECK_USER_FAILURE, payload: errorMessage });
         }
     };
 };
 
+export const loginUser = (email: string, password: string) => async (dispatch: Dispatch) => {
+    try {
+        dispatch({ type: USER_LOGIN_REQUEST });
 
+        const queryParams = new URLSearchParams({ email }).toString();
 
+        const url = `/api/v1/login?${queryParams}`;
+        const config = { headers: { 'Content-Type': 'application/json' } };
 
+        const { data }: AxiosResponse = await axios.post(url, password, config);
 
+        dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
+    } catch (error:any) {
+        const errorMessage =
+            error.response && error.response.data.message ? error.response.data.message : error.message;
 
+        dispatch({ type: USER_LOGIN_FAILURE, payload: errorMessage });
+    }
+};
 
-
-
-
-export const clearUserErrors = () => async (dispatch) => {
-
+export const clearUserErrors = () => async (dispatch: Dispatch) => {
     dispatch({
-        type: USER_CLEAR_ERRORS
-    })
-}
-
+        type: USER_CLEAR_ERRORS,
+    });
+};

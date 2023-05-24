@@ -25,33 +25,36 @@ import Loader from "./components/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "./redux/action/UserAction";
 import store from "./Store";
+import LoginPassword from "./pages/Auth/Loginpassword";
 function App() {
+  const { loading } = useSelector((state) => state.user)
 
+  useEffect(() => {
+    store.dispatch(loadUser());
 
+  }, [])
   const Layout = () => {
-
-  
-
-    useEffect(() => {
-      store.dispatch(loadUser());
-    }, [])
-
-
     return (
-      <div className="flex gap-2 h-full app">
+      <>
+        {
+          loading ? (
+            <Loader />
+          ) :
+            (
+              <div className="flex gap-2 h-full app">
 
-       <Navbar />
-        
-        <Outlet />
-         <Footer />
-        
+                <Navbar />
 
+                <Outlet />
+                <Footer />
 
-
-      </div>
+              </div>
+            )}
+      </>
     );
   };
 
+  
   const router = createBrowserRouter([
     {
       path: "/",
@@ -68,6 +71,10 @@ function App() {
         {
           path: "/login",
           element: <Login />,
+        },
+        {
+          path: "/auth*",
+          element: <LoginPassword />,
         },
         {
           path: "/signup",
