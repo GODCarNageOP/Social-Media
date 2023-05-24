@@ -16,15 +16,20 @@ import ContactPageOutlinedIcon from "@mui/icons-material/ContactPageOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/action/UserAction";
 
 const Navbar = () => {
-
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false)
 
   const [isDarkMode, setIsDarkMode] = useState(
     localStorage.getItem("isDarkMode") === "true"
   );
-
+  console.log(open)
+  const logoutFun = () => {
+    dispatch(logout())
+  }
   useEffect(() => {
     if (isDarkMode) {
       document.body.classList.add("dark-mode");
@@ -39,7 +44,7 @@ const Navbar = () => {
   };
 
   return (
-   <div className="navbar w-[13%] hidden sm:flex sm:w-[10%] md:w-[10%] xl:w-[20%] flex flex-col h-full">
+    <div className="navbar w-[13%] hidden sm:flex sm:w-[10%] md:w-[10%] xl:w-[20%] flex flex-col h-full">
 
 
       <Link to="/">
@@ -133,14 +138,14 @@ const Navbar = () => {
         <div className="overlay h-28 w-80 bg-white absolute shadow-lg border rounded-xl z-10 flex flex-col top-[550px]">
           <div className="overlayContainer my-5 gap-5">
             <div className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer">Add an Existing account</div>
-            <div className="bottom hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer">Log out @ig_carnageyt</div>
+            <div onClick={() => logoutFun()} className="bottom hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer">Log out @ig_carnageyt</div>
           </div>
         </div>
       }
       <div className="profile flex justify-center xl:justify-between  h-[10%] mx-2 items-center hover:bg-gray-200 hover:rounded-full p-3 cursor-pointer mt-10">
         <div className="profileContainer gap-3 flex items-center justify-center">
-          <div className="w-14 h-14 flex item-center justify-center    rounded-full overflow-hidden">
-          <img src={yash} alt="" className="h-full w-full object-cover" />
+          <div className="w-14 h-14 flex item-center justify-center    rounded-full overflow-hidden" onClick={() => setOpen(!open)}>
+            <img src={yash} alt="" className="h-full w-full object-cover" />
           </div>
 
           <div className="flex flex-col hidden xl:flex">

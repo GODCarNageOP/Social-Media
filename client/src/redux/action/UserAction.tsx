@@ -27,6 +27,8 @@ import {
     CHECK_USER_REQUEST,
     CHECK_USER_SUCCESS,
     CHECK_USER_FAILURE,
+    USER_LOGOUT_SUCCESS,
+    USER_LOGOUT_FAILURE,
 } from '../constants/UserConstants';
 
 export const register = (userData: any) => async (dispatch: Dispatch) => {
@@ -128,6 +130,27 @@ export const loginUser = (email: string, password: string) => async (dispatch: D
         dispatch({ type: USER_LOGIN_FAILURE, payload: errorMessage });
     }
 };
+
+export const logout = () => async (dispatch) => {
+    try {
+        await axios.get(`/api/v1/logout`);
+
+        dispatch({ type: USER_LOGOUT_SUCCESS });
+    } catch (error) {
+        const errorMessage = error.response && error.response.data.message ? error.response.data.message : error.message;
+
+        dispatch({ type: USER_LOGOUT_FAILURE, payload: errorMessage });
+    }
+};
+
+
+
+
+
+
+
+
+
 
 export const clearUserErrors = () => async (dispatch: Dispatch) => {
     dispatch({

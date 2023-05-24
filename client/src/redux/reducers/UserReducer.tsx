@@ -27,6 +27,8 @@ import {
     USER_SEND_CODE_SUCCESS,
     USER_SEND_CODE_FAILURE,
     USER_SEND_CODE_REQUEST,
+    USER_LOGOUT_REQUEST,
+    USER_LOGOUT_SUCCESS,
 } from '../constants/UserConstants.tsx';
 
 
@@ -51,6 +53,7 @@ export const userReducer = (state = initialState, action) => {
         case USER_VERIFY_REQUEST:
         case USER_SEND_CODE_REQUEST:
         case LOAD_USER_REQUEST:
+        case USER_LOGOUT_REQUEST:
 
 
 
@@ -58,6 +61,7 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 loading: true,
                 codeSended: false,
+                isLoggedIn:false,
 
             };
 
@@ -73,6 +77,13 @@ export const userReducer = (state = initialState, action) => {
 
             };
 
+        case USER_LOGOUT_SUCCESS:
+   
+            return {
+                loading: false,
+                user: null,
+                isLoggedIn: false,
+            };
 
         case USER_VERIFY_SUCCESS:
             return {

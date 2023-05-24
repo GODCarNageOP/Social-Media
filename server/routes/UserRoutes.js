@@ -2,6 +2,7 @@ import express from "express";
 import {
   getUserProfile,
   loginUser,
+  logout,
   registerUser,
   sendCode,
   userExists,
@@ -14,6 +15,7 @@ const router = express.Router();
 router.post("/register", registerUser);
 router.post("/verify", verifyOtp);
 router.post("/send/otp", sendCode);
+router.get("/logout", logout);
 
 router.post("/login", loginUser);
 router.route("/profile").get(isAuthenticatedUser, getUserProfile);
