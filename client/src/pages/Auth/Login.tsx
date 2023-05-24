@@ -7,26 +7,30 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { TextField } from '@mui/material';
 import { useAlert } from 'react-alert';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearUserErrors } from '../../redux/action/UserAction';
+import { checkUser, clearUserErrors } from '../../redux/action/UserAction';
 import Loader from '../../components/Loader';
 
 const Login = () => {
     const Navigate = useNavigate();
     const alert = useAlert();
-    const { isLoggedIn, error, loading } = useSelector((state) => state.user)
+    const { isLoggedIn, error,isUser, loading } = useSelector((state) => state.user)
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
 
     const navigate = () => {
+
+        dispatch(checkUser(email))
         if (!email) {
             alert.error('Please enter email');
-        } else {
+        } else if (isUser) {
+            
             Navigate(`/auth?email=${email}`);
-        }
+        } 
+        
     };
     useEffect(() => {
         if (error) {
-
+            alert.error(error);
             dispatch(clearUserErrors())
         }
 
@@ -44,7 +48,7 @@ const Login = () => {
                 loading ? (
                     <Loader />
                 ) : (
-            
+
 
                     <div className="w-full flex items-center justify-center  min-h-[100vh]  h-full login">
 

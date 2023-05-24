@@ -34,6 +34,7 @@ import {
 
 const initialState = {
     user: null,
+    isUser:false,
     loading: false,
     error: null,
     isLoggedIn: false,
@@ -74,6 +75,7 @@ export const userReducer = (state = initialState, action) => {
                 success: action.payload.success,
                 message: action.payload.message,
                 codeSended: true,
+                isUser:true,
 
             };
 
@@ -83,6 +85,8 @@ export const userReducer = (state = initialState, action) => {
                 loading: false,
                 user: null,
                 isLoggedIn: false,
+                isUser: false,
+
             };
 
         case USER_VERIFY_SUCCESS:
@@ -111,7 +115,9 @@ export const userReducer = (state = initialState, action) => {
                 isLoggedIn: true,
                 codeSended: false,
                 error: null,
-                userCreated: null
+                userCreated: null,
+                isUser: true,
+
             }
 
         case LOAD_USER_FAIL:
@@ -121,12 +127,21 @@ export const userReducer = (state = initialState, action) => {
                 error: action.payload,
                 userCreated: null,
                 isLoggedIn: false,
+                isUser: false,
+
                 codeSended: false,
             }
 
+            case CHECK_USER_SUCCESS:
+                return {
+                    ...state,
+                    isUser: true,
+                }
         case USER_SEND_CODE_FAILURE:
         case USER_REGISTER_FAILURE:
         case USER_VERIFY_FAILURE:
+        case CHECK_USER_FAILURE:
+
             return {
                 ...state,
                 error: action.payload,
@@ -134,9 +149,14 @@ export const userReducer = (state = initialState, action) => {
                 loading: false,
                 isLoggedIn: false,
                 codeSended: false,
+                isUser: false,
 
             };
-
+        case USER_CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
         default:
             return state;
     }

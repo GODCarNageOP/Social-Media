@@ -259,8 +259,8 @@ export const getUserProfile = asyncHandler(async (req, res, next) => {
 export const userExists = asyncHandler(async (req, res, next) => {
   const user = await User.findOne(req.body.email);
 
-  if (user) {
-    return next(new CustomError("User Exists", 404));
+  if (!user) {
+    return next(new CustomError("User Not Exists", 404));
   }
 
   res.json({

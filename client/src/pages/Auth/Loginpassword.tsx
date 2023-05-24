@@ -38,7 +38,7 @@ const LoginPassword = () => {
             Navigate('/profile');
 
         }
-    }, [error, isLoggedIn, dispatch])
+    }, [error, isLoggedIn, dispatch,alert])
 
 
     const login = () => {
