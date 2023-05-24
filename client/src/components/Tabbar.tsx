@@ -17,12 +17,6 @@ const TabBar: React.FC<TabBarProps> = ({ tabs }) => {
     const urlAfterSlash = pathname.substring(1);
 
 
-    // if (urlAfterSlash==='') {
-    //     urlAfterSlash='/'
-    // }
-    console.log('tab', tabs, urlAfterSlash);
-
-    console.log(urlAfterSlash === tabs[1].path, tabs[1].path)
 
     return (
         <div className="tab-bar w-full">

@@ -1,5 +1,5 @@
 const sendToken = (user, statusCode, res) => {
-console.log("1", process.env.COOKIE_EXPIRE);
+
 
   const token = user.getJWTToken();
 
@@ -12,6 +12,7 @@ console.log("1", process.env.COOKIE_EXPIRE);
 
     httpOnly: true,
   };
+
 
   res.status(statusCode).cookie("token", token, options).json({
     success: true,

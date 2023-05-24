@@ -1,42 +1,59 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import twitterIcon from '../../assets/twitter.png'
 import GoogleIcon from '@mui/icons-material/Google';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import { TextField } from '@mui/material';
-import { useAlert } from 'react-alert';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearUserErrors } from '../../redux/action/UserAction';
+import { useAlert } from 'react-alert';
+import { clearUserErrors, loginUser } from '../../redux/action/UserAction';
 import Loader from '../../components/Loader';
 
-const Login = () => {
+const LoginPassword = () => {
+    const params = useParams();
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const email = queryParams.get('email');
+
+
+    const [password, setPassword] = useState("");
+  
     const Navigate = useNavigate();
     const alert = useAlert();
-    const { isLoggedIn, error, loading } = useSelector((state) => state.user)
-    const dispatch = useDispatch();
-    const [email, setEmail] = useState("");
 
-    const navigate = () => {
-        if (!email) {
-            alert.error('Please enter email');
-        } else {
-            Navigate(`/auth?email=${email}`);
-        }
-    };
+
+    const { isLoggedIn, loading, error } = useSelector((state) => state.user);
+
     useEffect(() => {
         if (error) {
-
+            alert.error(error);
             dispatch(clearUserErrors())
         }
 
         if (isLoggedIn) {
-
+            alert.success("Login Success");
 
             Navigate('/profile');
 
         }
     }, [error, isLoggedIn, dispatch])
+
+
+    const login = () => {
+        if (!password || !email) {
+            console.log('email', email, password)
+            alert.error("Please enter email")
+        }
+        else {
+            const pass={
+                password:password
+            }
+
+            dispatch(loginUser(email, pass))
+        }
+    }
 
     return (
         <>
@@ -44,12 +61,12 @@ const Login = () => {
                 loading ? (
                     <Loader />
                 ) : (
-            
+
 
                     <div className="w-full flex items-center justify-center  min-h-[100vh]  h-full login">
 
 
-                        <div className="w-full  max-w-[600px] border-2  p-2 pb-9 flex gap-8 items-center justify-between min-h-[600px] border-1 border-solid border-gray-300  flex-col Login">
+                        <div className="w-full  max-w-[600px] border-2  p-2 pb-9 flex gap-8 items-center justify-between min-h-[600px] border-1 border-solid border-gray-300  flex-col LoginPassword">
                             <img src={twitterIcon} className='h-[50px]' alt="" />
                             <p className='text-3xl font-bold text-center'>Sign in to Twitter</p>
                             <Button value="Sign in with Google" class="" icon={<GoogleIcon />} />
@@ -61,12 +78,11 @@ const Login = () => {
                             </div>
                             {/* <div className="flex"> */}
 
-                            <TextField placeholder='Phone,Email or Username' type='email' required className='w-full max-w-[450px]' id="outlined-basic" value={email} onChange={(e) => setEmail(e.target.value)} label="Email" variant="outlined" />
+                            <TextField placeholder='Phone,Email or Username' required type='password' value={password} onChange={(e) => setPassword(e.target.value)} className='w-full max-w-[450px]' id="outlined-basic" label="Password" variant="outlined" />
                             {/* </div> */}
                             {/* <Input /> */}
-                            <div className="w-full max-w-[456px]" onClick={() => navigate()}>
-
-                                <Button value="Next" class="bg-black text-white" />
+                            <div  className="w-full max-w-[456px]" onClick={() => login()}>
+                                <Button value="Login" class="bg-black text-white" />
                             </div>
                             <Button value="Forgot Password?" class=" text-black " />
 
@@ -114,4 +130,4 @@ const Button = ({ value, icon, class: additionalClass }: { value: string; class:
 // }
 
 
-export default Login;
+export default LoginPassword;

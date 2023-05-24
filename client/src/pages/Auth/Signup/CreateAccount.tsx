@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import twitterIcon from '../../../assets//twitter.png'
 import GoogleIcon from '@mui/icons-material/Google';
 import { TextField } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useAlert } from 'react-alert';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkUser } from '../../../redux/action/UserAction';
 
 const months = [
     {
@@ -79,17 +83,55 @@ for (let i = 1900; i <= 2023; i++) {
 
 
 const CreateYouAccount = () => {
-    const [usePhone, setUsePhone] = useState(false);
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState(0);
+
+    const alert = useAlert();
+    const dispatch = useDispatch();
+
+    const existingData = JSON.parse(sessionStorage.getItem('UserData') || '{}');
 
 
 
-    const [selectedMonth, setSelectedMonth] = useState("January");
-    const [selectedDay, setSelectedDay] = useState(1);
-    const [selectedYear, setSelectedYear] = useState(2000);
-    console.log(selectedMonth, selectedDay, selectedYear, email, name, phone)
+
+    const Navigate = useNavigate();
+
+    const [userName, setUserName] = useState(existingData?.userName || '');
+    const [email, setEmail] = useState(existingData?.email || '');
+    const [password, setPassword] = useState(existingData?.password || '');
+
+    const [selectedMonth, setSelectedMonth] = useState(existingData.dob?.month || 'January');
+    const [selectedDay, setSelectedDay] = useState(existingData.dob?.day || '1');
+    const [selectedYear, setSelectedYear] = useState(existingData.dob?.year || '2000');
+
+
+
+    const isButtonDisabled = !userName || !email;
+    const handleButtonClick = () => {
+
+        if (isButtonDisabled) {
+            alert.error("Fill The Details")
+        }
+        else {
+
+
+
+            existingData.userName = userName;
+            existingData.email = email;
+            existingData.password = password;
+
+            existingData.dob = {
+                month: selectedMonth,
+                day: selectedDay,
+                year: selectedYear
+            }
+
+            sessionStorage.setItem("UserData", JSON.stringify(existingData));
+
+            Navigate('/signup/first-page')
+        }
+    };
+
+
+
     return (
         <div className="w-full flex items-center justify-center  min-h-[100vh]  h-full signup">
 
@@ -103,8 +145,21 @@ const CreateYouAccount = () => {
                     <p className='text-3xl font-bold '>Create Your Account</p>
                 </div>
 
-                <TextField value={name} onChange={(e) => setName(e.target.value)} className='w-full max-w-[450px] text-black' id="filled-basic" label="Name" variant="outlined" />
-                {
+                <TextField value={userName} onChange={(e) => setUserName(e.target.value)} className='w-full max-w-[450px] text-black' id="filled-basic" label="User Name" variant="outlined" />
+
+                <div className="flex flex-col w-full max-w-[450px] ">
+                    <TextField value={email} onChange={(e) => setEmail(e.target.value)} className='w-full max-w-[450px] text-black' id="filled-basic" type='email' label="Email" variant="outlined" />
+                    {/* {
+                        userExists === false && <span className='text-red-500'>
+                            user exists already
+                        </span>
+                    } */}
+
+                </div>
+
+                <TextField value={password} onChange={(e) => setPassword(e.target.value)} className='w-full max-w-[450px] text-black' id="filled-basic" type='password' label="Passwrd" variant="outlined" />
+
+                {/* {
                     usePhone && (
                         <div className="flex flex-col w-full  max-w-[450px] items-end">
 
@@ -113,16 +168,12 @@ const CreateYouAccount = () => {
                         </div>
                     )
                 }
-                {
-                    !usePhone && (
-                        <div className="flex flex-col w-full  max-w-[450px] items-end">
-                            <TextField value={email} onChange={(e) => setEmail(e.target.value)} className='w-full text-black' id="filled-basic" label="Email" variant="outlined" />
-                            <span className='text-blue-500 pt-3 hover:underline cursor-pointer' onClick={() => setUsePhone(!usePhone)}>use email instead</span>
-                        </div>
-                    )
+                { */}
+
+                {/* ) */}
+                {/* } */}
 
 
-                }
 
                 <div className="flex flex flex-col gap-2 w-full  max-w-[450px]">
 
@@ -197,10 +248,10 @@ const CreateYouAccount = () => {
                     </div>
                 </div>
 
-                <Link to='/step/2' className='w-full max-w-[450px]'>
-                    <Button value="Next" class="bg-black text-white " />
+                <button className="w-full max-w-[450px]" onClick={handleButtonClick} >
 
-                </Link>
+                    <Button value="Next" class="bg-black text-white " disabled={isButtonDisabled} />
+                </button>
 
             </div>
         </div>
