@@ -19,10 +19,10 @@ const Login = () => {
 
     const navigate = () => {
 
-        dispatch(checkUser(email))
+        // dispatch(checkUser(email))
         if (!email) {
             alert.error('Please enter email');
-        } else if (isUser) {
+        } else if (email) {
             
             Navigate(`/auth?email=${email}`);
         } 
@@ -40,7 +40,7 @@ const Login = () => {
             Navigate('/profile');
 
         }
-    }, [error, isLoggedIn, dispatch])
+    }, [error, isLoggedIn, dispatch,isUser,alert,Navigate])
 
     return (
         <>
@@ -68,10 +68,10 @@ const Login = () => {
                             <TextField placeholder='Phone,Email or Username' type='email' required className='w-full max-w-[450px]' id="outlined-basic" value={email} onChange={(e) => setEmail(e.target.value)} label="Email" variant="outlined" />
                             {/* </div> */}
                             {/* <Input /> */}
-                            <div className="w-full max-w-[456px]" onClick={() => navigate()}>
+                            <button className="w-full max-w-[456px]" onClick={() => navigate()}>
 
                                 <Button value="Next" class="bg-black text-white" />
-                            </div>
+                            </button>
                             <Button value="Forgot Password?" class=" text-black " />
 
                             <p>

@@ -23,15 +23,17 @@ import SingUpTwo from "./pages/Auth/Signup/SignUpTwo";
 import SignUpThree from "./pages/Auth/Signup/SignUpThree";
 import Loader from "./components/Loader";
 import { useDispatch, useSelector } from "react-redux";
-import { loadUser } from "./redux/action/UserAction";
+import { clearUserErrors, loadUser } from "./redux/action/UserAction";
 import store from "./Store";
 import LoginPassword from "./pages/Auth/Loginpassword";
 function App() {
-  const { loading } = useSelector((state) => state.user)
-
+  const { loading, error } = useSelector((state) => state.user)
+  const dispatch = useDispatch()
   useEffect(() => {
     store.dispatch(loadUser());
-
+    if (error) {
+      dispatch(clearUserErrors())
+    }
   }, [])
   const Layout = () => {
     return (
@@ -54,7 +56,7 @@ function App() {
     );
   };
 
-  
+
   const router = createBrowserRouter([
     {
       path: "/",
