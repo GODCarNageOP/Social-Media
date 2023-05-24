@@ -8,7 +8,7 @@ const { token } = req.cookies;
 
 
 if (!token) {
-  return next(new ErrorHandler("Pleaser login to access this resources", 401));
+  return next(new CustomError("Pleaser login to access this resources", 401));
 }
 
 const decodeData = jwt.verify(token, process.env.SECRET_KEY);

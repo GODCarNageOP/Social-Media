@@ -24,20 +24,24 @@ export const registerUser = asyncHandler(async (req, res, next) => {
     req.body;
 
   // Check if the username, email, or phone number already exists in the database
+  console.log("111111111",userName,email,password,name,gender,phoneNumber)
   const userN = await User.findOne({ userName: userName});
 
 
   if (userN) {
     return next(new CustomError("UserName already exists", StatusCodes.CONFLICT));
   }
-  const userE = await User.findOne({ email: email });
+  console.log("111111111");
 
+  const userE = await User.findOne({ email: email });
+  
+  console.log("111111111");
+  
  if (userE) {
    return next(
      new CustomError("Email already register", StatusCodes.CONFLICT)
    );
- }
-
+  }
   const userP = await User.findOne({ phoneNumber: phoneNumber });
 
 
@@ -46,6 +50,8 @@ export const registerUser = asyncHandler(async (req, res, next) => {
       new CustomError("Phone already register", StatusCodes.CONFLICT)
     );
   }
+  console.log("111111111");
+
   const code = generateOTP();
 
   const message = `Your Otp is  :- \n\n ${code} \n\n If You have not requested this email then, Pleaser Ignore Balraj`;
@@ -259,8 +265,8 @@ export const getUserProfile = asyncHandler(async (req, res, next) => {
 export const userExists = asyncHandler(async (req, res, next) => {
   const user = await User.findOne(req.body.email);
 
-  if (user) {
-    return next(new CustomError("User Exists", 404));
+  if (!user) {
+    return next(new CustomError("User Not Exists", 404));
   }
 
   res.json({

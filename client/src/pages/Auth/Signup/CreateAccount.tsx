@@ -157,7 +157,7 @@ const CreateYouAccount = () => {
 
                 </div>
 
-                <TextField value={password} onChange={(e) => setPassword(e.target.value)} className='w-full max-w-[450px] text-black' id="filled-basic" type='password' label="Passwrd" variant="outlined" />
+                <TextField value={password} onChange={(e) => setPassword(e.target.value)} className='w-full max-w-[450px] text-black' id="filled-basic" type='password' label="Password" variant="outlined" />
 
                 {/* {
                     usePhone && (

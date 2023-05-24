@@ -34,6 +34,7 @@ import {
 
 const initialState = {
     user: null,
+    isUser: false,
     loading: false,
     error: null,
     isLoggedIn: false,
@@ -53,6 +54,7 @@ export const userReducer = (state = initialState, action) => {
         case USER_VERIFY_REQUEST:
         case USER_SEND_CODE_REQUEST:
         case LOAD_USER_REQUEST:
+        case USER_LOGIN_REQUEST:
         case USER_LOGOUT_REQUEST:
 
 
@@ -60,8 +62,8 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: true,
-                codeSended: false,
-                isLoggedIn:false,
+
+                isLoggedIn: false,
 
             };
 
@@ -74,16 +76,19 @@ export const userReducer = (state = initialState, action) => {
                 success: action.payload.success,
                 message: action.payload.message,
                 codeSended: true,
+                isUser: true,
 
             };
 
         case USER_LOGOUT_SUCCESS:
-   
             return {
+                ...state,
                 loading: false,
                 user: null,
                 isLoggedIn: false,
+                isUser: false,
             };
+
 
         case USER_VERIFY_SUCCESS:
             return {
@@ -111,9 +116,18 @@ export const userReducer = (state = initialState, action) => {
                 isLoggedIn: true,
                 codeSended: false,
                 error: null,
-                userCreated: null
-            }
+                userCreated: null,
+                isUser: true,
 
+            }
+        case USER_LOGIN_SUCCESS:
+            return {
+                ...state,
+                user: action.payload.user,
+                error: null,
+                loading: false,
+                isLoggedIn: true
+            }
         case LOAD_USER_FAIL:
             return {
                 ...state,
@@ -121,12 +135,22 @@ export const userReducer = (state = initialState, action) => {
                 error: action.payload,
                 userCreated: null,
                 isLoggedIn: false,
+                isUser: false,
                 codeSended: false,
-            }
+            };
 
+
+        case CHECK_USER_SUCCESS:
+            return {
+                ...state,
+                isUser: true,
+            }
         case USER_SEND_CODE_FAILURE:
         case USER_REGISTER_FAILURE:
         case USER_VERIFY_FAILURE:
+        case USER_LOGIN_FAILURE:
+        case CHECK_USER_FAILURE:
+
             return {
                 ...state,
                 error: action.payload,
@@ -134,9 +158,14 @@ export const userReducer = (state = initialState, action) => {
                 loading: false,
                 isLoggedIn: false,
                 codeSended: false,
+                isUser: false,
 
             };
-
+        case USER_CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
         default:
             return state;
     }

@@ -76,7 +76,8 @@ const SingUpTwo = () => {
             Navigate(path)
         }
         if (error) {
-           
+            alert.error(error)
+
             dispatch(clearUserErrors())
         }
         if (isLoggedIn) {

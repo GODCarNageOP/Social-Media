@@ -7,26 +7,30 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { TextField } from '@mui/material';
 import { useAlert } from 'react-alert';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearUserErrors } from '../../redux/action/UserAction';
+import { checkUser, clearUserErrors } from '../../redux/action/UserAction';
 import Loader from '../../components/Loader';
 
 const Login = () => {
     const Navigate = useNavigate();
     const alert = useAlert();
-    const { isLoggedIn, error, loading } = useSelector((state) => state.user)
+    const { isLoggedIn, error,isUser, loading } = useSelector((state) => state.user)
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
 
     const navigate = () => {
+
+        // dispatch(checkUser(email))
         if (!email) {
             alert.error('Please enter email');
-        } else {
+        } else if (email) {
+            
             Navigate(`/auth?email=${email}`);
-        }
+        } 
+        
     };
     useEffect(() => {
         if (error) {
-
+            alert.error(error);
             dispatch(clearUserErrors())
         }
 
@@ -36,7 +40,7 @@ const Login = () => {
             Navigate('/profile');
 
         }
-    }, [error, isLoggedIn, dispatch])
+    }, [error, isLoggedIn, dispatch,isUser,alert,Navigate])
 
     return (
         <>
@@ -44,7 +48,7 @@ const Login = () => {
                 loading ? (
                     <Loader />
                 ) : (
-            
+
 
                     <div className="w-full flex items-center justify-center  min-h-[100vh]  h-full login">
 
@@ -64,10 +68,10 @@ const Login = () => {
                             <TextField placeholder='Phone,Email or Username' type='email' required className='w-full max-w-[450px]' id="outlined-basic" value={email} onChange={(e) => setEmail(e.target.value)} label="Email" variant="outlined" />
                             {/* </div> */}
                             {/* <Input /> */}
-                            <div className="w-full max-w-[456px]" onClick={() => navigate()}>
+                            <button className="w-full max-w-[456px]" onClick={() => navigate()}>
 
                                 <Button value="Next" class="bg-black text-white" />
-                            </div>
+                            </button>
                             <Button value="Forgot Password?" class=" text-black " />
 
                             <p>

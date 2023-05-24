@@ -158,8 +158,8 @@ const CreateYouAccount = () => {
                                     <p className='text-3xl font-bold '>Enter Your Details</p>
                                 </div>
 
-                                <TextField value={phone} onChange={(e) => setPhone(e.target.value)} className='w-full max-w-[450px] text-black' id="filled-basic" type='number' label="Phone" variant="outlined" />
                                 <TextField value={name} onChange={(e) => setName(e.target.value)} className='w-full max-w-[450px] text-black' id="filled-basic" label="Name" type='text' variant="outlined" />
+                                <TextField value={phone} onChange={(e) => setPhone(e.target.value)} className='w-full max-w-[450px] text-black' id="filled-basic" type='number' label="Phone" variant="outlined" />
 
                                 <TextField
                                     id="outlined-select-currency-native"
