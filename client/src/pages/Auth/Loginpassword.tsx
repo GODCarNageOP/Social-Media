@@ -24,7 +24,7 @@ const LoginPassword = () => {
     const alert = useAlert();
 
 
-    const { isLoggedIn, loading, error } = useSelector((state) => state.user);
+    const { isLoggedIn, loading, error,user } = useSelector((state) => state.user);
 
     useEffect(() => {
         if (error) {
@@ -34,8 +34,8 @@ const LoginPassword = () => {
 
         if (isLoggedIn) {
             alert.success("Login Success");
+            Navigate(`/profile/${user.userName}`);
 
-            Navigate('/profile');
 
         }
     }, [error, isLoggedIn, dispatch,alert])

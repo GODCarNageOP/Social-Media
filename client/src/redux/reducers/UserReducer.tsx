@@ -8,6 +8,7 @@ import {
     USER_REGISTER_FAILURE,
     USER_UPDATE_REQUEST,
     USER_UPDATE_SUCCESS,
+
     USER_UPDATE_FAILURE,
     USER_DELETE_REQUEST,
     USER_DELETE_SUCCESS,
@@ -54,6 +55,7 @@ export const userReducer = (state = initialState, action) => {
         case USER_VERIFY_REQUEST:
         case USER_SEND_CODE_REQUEST:
         case LOAD_USER_REQUEST:
+        case USER_UPDATE_REQUEST:
         case USER_LOGIN_REQUEST:
         case USER_LOGOUT_REQUEST:
 
@@ -99,7 +101,14 @@ export const userReducer = (state = initialState, action) => {
                 codeSended: false,
 
             }
-
+        case USER_UPDATE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                user: action.payload.user,
+                isLoggedIn:true,
+            };
         case USER_SEND_CODE_SUCCESS:
             return {
 
@@ -149,6 +158,7 @@ export const userReducer = (state = initialState, action) => {
         case USER_REGISTER_FAILURE:
         case USER_VERIFY_FAILURE:
         case USER_LOGIN_FAILURE:
+        case USER_UPDATE_FAILURE:
         case CHECK_USER_FAILURE:
 
             return {

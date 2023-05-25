@@ -23,7 +23,7 @@ const SignUpThree = () => {
     const { email } = params;
     const alert = useAlert();
 
-    const { isLoggedIn, loading, error } = useSelector((state) => state.user);
+    const { isLoggedIn, loading, error ,user} = useSelector((state) => state.user);
 
     const [code, setCode] = useState();
     const existingData = JSON.parse(sessionStorage.getItem('UserData') || '{}');
@@ -67,7 +67,8 @@ const SignUpThree = () => {
         if (isLoggedIn) {
 
             alert.success("Email Verified")
-            Navigate('/profile');
+            Navigate(`/profile/${user.userName}`);
+
 
         }
     }, [error, isLoggedIn])

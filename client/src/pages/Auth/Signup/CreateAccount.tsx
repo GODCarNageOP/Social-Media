@@ -159,19 +159,7 @@ const CreateYouAccount = () => {
 
                 <TextField value={password} onChange={(e) => setPassword(e.target.value)} className='w-full max-w-[450px] text-black' id="filled-basic" type='password' label="Password" variant="outlined" />
 
-                {/* {
-                    usePhone && (
-                        <div className="flex flex-col w-full  max-w-[450px] items-end">
-
-                            <TextField type='number' value={phone} onChange={(e) => setPhone(e.target.value)} className='w-full max-w-[450px] text-black' id="filled-basic" label="Phone" variant="outlined" />
-                            <span className='text-blue-500 hover:underline cursor-pointer' onClick={() => setUsePhone(!usePhone)}>use email instead</span>
-                        </div>
-                    )
-                }
-                { */}
-
-                {/* ) */}
-                {/* } */}
+              
 
 
 
@@ -194,7 +182,7 @@ const CreateYouAccount = () => {
                 <div className="flex w-full max-w-[450px] gap-3">
                     <div className="flex w-full max-w-[450px] gap-3">
                         <TextField
-                            id="outlined-select-currency-native"
+                            id="outlined"
                             select
                             label="Month"
                             className="flex-grow"
@@ -211,7 +199,7 @@ const CreateYouAccount = () => {
                             ))}
                         </TextField>
                         <TextField
-                            id="outlined-select-currency-native"
+                            id="outlined-"
                             select
                             className="flex-1"
                             label="Day"
@@ -229,7 +217,7 @@ const CreateYouAccount = () => {
                             ))}
                         </TextField>
                         <TextField
-                            id="outlined-select-currency-native"
+                            id="outlined"
                             select
                             className="flex-1"
                             label="Year"

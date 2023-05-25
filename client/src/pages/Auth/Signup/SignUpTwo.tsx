@@ -19,7 +19,7 @@ const SingUpTwo = () => {
     const alert = useAlert();
     const dispatch = useDispatch();
     const Navigate = useNavigate();
-    const { userCreated, isLoggedIn, error, loading } = useSelector((state) => state.user)
+    const { userCreated, isLoggedIn, error, loading,user } = useSelector((state) => state.user)
 
 
     const existingData = JSON.parse(sessionStorage.getItem('UserData') || '{}');
@@ -81,7 +81,8 @@ const SingUpTwo = () => {
             dispatch(clearUserErrors())
         }
         if (isLoggedIn) {
-            Navigate('/profile')
+            Navigate(`/profile/${user.userName}`);
+
 
         }
     }, [isLoggedIn, userCreated, error, dispatch])

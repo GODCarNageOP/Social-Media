@@ -14,183 +14,10 @@ import TabBar from "../../components/Tabbar";
 import { useSelector } from "react-redux";
 import Loader from "../../components/Loader";
 import { useAlert } from 'react-alert';
+import Slider from '../slider/Slider';
+import EditProfile from "./EditProfile";
 
 
-interface Profile {
-  name: string;
-  userName: string;
-  profession: string;
-  profilepic: string;
-  address: {
-    country: string;
-    website: string;
-    dob: string;
-    joined: string;
-  };
-  followers: {
-    id: string;
-    profilePic: string;
-    name: string;
-    userName: string;
-  }[];
-  following: {
-    id: string;
-    profilePic: string;
-    name: string;
-    userName: string;
-  }[];
-  likes: {
-    id: string;
-    profilePic: string;
-    name: string;
-    userName: string;
-    postId: string;
-    content: string;
-  }[];
-  replies: {
-    id: string;
-    profilePic: string;
-    name: string;
-    userName: string;
-    commentId: string;
-    content: string;
-  }[];
-  numberOfFollowers: number;
-  numberOfFollowing: number;
-  numberOfLikes: number;
-  numberOfTweets: number;
-  tweets: {
-    id: string;
-    content: string;
-    timestamp: string;
-    likes: number;
-    retweets: number;
-    replies: number;
-  }[];
-}
-
-// const profile: Profile = {
-//   name: "Aakash Kumar",
-//   userName: "Akashkumar58906666",
-//   profession: "FULL STACK DEVELOPER",
-//   profilepic: profilePic,
-//   address: {
-//     country: "India, Bihar",
-//     website: "github.com/Akash-Kashyap24.git.com",
-//     dob: "December 5, 2001",
-//     joined: "August 5, 2001",
-//   },
-//   followers: [
-//     {
-//       id: "follower1",
-//       profilePic: "follower1.jpg",
-//       name: "John Doe",
-//       userName: "johndoe123",
-//     },
-//     {
-//       id: "follower2",
-//       profilePic: "follower2.jpg",
-//       name: "Jane Smith",
-//       userName: "janesmith456",
-//     },
-//   ],
-//   following: [
-//     {
-//       id: "following1",
-//       profilePic: "following1.jpg",
-//       name: "Emma Johnson",
-//       userName: "emmajohnson789",
-//     },
-//     {
-//       id: "following2",
-//       profilePic: "following2.jpg",
-//       name: "Michael Brown",
-//       userName: "michaelbrown321",
-//     },
-//   ],
-//   likes: [
-//     {
-//       id: "like1",
-//       profilePic: "like1.jpg",
-//       name: "Sarah Johnson",
-//       userName: "sarahjohnson567",
-//       postId: "123",
-//       content: "Great post!",
-//     },
-//     {
-//       id: "like2",
-//       profilePic: "like2.jpg",
-//       name: "David Smith",
-//       userName: "davidsmith890",
-//       postId: "456",
-//       content: "I totally agree!",
-//     },
-//   ],
-//   replies: [
-//     {
-//       id: "reply1",
-//       profilePic: "reply1.jpg",
-//       name: "Robert Johnson",
-//       userName: "robertjohnson111",
-//       commentId: "789",
-//       content: "Nice work!",
-//     },
-//     {
-//       id: "reply2",
-//       profilePic: "reply2.jpg",
-//       name: "Emily Davis",
-//       userName: "emilydavis222",
-//       commentId: "101112",
-//       content: "Keep it up!",
-//     },
-//   ],
-//   numberOfFollowers: 2,
-//   numberOfFollowing: 2,
-//   numberOfLikes: 2,
-//   numberOfTweets: 19,
-//   tweets: [
-//     {
-//       id: "tweet1",
-//       content: "This is my first tweet!",
-//       timestamp: "May 1, 2023",
-//       likes: 10,
-//       retweets: 5,
-//       replies: 2,
-//     },
-//     {
-//       id: "tweet2",
-//       content: "Excited to be here on Twitter!",
-//       timestamp: "May 3, 2023",
-//       likes: 20,
-//       retweets: 8,
-//       replies: 3,
-//     },
-//     {
-//       id: "tweet3",
-//       content: "Working on a new project. Stay tuned!",
-//       timestamp: "May 5, 2023",
-//       likes: 15,
-//       retweets: 3,
-//       replies: 1,
-//     },
-//     {
-//       id: "tweet4",
-//       content: "Happy weekend, everyone!",
-//       timestamp: "May 7, 2023",
-//       likes: 12,
-//       retweets: 6,
-//       replies: 4,
-//     },
-//     {
-//       id: "tweet5",
-//       content: "Enjoying the picnic",
-//       timestamp: "May 7, 2023",
-//       likes: 12,
-//       retweets: 6,
-//       replies: 4,
-//     },
-//   ],
-// };
 
 const Profile = () => {
   const alert = useAlert();
@@ -207,18 +34,33 @@ const Profile = () => {
   const urlAfterSlash = pathname.substring(1);
 
   const tabs = [
-    { label: "Tweets", path: "/profile" },
+    { label: "Tweets", path: `/profile/${user?.userName}` },
     { label: "Replies", path: "/profile/with_replies" },
     { label: "Media", path: "/profile/media" },
     { label: "Likes", path: "/profile/likes" },
   ];
+  const address = user?.country + "," + user?.state;
+  const joined = user?.joined;
+  const joinedDate = new Date(joined || '');
+  const joinedFormatted = joinedDate.toLocaleDateString('en-US', {
+    month: 'numeric',
+    day: '2-digit',
+    year: '2-digit',
+  })
+  const [openEdit, setOpenEdit] = useState(false);
+
 
   useEffect(() => {
     if (!isLoggedIn) {
       Navigate('/login');
 
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, user,openEdit,loading,error]);
+
+  const openEditClose = () => {
+    setOpenEdit(!openEdit)
+  }
+
   return (
     <>
       {
@@ -227,6 +69,15 @@ const Profile = () => {
         ) : (
 
           <>
+
+
+            <EditProfile openEdits={openEdit} setOpenEdits={setOpenEdit} />
+
+            {
+              user?.country === '' || user?.state === '' || !user?.language || user?.language.length === 0 ? <Slider /> : null
+
+
+            }
             {
               profile != null && (
                 <div className="Profile  mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%] pt-1">
@@ -253,7 +104,7 @@ const Profile = () => {
                           alt=""
                         />
                       </div>
-                      <button className=" h-10 p-2 px-5 mt-10 font-semibold bg-white rounded-3xl edit-btn-profile mx-5 hover:bg-gray-200 cursor-pointer">
+                      <button onClick={openEditClose} className=" h-10 p-2 px-5 mt-10 font-semibold bg-white rounded-3xl edit-btn-profile mx-5 hover:bg-gray-200 cursor-pointer">
                         Edit profile
                       </button>
                     </div>
@@ -265,14 +116,14 @@ const Profile = () => {
                       <span className="text-sm text-gray-500">@{profile?.userName}</span>
                     </div>
                     <div className="profileContainer flex flex-col items-start text-gray-600">
-                      <span className="text-gray-500 p-2 text-sm">
-                        {profile.profession}
+                      <span className="text-gray-500 p-2 text-1xl">
+                        {profile.bio}
                       </span>
                       <div className="top flex flex-wrap gap-3">
                         <div className="flex gap-1 items-center">
                           <LocationOnOutlinedIcon />
                           <span className="text-gray-500 text-sm">
-                            {profile?.country}
+                            {address}
                           </span>
                         </div>
                         <div className="flex gap-1 items-center">
@@ -292,7 +143,7 @@ const Profile = () => {
                         <div className="flex gap-1 flex-wrap items-center">
                           <CalendarMonthOutlinedIcon />
                           <span className="text-gray-500">
-                            Joined {profile?.joined}
+                            Joined {joinedFormatted}
                           </span>
                         </div>
                       </div>
@@ -316,11 +167,12 @@ const Profile = () => {
 
                   <TabBar tabs={tabs} />
                   {
-
-                    urlAfterSlash === "profile" && (
+                    urlAfterSlash === `profile/${user?.userName}` && (
+                      // Render your desired component here
                       <ProfileTweet />
                     )
                   }
+
                   {
 
                     urlAfterSlash === "profile/likes" && (
@@ -359,119 +211,6 @@ const Profile = () => {
 
 
 
-
-
-
-
-// const ProfileTab = () => {
-//   const [openTab, setOpenTabs] = useState("Tweets");
-//   const location = useLocation();
-//   const pathname = location.pathname;
-//   const urlAfterSlash = pathname.substring(1);
-
-//   return (
-//     <div className="profile-tweet w-full">
-//       <div className="flex h-14 cursor-pointer">
-//         <Link
-//           to="/profile"
-//           className={`flex-1 flex flex-col relative ${urlAfterSlash === "profile" ? "active-link" : "inactive-link"
-//             }`}
-//         >
-//           <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "profile" ? "activeTabs" : "deactivate-tabs"
-//             }`}>
-//             Tweets
-//           </span>
-//           {urlAfterSlash === "profile" ? (
-
-//             <div className="activelines"></div>
-//           ) : (
-//             <div className="deactivatelines"></div>
-//           )
-//           }
-
-//         </Link>
-//         <Link
-//           to="/profile/with_replies"
-//           className={`flex-1 flex flex-col relative ${urlAfterSlash === "profile/with_replies" ? "active-link" : "inactive-link"
-//             }`}
-//         >
-//           <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "profile/with_replies" ? "activeTabs" : "deactivate-tabs"
-//             }`}>
-//             Replies
-//           </span>
-//           {urlAfterSlash === "profile/with_replies" ? (
-
-//             <div className="activelines"></div>
-//           ) : (
-//             <div className="deactivatelines"></div>
-//           )
-//           }
-//         </Link>
-//         <Link
-//           to="/profile/media"
-//           className={`flex-1  flex flex-col relative ${urlAfterSlash === "profile/media" ? "active-link" : "inactive-link"
-//             }`}
-//         >
-//           <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "profile/media" ? "activeTabs" : "deactivate-tabs"
-//             }`}>
-//             Media
-//           </span>
-//           {urlAfterSlash === "profile/media" ? (
-
-//             <div className="activelines"></div>
-//           ) : (
-//             <div className="deactivatelines"></div>
-//           )
-//           }
-//         </Link>
-//         <Link
-//           to="/profile/likes"
-//           className={`flex-1 flex flex-col relative ${urlAfterSlash === "profile/likes" ? "active-link" : "inactive-link"
-//             }`}
-//         >
-//           <span className={`flex-1 font-bold flex justify-center items-center hover:bg-gray-200  ${urlAfterSlash === "profile/likes" ? "activeTabs" : "deactivate-tabs"
-//             }`}>
-//             Likes
-//           </span>
-//           {urlAfterSlash === "profile/likes" ? (
-
-//             <div className="activelines"></div>
-//           ) : (
-//             <div className="deactivatelines"></div>
-//           )
-//           }
-//         </Link>
-//       </div>
-//       {
-
-//         urlAfterSlash === "profile" && (
-//           <ProfileTweet />
-//         )
-//       }
-//       {
-
-//         urlAfterSlash === "profile/likes" && (
-//           <ProfileTweet />
-//         )
-//       }
-
-//       {
-
-//         urlAfterSlash === "profile/with_replies" && (
-//           <ProfileTweet />
-//         )
-//       }
-
-//       {
-
-//         urlAfterSlash === "profile/media" && (
-//           <ProfileTweet />
-//         )
-//       }
-
-//     </div>
-//   );
-// };
 
 
 

@@ -26,6 +26,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearUserErrors, loadUser } from "./redux/action/UserAction";
 import store from "./Store";
 import LoginPassword from "./pages/Auth/Loginpassword";
+import Slider from "./pages/slider/Slider";
 function App() {
   const { loading, error } = useSelector((state) => state.user)
   const dispatch = useDispatch()
@@ -70,6 +71,7 @@ function App() {
           path: "/loader",
           element: <Loader />,
         },
+        
         {
           path: "/login",
           element: <Login />,
@@ -121,7 +123,7 @@ function App() {
         },
 
         {
-          path: "/profile",
+          path: "/profile/:username",
           element: <Profile />,
         },
         {
