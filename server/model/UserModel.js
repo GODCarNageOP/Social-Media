@@ -20,6 +20,16 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
+    choices: [
+      {
+        type: String,
+      },
+    ],
+    language: [
+      {
+        type: String,
+      },
+    ],
     profession: {
       type: String,
     },
@@ -51,7 +61,11 @@ const userSchema = new Schema(
     },
     country: {
       type: String,
-      default: "Chose Country",
+   
+    },
+    state: {
+      type: String,
+      
     },
     avatar: {
       public_id: {

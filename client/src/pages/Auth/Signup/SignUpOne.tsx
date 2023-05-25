@@ -95,7 +95,7 @@ const CreateYouAccount = () => {
 
     const alert = useAlert();
     const Navigate = useNavigate();
-    const { isLoggedIn, error,loading } = useSelector((state) => state.user)
+    const { isLoggedIn, error,loading,user } = useSelector((state) => state.user)
     const dispatch = useDispatch();
     const existingData = JSON.parse(sessionStorage.getItem('UserData') || '{}');
 
@@ -133,7 +133,8 @@ const CreateYouAccount = () => {
         if (isLoggedIn) {
 
 
-            Navigate('/profile');
+            Navigate(`/profile/${user.userName}`);
+
 
         }
     }, [error, isLoggedIn, dispatch])

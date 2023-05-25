@@ -24,33 +24,28 @@ export const registerUser = asyncHandler(async (req, res, next) => {
     req.body;
 
   // Check if the username, email, or phone number already exists in the database
-  console.log("111111111",userName,email,password,name,gender,phoneNumber)
-  const userN = await User.findOne({ userName: userName});
-
+  const userN = await User.findOne({ userName: userName });
 
   if (userN) {
-    return next(new CustomError("UserName already exists", StatusCodes.CONFLICT));
+    return next(
+      new CustomError("UserName already exists", StatusCodes.CONFLICT)
+    );
   }
-  console.log("111111111");
 
   const userE = await User.findOne({ email: email });
-  
-  console.log("111111111");
-  
- if (userE) {
-   return next(
-     new CustomError("Email already register", StatusCodes.CONFLICT)
-   );
+
+  if (userE) {
+    return next(
+      new CustomError("Email already register", StatusCodes.CONFLICT)
+    );
   }
   const userP = await User.findOne({ phoneNumber: phoneNumber });
-
 
   if (userP) {
     return next(
       new CustomError("Phone already register", StatusCodes.CONFLICT)
     );
   }
-  console.log("111111111");
 
   const code = generateOTP();
 
@@ -91,7 +86,6 @@ export const registerUser = asyncHandler(async (req, res, next) => {
 export const sendCode = asyncHandler(async (req, res, next) => {
   const { email } = req.param;
 
-
   const user = await User.findOne({ email: email });
 
   if (!user) {
@@ -108,7 +102,6 @@ export const sendCode = asyncHandler(async (req, res, next) => {
   });
 
   const otpExpiration = Date.now() + 5 * 60 * 1000;
-
 
   // Update the user data
   user.otpExpiration = otpExpiration;
@@ -152,7 +145,7 @@ export const verifyOtp = asyncHandler(async (req, res, next) => {
   await user.save();
 
   // Optionally, you can send a new token to the client
-  sendToken(user,200, res);
+  sendToken(user, 200, res);
 
   // res.json({ success: true, message: "verified successfully", user });
 });
@@ -161,9 +154,8 @@ export const verifyOtp = asyncHandler(async (req, res, next) => {
 
 export const loginUser = asyncHandler(async (req, res, next) => {
   const { email } = req.query;
-  
-  const {password } = req.body;
- 
+
+  const { password } = req.body;
 
   if (!email || !password) {
     return next(
@@ -189,7 +181,7 @@ export const loginUser = asyncHandler(async (req, res, next) => {
   }
   // const secretKey = process.env.SECRET_KEY;
 
-  sendToken(user,200, res);
+  sendToken(user, 200, res);
   //   res.status(201).json({ message: "User login successfully" });
 
   // If the username, email, and phone number are unique, proceed with registration
@@ -203,12 +195,17 @@ export const updateProfile = asyncHandler(async (req, res, next) => {
     userName,
     name,
     email,
+    country,
+    language,
+    choices,
     phoneNumber,
     gender,
     bio,
     dob,
     avatar,
     coverImage,
+    website,
+    state,
   } = req.body;
   const user = await User.findById(req.user.id);
 
@@ -220,6 +217,11 @@ export const updateProfile = asyncHandler(async (req, res, next) => {
     phoneNumber: phoneNumber || user.phoneNumber,
     dob: dob || user.dob,
     bio: bio || user.bio,
+    website: website || user.website,
+    choices: choices || user.choices,
+    country: country || user.country,
+    state: state || user.state,
+    language: language || user.language,
   };
 
   if (email) {
@@ -238,12 +240,9 @@ export const updateProfile = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
+    user: user,
   });
 });
-
-
-
-
 
 // get user profile
 export const getUserProfile = asyncHandler(async (req, res, next) => {
@@ -254,11 +253,6 @@ export const getUserProfile = asyncHandler(async (req, res, next) => {
   }
   res.json(user);
 });
-
-
-
-
-
 
 //  user exists
 
@@ -273,11 +267,6 @@ export const userExists = asyncHandler(async (req, res, next) => {
     success: true,
   });
 });
-
-
-
-
-
 
 // update password
 
@@ -298,13 +287,7 @@ export const updatePassword = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, data: updatedUser });
 });
 
-
-
-
-
-
-
-//logout 
+//logout
 export const logout = asyncHandler(async (req, res, next) => {
   res.cookie("token", null, {
     expires: new Date(Date.now()),
@@ -316,13 +299,6 @@ export const logout = asyncHandler(async (req, res, next) => {
     message: "Logged Out",
   });
 });
-
-
-
-
-
-
-
 
 //forgot password
 export const forgotPassword = asyncHandler(async (req, res, next) => {
@@ -366,10 +342,6 @@ export const forgotPassword = asyncHandler(async (req, res, next) => {
     return next(new CustomError(error.message, 500));
   }
 });
-
-
-
-
 
 // Reset Password
 export const ResetPassword = asyncHandler(async (req, res, next) => {

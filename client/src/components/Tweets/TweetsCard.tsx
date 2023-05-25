@@ -14,6 +14,9 @@ import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDiss
 import { BsUpload, BsThreeDots } from "react-icons/bs";
 import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 
+import Checkbox from '@mui/material/Checkbox';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
 interface Tweet {
     name: string;
     userName: string;
@@ -34,6 +37,7 @@ interface TweetCardProps {
     tweet: Tweet;
 }
 
+const label = { inputProps: { 'aria-label': 'like ' } };
 const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
     const [isMoreOpen, setIsMoreOpen] = useState(false);
     const moreRef = useRef<HTMLDivElement>(null);
@@ -107,9 +111,9 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
                         </div>
 
                         <div className="flex gap-2 item-center justify-center">
-                            <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
+                            <span className="cursor-pointer flex items-center  tweet-icon hover:text-blue-500 text-gray-700 ">
 
-                                <AiOutlineRetweet />
+                                <AiOutlineRetweet  />
                             </span>
                             <span className="cursor-pointer text-sm flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
 
@@ -120,9 +124,14 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
                         <div className="flex gap-2 item-center justify-center">
 
 
-                            <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
+                            <span className="cursor-pointer flex items-center text-sm tweet-icon hover:text-blue-500 text-gray-700 ">
 
-                                <AiOutlineHeart />
+                                <Checkbox {...label} icon={<FavoriteBorder />} className="text-sm" checkedIcon={<Favorite />} />
+                                {/* <Checkbox
+                                    {...label}
+                                    icon={<BookmarkBorderIcon />}
+                                    checkedIcon={<BookmarkIcon />}
+                                /> */}
                             </span>
                             <span className="cursor-pointer flex text-sm items-center tweet-icon hover:text-blue-500 text-gray-700 ">
 
@@ -140,7 +149,7 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
                             </span>
                         </div>
 
-                        <span className="cursor-pointer tweet-icon hover:text-blue-500 text-gray-700 ">
+                        <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
 
                             <BsUpload />
                         </span>

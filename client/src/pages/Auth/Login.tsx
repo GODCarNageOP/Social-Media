@@ -13,7 +13,7 @@ import Loader from '../../components/Loader';
 const Login = () => {
     const Navigate = useNavigate();
     const alert = useAlert();
-    const { isLoggedIn, error,isUser, loading } = useSelector((state) => state.user)
+    const { isLoggedIn, error,isUser, loading,user } = useSelector((state) => state.user)
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
 
@@ -37,7 +37,7 @@ const Login = () => {
         if (isLoggedIn) {
 
 
-            Navigate('/profile');
+            Navigate(`/profile/${user.userName}`);
 
         }
     }, [error, isLoggedIn, dispatch,isUser,alert,Navigate])
@@ -96,7 +96,7 @@ const Login = () => {
 
 
 
-const Button = ({ value, icon, class: additionalClass }: { value: string; class: string; icon: JSX.Element }) => {
+export const Button = ({ value, icon, class: additionalClass }: { value: string; class: string; icon: JSX.Element }) => {
     return (
         <div className={`w-full max-w-[450px] h-12 pt-5 pb-5 border-2 border-solid border-gray-300 cursor-pointer rounded-full ${additionalClass}`}>
             <button className="h-full flex gap-2 justify-center items-center w-full">

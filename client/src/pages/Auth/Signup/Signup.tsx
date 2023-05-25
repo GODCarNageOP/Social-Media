@@ -10,7 +10,7 @@ import Loader from '../../../components/Loader';
 const Signup = () => {
   const Navigate = useNavigate();
   const alert = useAlert();
-  const { isLoggedIn, error,loading } = useSelector((state) => state.user)
+  const { isLoggedIn, error,loading,user } = useSelector((state) => state.user)
   const dispatch = useDispatch();
 
 
@@ -24,8 +24,8 @@ const Signup = () => {
 
     if (isLoggedIn) {
 
+      Navigate(`/profile/${user.userName}`);
 
-      Navigate('/profile');
 
     }
   }, [error, isLoggedIn, dispatch])

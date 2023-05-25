@@ -50,7 +50,7 @@ export const verify = (userData: any) => async (dispatch: Dispatch) => {
     try {
         dispatch({ type: USER_VERIFY_REQUEST });
 
-        const { data }: AxiosResponse = await axios.post('/api/v1/verify', userData);
+        const { data }: AxiosResponse = await axios.put('/api/v1/verify', userData);
 
         dispatch({ type: USER_VERIFY_SUCCESS, payload: data });
     } catch (error: any) {
@@ -94,6 +94,31 @@ export const loadUser = () => async (dispatch: Dispatch) => {
     }
 };
 
+
+
+
+//updateProfiel 
+export const updateProfile = (userData:any) => async (dispatch: Dispatch) => {
+    try {
+        dispatch({ type: USER_UPDATE_REQUEST });
+
+        const url = `/api/v1/edit`;
+        const config = { headers: { 'Content-Type': 'application/json' } };
+
+        const { data }: AxiosResponse = await axios.put(url, userData, config);
+
+        dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
+    } catch (error: any) {
+        const errorMessage =
+            error.response && error.response.data.message ? error.response.data.message : error.message;
+
+        dispatch({ type: USER_UPDATE_FAILURE, payload: errorMessage });
+    }
+};
+
+
+
+//checkuser
 export const checkUser = (email: any) => {
     return async (dispatch: Dispatch) => {
         dispatch({ type: CHECK_USER_REQUEST });
@@ -111,6 +136,12 @@ export const checkUser = (email: any) => {
     };
 };
 
+
+
+
+
+
+//login user
 export const loginUser = (email: string, password: string) => async (dispatch: Dispatch) => {
     try {
         dispatch({ type: USER_LOGIN_REQUEST });
@@ -131,6 +162,10 @@ export const loginUser = (email: string, password: string) => async (dispatch: D
     }
 };
 
+
+
+
+//logout
 export const logout = () => async (dispatch) => {
     try {
         await axios.get(`/api/v1/logout`);
