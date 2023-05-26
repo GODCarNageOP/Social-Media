@@ -2,7 +2,7 @@
 
 const Messages = () => {
     return (
-      <div>Messages</div>
+     <div className="messages w-[50%] border-x ml-[24%] -mr-1"></div>
     )
   }
   
