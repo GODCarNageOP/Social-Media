@@ -27,7 +27,8 @@ const Explore = () => {
 
   ];
   return (
-    <div className="explore w-[50%]">
+    <div className="explore w-[50%] border-x ml-[24%] -mr-1">
+       <div className="homeContainer fixed bg-transparent w-[38%]">
       <div className="exploreContainer flex justify-between items-center">
         <div className="search h-[5%] flex-1 rounded-full bg-gray-100 flex mt-3 items-center p-3 gap-2 mx-10 justify-start">
           <SearchIcon className="icon text-gray-500" />
@@ -41,8 +42,9 @@ const Explore = () => {
           <SettingsOutlinedIcon className="mr-10 mt-3 hover:bg-gray-200 cursor-pointer hover:rounded-full" />
         </Link>
       </div>
-      <div className="exploreNavbar  justify-between h-14 mt-2">
+      <div className="exploreNavbar  justify-between h-14 mt-2 pr-5">
         <TabBar tabs={tabs} />
+        </div>
         {
 
           urlAfterSlash === "explore" && (
@@ -72,6 +74,7 @@ const Explore = () => {
         }
 
       </div>
+      
     </div>
   );
 };

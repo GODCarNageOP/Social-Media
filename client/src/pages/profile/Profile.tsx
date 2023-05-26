@@ -202,7 +202,8 @@ const Profile = () => {
   ];
 
   return (
-    <div className="Profile  w-[80%] lg:w-[50%] pt-1">
+    <div className="Profile  w-[80%] lg:w-[50%] pt-1 border-x ml-[24%] -mr-1">
+      <div className="homeContainer fixed bg-transparent w-[38%]">
       <div className="back-div flex gap-8 align-center pl-4 items-center">
         <ArrowBackIcon className=" hover:bg-gray-200 cursor-pointer hover:rounded-full" />
 
@@ -214,8 +215,9 @@ const Profile = () => {
           </div>
         </div>
       </div>
+      </div>
 
-      <div className="cover-div h-[20%]  bg-gray-300  cursor-pointer"></div>
+      <div className="cover-div h-[20%]  bg-gray-300  cursor-pointer mt-14"></div>
 
       <div className="profile-sec relative">
         <div className="flex justify-between relative items-center w-full profile-absolute-div pl-4">

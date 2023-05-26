@@ -83,22 +83,18 @@ function App() {
           element: <Profile />,
         },
         {
-
           path: "/settings",
-          element: <Settings/>,
+          element: <Settings />,
         },
         {
-
           path: "/notification",
           element: <Notifications />,
         },
         {
-
           path: "/notifications/verified",
           element: <Notifications />,
         },
         {
-
           path: "/notifications/mentions",
           element: <Notifications />,
         },
@@ -110,26 +106,23 @@ function App() {
         {
           path: "/explore",
           element: <Explore />,
-        }, {
+        },
+        {
           path: "/explore/trendings",
           element: <Explore />,
-
-        }, {
+        },
+        {
           path: "/explore/sports",
           element: <Explore />,
-
         },
         {
           path: "/explore/entertainment",
           element: <Explore />,
-
         },
         {
           path: "/explore/news",
           element: <Explore />,
-
         },
-
       ],
     },
   ]);

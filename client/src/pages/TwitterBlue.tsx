@@ -58,7 +58,8 @@ const TwitterBlue: React.FC = () => {
   };
 
   return (
-    <div className="contact w-[50%]">
+    <div className="contact w-[50%] border-x ml-[24%] -mr-1">
+       <div className="homeContainer fixed bg-transparent w-[38%]">
       <div className="contactContainer flex mx-10 justify-between items-center mt-5">
         <h1 className="text-2xl font-semibold cursor-pointer">Contact</h1>
         <Link to="/settings">
@@ -66,7 +67,8 @@ const TwitterBlue: React.FC = () => {
         </Link>
       </div>
       <hr className="w-full mt-10" />
-      <div className="form mx-5">
+      </div>
+      <div className="form mx-5 mt-32">
         <form ref={formRef} onSubmit={handleSubmit} className="mt-12 flex flex-col gap-8">
           <label className="flex flex-col">
             <span className="text-black font-medium mb-4">Your Name</span>

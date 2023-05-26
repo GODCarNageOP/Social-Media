@@ -8,17 +8,17 @@ const Home = () => {
     // { label: "Tab 3", path: "/tab3" },
   ];
   return (
-    <div className="home mobile:w-[100%]  w-[80%]  lg:w-[50%] xl:w-[50%]">
+    <div className="home mobile:w-[100%]  w-[80%]  lg:w-[50%] xl:w-[50%] border-x ml-[24%] -mr-1">
+      <div className="homeContainer fixed bg-transparent w-[38%]">
       <h1 className="text-2xl font-semibold my-1 p-4 cursor-pointer mx-10">Home</h1>
       <div className="homeNavbar flex justify-between h-16">
         {/* <HomeTabs/> */}
         <TabBar tabs={tabs} />
       </div>
     </div>
+    </div>
   );
 };
-
-
 
 
 // const HomeTabs = () => {

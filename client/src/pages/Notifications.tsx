@@ -11,7 +11,8 @@ const Notifications = () => {
   ];
 
   return (
-    <div className="notifications w-[50%]">
+    <div className="notifications w-[50%] border-x ml-[24%] -mr-1">
+        <div className="homeContainer fixed bg-transparent w-[38%]">
       <div className="notificationContainer flex mx-10 justify-between items-center mt-5">
         <h1 className='text-2xl font-semibold cursor-pointer'>Notifications</h1>
         <Link to="/settings">
@@ -20,6 +21,7 @@ const Notifications = () => {
       </div>
       <div className="notificationNavbar flex justify-between h-14 mt-3">
         <TabBar tabs={tabs} />
+      </div>
       </div>
     </div>
   )

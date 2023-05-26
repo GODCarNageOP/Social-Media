@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 const Navbar = () => {
 
   const [open, setOpen] = useState(false)
+  const [tweet, setTweet] = useState(false)
 
   const [isDarkMode, setIsDarkMode] = useState(
     localStorage.getItem("isDarkMode") === "true"
@@ -38,8 +39,12 @@ const Navbar = () => {
     setIsDarkMode(!isDarkMode);
   };
 
+  const tweets = () => {
+    setTweet(!tweet)
+  }
+
   return (
-   <div className="navbar w-[13%] sm:w-[10%] md:w-[10%] xl:w-[20%]  mr-7 flex flex-col h-full">
+   <div className="navbar w-[13%] sm:w-[10%] md:w-[10%] xl:w-[20%]  mr-7 flex flex-col h-full fixed">
 
 
       <Link to="/">
@@ -120,9 +125,9 @@ const Navbar = () => {
           )}
         </div>
       </div>
-      <div className="flex items-center justify-center">
 
-        <span className=" h-12 w-64 text-xl bg-blue-500 rounded-3xl hover:bg-blue-600 text-white flex items-center justify-center mt-2 p-3 mr-10 ml-3 cursor-pointer large-device-tweet">
+      <div className="flex items-center justify-center">
+        <span className=" h-12 w-64 text-xl bg-blue-500 rounded-3xl hover:bg-blue-600 text-white flex items-center justify-center mt-2 p-3 mr-10 ml-3 cursor-pointer large-device-tweet" onClick={tweets}>
           Tweet
         </span>
         <div className="cursor-pointer h-12 w-12  flex items-center text-2xl justify-center text-white bg-blue-500 small-device-tweet">
@@ -137,18 +142,18 @@ const Navbar = () => {
           </div>
         </div>
       }
-      <div className="profile flex justify-center xl:justify-between  h-[10%] mx-2 items-center hover:bg-gray-200 hover:rounded-full p-3 cursor-pointer mt-10">
+      <div className="profile flex justify-center xl:justify-between  h-[10%] mx-2 items-center hover:bg-gray-200 hover:rounded-full p-3 cursor-pointer mt-10" onClick={() => setOpen(!open)}>
         <div className="profileContainer gap-3 flex items-center justify-center">
           <div className="w-14 h-14 flex item-center justify-center    rounded-full overflow-hidden">
           <img src={yash} alt="" className="h-full w-full object-cover" />
           </div>
 
-          <div className="flex flex-col hidden xl:flex">
+          <div className="flex flex-col xl:flex">
             <h1 className="text-lg">Yash Harale</h1>
             <p className="text-sm text-gray-500">@ig_carnageyt</p>
           </div>
         </div>
-        <div onClick={() => setOpen(!open)} className="relative hidden xl:flex">
+        <div className="relative hidden xl:flex">
           <MoreHorizOutlinedIcon className="icon" />
         </div>
       </div>
