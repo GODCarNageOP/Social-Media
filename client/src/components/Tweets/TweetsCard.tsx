@@ -17,6 +17,7 @@ import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
+import { useSelector } from "react-redux";
 interface Tweet {
     name: string;
     userName: string;
@@ -24,12 +25,13 @@ interface Tweet {
     profilepic: string;
     joined: string;
     id: string;
-    content: string;
     timestamp: string;
     likes: number;
     retweets: number;
     replies: number;
-
+    content: string;
+    views: number;
+    createAt: string;
     // Rest of the profile object properties
 }
 
@@ -38,9 +40,11 @@ interface TweetCardProps {
 }
 
 const label = { inputProps: { 'aria-label': 'like ' } };
-const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
+const TweetCard: React.FC<TweetCardProps> = ({tweet}) => {
     const [isMoreOpen, setIsMoreOpen] = useState(false);
     const moreRef = useRef<HTMLDivElement>(null);
+    const { user, loading, error } = useSelector((state) => state.user)
+    
 
     const handleMore = () => {
         setIsMoreOpen(!isMoreOpen);
@@ -68,10 +72,10 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
             <div className="center flex flex-col flex-1  mt-2">
                 <div className="flex w-full   justify-between  sm:w-full">
                     <div className="profile-details-tweets flex  items-start justify-center">
-                        <span className="font-bold text-sm hover:underline cursor-pointer">{tweet?.name}</span>
-                        <span className="text-gray-600 text-sm  sm:text-base  "> @{tweet?.userName}</span>
+                        <span className="font-bold text-sm hover:underline cursor-pointer">{user?.name}</span>
+                        <span className="text-gray-600 text-sm  sm:text-base  "> @{user?.userName}</span>
                         <span>.</span>
-                        <span className="text-gray-600 text-sm sm:text-base ">{tweet?.joined}</span>
+                        <span className="text-gray-600 text-sm sm:text-base ">{user?.joined}</span>
                     </div>
 
                     <span className="cursor-pointer  tweet-icon hover:text-blue-500 text-gray-500" onClick={() => handleMore()}>
@@ -106,18 +110,19 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
                             </span>
                             <span className="cursor-pointer flex items-center text-sm tweet-icon hover:text-blue-500 text-gray-700 ">
 
-                                {tweet?.replies}
+                                {tweet?.numOfComments}
                             </span>
                         </div>
 
                         <div className="flex gap-2 item-center justify-center">
                             <span className="cursor-pointer flex items-center  tweet-icon hover:text-blue-500 text-gray-700 ">
 
-                                <AiOutlineRetweet  />
+                                <AiOutlineRetweet />
                             </span>
                             <span className="cursor-pointer text-sm flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
 
-                                {tweet?.retweets}
+                                {tweet?.numOfRetweets}
+
                             </span>
                         </div>
 
@@ -135,7 +140,8 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
                             </span>
                             <span className="cursor-pointer flex text-sm items-center tweet-icon hover:text-blue-500 text-gray-700 ">
 
-                                {tweet?.likes}
+                                {tweet?.numOfLikes}
+
                             </span>
                         </div>
                         <div className="flex gap-2 item-center justify-center">
@@ -145,7 +151,8 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
                             </span>
                             <span className="cursor-pointer flex text-sm items-center font-thin tweet-icon hover:text-blue-500 text-gray-700 ">
 
-                                {tweet?.likes}
+                                {tweet?.views}
+
                             </span>
                         </div>
 
@@ -171,7 +178,7 @@ const More = () => {
 
 
     return (
-        <div className="overlay h-33 w-80 p-3 bg-white  shadow-lg border rounded-xl z-10 flex flex-col top-[465px] ml-[60px]">
+        <div className="overlay h-33 w-80 p-3  bg-white  shadow-lg border rounded-xl z-10 flex flex-col top-[465px] ml-[60px]">
             <div className="overlayContainer gap-8">
                 <div className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
                     < DeleteIcon />
@@ -182,10 +189,10 @@ const More = () => {
                     <h1>Pin to Your Profile</h1>
                 </div>
                 <div className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
-                 
-                        <ChatBubbleOutlineIcon  />
-               
-                    
+
+                    <ChatBubbleOutlineIcon />
+
+
                     <h1>Changes who can reply</h1>
                 </div>
                 <div className="bottom hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">

@@ -61,11 +61,17 @@ const userSchema = new Schema(
     },
     country: {
       type: String,
-   
     },
+    comment: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Tweet",
+        
+        required: true,
+      },
+    ],
     state: {
       type: String,
-      
     },
     avatar: {
       public_id: {

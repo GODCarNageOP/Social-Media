@@ -1,9 +1,9 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-const commentSchema = new mongoose.Schema({
+const CommentLikeSchema = new mongoose.Schema({
   post: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Tweet",
+    ref: "Twitter",
     required: true,
   },
   user: {
@@ -12,15 +12,12 @@ const commentSchema = new mongoose.Schema({
     required: true,
   },
   comment: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Comment",
     required: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
   },
 });
 
-const Comment = mongoose.model("Comment", commentSchema);
+const CommentLike = mongoose.model("CommentsLike", CommentLikeSchema);
 
-export default Comment;
+export default CommentLike;

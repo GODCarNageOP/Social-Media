@@ -1,4 +1,4 @@
-const { Schema, model, Types } = require("mongoose");
+import mongoose, { Schema, Document } from "mongoose";
 
 const tweetSchema = new Schema({
   content: {
@@ -10,53 +10,40 @@ const tweetSchema = new Schema({
     ref: "User",
     required: true,
   },
-  likes: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "User",
+  numOfLikes: {
+    type: Number,
+    default: 0,
+  },
+  numOfRetweets: {
+    type: Number,
+    default: 0,
+  },
+  image: {
+    pubic_id: {
+      type: String,
     },
-  ],
-  retweets: [
-    {
-      content: {
-        type: String,
-        required: true,
-      },
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-      },
-      createdAt: {
-        type: Date,
-        default: Date.now,
-      },
+    url: {
+      type: String,
     },
-  ],
-  comments: [
-    {
-      content: {
-        type: String,
-        required: true,
-      },
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-      },
-      createdAt: {
-        type: Date,
-        default: Date.now,
-      },
-    },
-  ],
+  },
+  pinned: {
+    type: Boolean,
+  },
+  numOfComments: {
+    type: Number,
+    default: 0,
+  },
+
+  views: {
+    type: Number,
+    default: 1,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
   },
 });
 
-const Tweet = model("Tweet", tweetSchema);
-
+const Tweet = mongoose.model("Tweet", tweetSchema);
 
 export default Tweet;

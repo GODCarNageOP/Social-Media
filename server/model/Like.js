@@ -1,9 +1,9 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
 
 const likeSchema = new mongoose.Schema({
   post: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Post",
+    ref: "Twitter",
     required: true,
   },
   user: {

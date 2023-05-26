@@ -57,10 +57,38 @@
 
   box-shadow: 5px 5px 100px 2500px rgba(29, 29, 29, 0.363);
 }
+
+
+.Write-Tweet {
+  /* min-height: 300px; */
+  max-width: 700px; 
+  overflow-y: scroll;
+  overflow-x: hidden;
+  z-index: 100;
+  position: fixed;
+  left: 50%;
+  /* border-radius: 20px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  top: 0%;
+  transform: translate(-50%,0%);
+  background-color: white;
+  z-index: 100;
+  box-shadow: 5px 5px 100px 2500px rgba(29, 29, 29, 0.363);
+}
+.profile-pic-Write-tweet{
+height: 60px;
+width: 70px;
+border-radius: 50%;
+}
+
 .stayTop{
   z-index: 100;
 }
-
+.none{
+  display: none;
+}
 .topAbs{
   position: fixed;
   top: 0;
