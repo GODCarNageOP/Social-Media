@@ -25,6 +25,8 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { isLoggedIn, user } = useSelector((state: any) => state.user);
 
+  const profile = user;
+
   const [isDarkMode, setIsDarkMode] = useState(
     localStorage.getItem("isDarkMode") === "true"
   );
@@ -153,7 +155,7 @@ const Navbar = () => {
                 onClick={() => logoutFun()}
                 className="bottom hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer"
               >
-                Log out @ig_carnageyt
+                Log out {profile?.userName}
               </div>
             </div>
           </div>
@@ -168,8 +170,8 @@ const Navbar = () => {
             </div>
 
             <div className="flex flex-col xl:flex">
-              <h1 className="text-lg">Yash Harale</h1>
-              <p className="text-sm text-gray-500">@ig_carnageyt</p>
+              <h1 className="text-lg">{profile?.name}</h1>
+              <p className="text-sm text-gray-500">{profile?.userName}</p>
             </div>
           </div>
           <div
