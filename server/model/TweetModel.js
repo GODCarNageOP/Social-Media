@@ -10,6 +10,10 @@ const tweetSchema = new Schema({
     ref: "User",
     required: true,
   },
+  isLiked: {
+    type: Boolean,
+    default: false,
+  },
   numOfLikes: {
     type: Number,
     default: 0,
@@ -18,16 +22,14 @@ const tweetSchema = new Schema({
     type: Number,
     default: 0,
   },
-  userName:{
-     type: String,
+  userName: {
+    type: String,
     ref: "User",
     required: true,
-  
   },
-  name:{
-     type: String,
+  name: {
+    type: String,
     required: true,
-
   },
   image: {
     pubic_id: {

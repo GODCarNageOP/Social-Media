@@ -70,7 +70,7 @@ export const getPersonalTweets = asyncHandler(async (req, res) => {
 // Update Post
 export const updateTweet = asyncHandler(async (req, res, next) => {
   const {
-    content,
+
     numOfComments,
     pinned,
     numOfLikes,
@@ -91,7 +91,7 @@ export const updateTweet = asyncHandler(async (req, res, next) => {
     return next(new CustomError("Not authorized to update this tweet", 404));
   }
 
-  tweet.content = content || tweet.content;
+
   tweet.numOfComments = numOfComments || tweet.numOfComments;
   tweet.pinned = pinned || tweet.pinned;
   tweet.numOfLikes = numOfLikes || tweet.numOfLikes;
@@ -129,5 +129,30 @@ export const deleteTweet = asyncHandler(async (req, res, next) => {
   res.json({
     success: true,
     message: "Tweet deleted successfully",
+  });
+});
+
+
+
+//upateLikes 
+export const updateLikes = asyncHandler(async (req, res, next) => {
+
+  const tweetId = req.params.id;
+  const userId = req.user.id;
+
+  let tweet = await Tweet.findById(tweetId);
+
+  if (!tweet) {
+    return next(new CustomError("Tweet not found", 404));
+  }
+
+
+  tweet.numOfLikes =tweet.numOfLikes+1;
+
+  await tweet.save();
+
+  res.json({
+    success: true,
+    tweet,
   });
 });

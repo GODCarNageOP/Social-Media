@@ -41,7 +41,7 @@ const Home = () => {
               {/* <HomeTabs/> */}
               <TabBar tabs={tabs} />
               {
-                urlAfterSlash === `home` && (
+                urlAfterSlash === `` && (
                   // Render your desired component here
                   <ProfileTweet tweets={allTweets} />
                 )

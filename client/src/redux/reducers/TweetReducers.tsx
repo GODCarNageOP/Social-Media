@@ -1,4 +1,4 @@
-import { CLEAR_TWEET_ERRORS } from '../constants/TweetConstants';
+import { CLEAR_TWEET_ERRORS, UPDATE_LIKES_FAILURE, UPDATE_LIKES_REQUEST, UPDATE_LIKES_SUCCESS } from '../constants/TweetConstants';
 import {
     CREATE_TWEET_REQUEST,
     CREATE_TWEET_SUCCESS,
@@ -23,9 +23,7 @@ import {
 const initialState = {
     loading: false,
     error: null,
-    personalTweets: [],
-    allTweets: [],
-    otherTweets: [],
+
 };
 
 export const tweetReducer = (state = initialState, action) => {
@@ -36,13 +34,12 @@ export const tweetReducer = (state = initialState, action) => {
         case FETCH_PERSONAL_TWEETS_REQUEST:
         case FETCH_ALL_TWEETS_REQUEST:
         case FETCH_OTHER_TWEETS_REQUEST:
+        case UPDATE_LIKES_REQUEST:
             return {
                 ...state,
                 loading: true,
                 error: null,
-                personalTweets: [],
-                allTweets: [],
-                otherTweets: [],
+
             };
         case CREATE_TWEET_SUCCESS:
             return {
@@ -50,7 +47,15 @@ export const tweetReducer = (state = initialState, action) => {
                 loading: false,
                 personalTweets: action.payload.tweet,
 
-                
+
+            };
+        case UPDATE_LIKES_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+
+
+
             };
         case UPDATE_TWEET_SUCCESS:
             return {
@@ -92,18 +97,19 @@ export const tweetReducer = (state = initialState, action) => {
         case FETCH_PERSONAL_TWEETS_FAILURE:
         case FETCH_ALL_TWEETS_FAILURE:
         case FETCH_OTHER_TWEETS_FAILURE:
+        case UPDATE_LIKES_FAILURE:
             return {
                 ...state,
                 loading: false,
                 error: action.payload,
             };
 
-            case CLEAR_TWEET_ERRORS:
-                return{
-                    ...state,
-                    error:null,
-                    loading:false,
-                }
+        case CLEAR_TWEET_ERRORS:
+            return {
+                ...state,
+                error: null,
+                loading: false,
+            }
         default:
             return state;
     }

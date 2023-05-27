@@ -26,9 +26,7 @@ const Notifications: React.FC = () => {
       alert.error(error);
       dispatch(clearUserErrors());
     }
-    if (isLoggedIn) {
-      navigate('/profile');
-    }
+  
     if (!isLoggedIn) {
       navigate('/login')
     }

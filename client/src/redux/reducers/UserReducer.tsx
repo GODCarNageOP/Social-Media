@@ -58,14 +58,11 @@ export const userReducer = (state = initialState, action) => {
         case USER_UPDATE_REQUEST:
         case USER_LOGIN_REQUEST:
         case USER_LOGOUT_REQUEST:
-
-
-
             return {
                 ...state,
                 loading: true,
 
-                isLoggedIn: false,
+                error: null,
 
             };
 
