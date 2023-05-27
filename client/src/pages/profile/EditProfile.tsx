@@ -122,15 +122,15 @@ const EditProfile = ({ openEdits, setOpenEdits }) => {
 
     return (
         <>
-            <div className={`w-full m-auto p-5 editProfile pb-14 ${openEdits ? "" : "none"}`}>
-                <div className="flex justify-between w-full h-19 bg-white  sticky top-[-20px] h-18 stayTop">
+            <div className={`w-full m-auto p-5 editProfile rounded-lg pb-14 ${openEdits ? "" : "none"}`}>
+                <div className="flex justify-between w-full h-19 bg-transparent items-center sticky top-[-20px] h-18 stayTop">
                     <div className="flex gap-4 items-center">
-                        <span className="flex font-bold cursor-pointer" onClick={openCloseEdit}>
+                        <span className="flex font-bold cursor-pointer hover:bg-gray-200 hover:rounded-full" onClick={openCloseEdit}>
                             <CloseIcon />
                         </span>
                         <span className="flex font-bold text-1xl">Edit Profile</span>
                     </div>
-                    <span onClick={saveData} className='bg-blue-500  w-fit  p-5 cursor-pointer text-white h-8 flex items-center  rounded-full '>Save</span>
+                    <span onClick={saveData} className='bg-blue-500  w-fit  p-3 cursor-pointer text-white h-8 flex items-center  rounded-full hover:bg-blue-600'>Save</span>
                 </div>
 
                 <div className="flex flex-col mt-5 p-2">
@@ -145,9 +145,7 @@ const EditProfile = ({ openEdits, setOpenEdits }) => {
                                     alt=""
                                 />
                             </div>
-                            <button className=" h-10 p-2 px-5  font-semibold bg-white rounded-3xl edit-btn-profile mx-5 hover:bg-gray-200 cursor-pointer">
-                                Edit profile
-                            </button>
+                           
                         </div>
                     </div>
 
