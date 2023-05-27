@@ -16,10 +16,10 @@ const Home = () => {
   const Navigate = useNavigate();
   const { isLoggedIn,loading } = useSelector((state:any) => state.user)
 
+  if (!isLoggedIn) {
+    Navigate('/login')
+  }
   useEffect(() => {
-    if (!isLoggedIn) {
-      Navigate('/login')
-    }
   
   }, [isLoggedIn,Navigate])
   const { allTweets  } = useSelector((state:any) => state.tweets)

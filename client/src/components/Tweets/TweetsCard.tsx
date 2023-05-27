@@ -21,7 +21,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { deleteTweet, updateTweet } from "../../redux/action/TweetAction";
 import { useLocation } from "react-router-dom";
 import Loader from "../Loader";
-import { addLike, deleteLike } from "../../redux/action/LikeAction";
+import { addLike, checkUserLikedTweet, deleteLike } from "../../redux/action/LikeAction";
 
 interface Tweet {
     name: string;
@@ -48,6 +48,8 @@ const label = { inputProps: { "aria-label": "like " } };
 const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
     const [isMoreOpen, setIsMoreOpen] = useState(false);
     const moreRef = useRef<HTMLDivElement>(null);
+    const { liked } = useSelector((state) => state?.likes);
+
     const { user, loading, error } = useSelector((state) => state.user);
     const id = tweet._id;
     const dispatch = useDispatch();
@@ -80,7 +82,8 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
         const year = dateObj.getFullYear().toString().slice(-2);
         formattedDate = `${month}/${day}/${year}`;
     }
-
+    const [isLiked, setIsLiked] = useState(liked || false);
+    const [numOfLikes, setNumOfLikes] = useState(tweet?.numOfLikes || 0);
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (
@@ -91,15 +94,14 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
             }
         };
 
+        dispatch(checkUserLikedTweet(id));
         document.addEventListener("mousedown", handleClickOutside);
 
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, []);
-
-    const [numOfLikes, setNumOfLikes] = useState(tweet?.numOfLikes || 0);
-    const [isLiked, setIsLiked] = useState(tweet?.isLiked || false);
+    }, [dispatch, tweet]);
+  
 
     const addLikeFun = () => {
         if (!isLiked) {
@@ -215,7 +217,7 @@ const More = ({ id, tweet, user }) => {
 
     let isAdmin = false;
 
-    if (tweet?.user === user?._id || urlAfterSlash === '/' || urlAfterSlash == '' || urlAfterSlash === 'following') {
+    if (tweet?.user === user?._id ) {
         isAdmin = true;
     }
 
@@ -223,6 +225,7 @@ const More = ({ id, tweet, user }) => {
     // const deleteId = {
     //     id
     // }
+    console.log("admin",isAdmin,tweet?.user,user?._id)
     const deleteTw = (id) => {
 
 

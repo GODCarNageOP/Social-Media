@@ -57,6 +57,7 @@ const Profile = () => {
       alert.error(error);
       dispatch(clearTweetsError());
     }
+  
   }, [isLoggedIn, user, openEdit, loading, error]);
 
   const openEditClose = () => {

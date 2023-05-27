@@ -29,7 +29,7 @@ import LoginPassword from "./pages/Auth/Loginpassword";
 import Slider from "./pages/slider/Slider";
 import { fetchPersonalTweets, fetchAllTweets } from './redux/action/TweetAction';
 function App() {
-  const { loading, error } = useSelector((state) => state.user)
+  const {isLoggedIn, loading, error } = useSelector((state) => state.user)
   const dispatch = useDispatch()
   useEffect(() => {
     store.dispatch(loadUser());
@@ -39,8 +39,7 @@ function App() {
     if (error) {
       dispatch(clearUserErrors())
     }
-  }, [])
-
+  }, []);
   const Layout = () => {
     return (
       <>
