@@ -2,8 +2,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import profilePic from '../assets/pofilePic.jpeg'
 
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import TrendingsCard from "../components/Trendings/TrendingsCard";
 import Foryou from "../components/Trendings/Foryou";
 import Trending from "../components/Trendings/Trending";
@@ -11,6 +11,7 @@ import News from "../components/Trendings/News";
 import Sports from "../components/Trendings/Sport";
 import Entertainment from "../components/Trendings/Entertainment";
 import TabBar from '../components/Tabbar';
+import { useSelector } from "react-redux";
 
 
 const tabs = [
@@ -22,7 +23,15 @@ const tabs = [
 
 ];
 const Explore = () => {
+  const Navigate = useNavigate();
+  const { isLoggedIn } = useSelector((state) => state.user)
 
+  useEffect(() => {
+    if (!isLoggedIn) {
+      Navigate('/login')
+    }
+
+  }, [Navigate, isLoggedIn])
 
   return (
     <div className="explore mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%]">

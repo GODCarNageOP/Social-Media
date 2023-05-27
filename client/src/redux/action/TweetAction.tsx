@@ -54,7 +54,7 @@ export const updateTweet = (tweetId: string, tweetData: TweetData) => async (dis
     try {
         dispatch({ type: UPDATE_TWEET_REQUEST });
 
-        const { data } = await axios.put(`/api/tweets/${tweetId}`, tweetData);
+        const { data } = await axios.put(`/api/v1/tweets/${tweetId}`, tweetData);
 
         dispatch({ type: UPDATE_TWEET_SUCCESS, payload: data });
     } catch (error: any) {
@@ -69,13 +69,16 @@ export const updateTweet = (tweetId: string, tweetData: TweetData) => async (dis
 };
 
 // Delete a personal tweet
-export const deleteTweet = (tweetId: string) => async (dispatch: Dispatch) => {
+export const deleteTweet = (id) => async (dispatch: Dispatch) => {
     try {
         dispatch({ type: DELETE_TWEET_REQUEST });
 
-        await axios.delete(`/api/tweets/${tweetId}`);
 
-        dispatch({ type: DELETE_TWEET_SUCCESS, payload: tweetId });
+        console.log(`deleting`, id)
+    //    const deletes= await axios.delete(`/api/v1/tweet/delete`,id);
+        const { data } = await axios.delete(`/api/v1/tweet/${id}`);
+
+        dispatch({ type: DELETE_TWEET_SUCCESS, payload:data?.message});
     } catch (error: any) {
 
         const errorMessage =
@@ -111,9 +114,9 @@ export const fetchAllTweets = () => async (dispatch: Dispatch) => {
     try {
         dispatch({ type: FETCH_ALL_TWEETS_REQUEST });
 
-        const { data } = await axios.get('/api/tweets/all');
+        const { data } = await axios.get('/api/v1/tweets/all');
 
-        dispatch({ type: FETCH_ALL_TWEETS_SUCCESS, payload: data });
+        dispatch({ type: FETCH_ALL_TWEETS_SUCCESS, payload: data.tweets });
     } catch (error: any) {
 
         const errorMessage =

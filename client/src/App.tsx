@@ -27,12 +27,14 @@ import { clearUserErrors, loadUser } from "./redux/action/UserAction";
 import store from "./Store";
 import LoginPassword from "./pages/Auth/Loginpassword";
 import Slider from "./pages/slider/Slider";
-import { fetchPersonalTweets } from "./redux/action/TweetAction";
+import { fetchPersonalTweets, fetchAllTweets } from './redux/action/TweetAction';
 function App() {
   const { loading, error } = useSelector((state) => state.user)
   const dispatch = useDispatch()
   useEffect(() => {
     store.dispatch(loadUser());
+    dispatch(fetchAllTweets());
+
     dispatch(fetchPersonalTweets());
     if (error) {
       dispatch(clearUserErrors())
@@ -67,6 +69,10 @@ function App() {
       element: <Layout />,
       children: [
         {
+          path: "/home",
+          element: <Home />,
+        },
+        {
           path: "/",
           element: <Home />,
         },
@@ -74,7 +80,7 @@ function App() {
           path: "/loader",
           element: <Loader />,
         },
-        
+
         {
           path: "/login",
           element: <Login />,

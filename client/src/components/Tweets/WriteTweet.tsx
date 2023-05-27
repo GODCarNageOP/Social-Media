@@ -72,7 +72,7 @@ const EditProfile = ({ openTweet, setOpenTweet }) => {
                                     onChange={handleImageChange}
                                 />
                             </label>
-                            <span className='bg-blue-500 p-2 text-white pl-8 pr-8 rounded-full cursor-pointer '>
+                            <span onClick={saveData} className='bg-blue-500 p-2 text-white pl-8 pr-8 rounded-full cursor-pointer '>
                                 Tweet
                             </span>
                         </div>

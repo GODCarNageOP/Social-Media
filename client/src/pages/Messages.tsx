@@ -8,9 +8,12 @@ import Loader from '../components/Loader';
 const Messages = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
-  const Navigate = useNavigate();
   const { userCreated, isLoggedIn, error, loading } = useSelector((state) => state.user)
+  const Navigate = useNavigate();
 
+  if (!isLoggedIn) {
+    Navigate('/login')
+  }
 
   useEffect(() => {
 
@@ -22,7 +25,12 @@ const Messages = () => {
       Navigate('/profile')
 
     }
-  }, [isLoggedIn, userCreated, error, dispatch])
+
+    if (!isLoggedIn) {
+      Navigate('/login')
+    }
+
+  }, [isLoggedIn, userCreated, error, dispatch, Navigate])
 
 
 

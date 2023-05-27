@@ -29,6 +29,9 @@ const Notifications: React.FC = () => {
     if (isLoggedIn) {
       navigate('/profile');
     }
+    if (!isLoggedIn) {
+      navigate('/login')
+    }
   }, [isLoggedIn, userCreated, error, dispatch, alert, navigate]);
 
   return (

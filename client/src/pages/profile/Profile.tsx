@@ -21,20 +21,19 @@ import EditProfile from "./EditProfile";
 
 const Profile = () => {
   const alert = useAlert();
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const [openTab, setOpenTabs] = useState("Tweets");
   const location = useLocation();
   const pathname = location.pathname;
+  const urlAfterSlash = pathname.substring(1);
   const Navigate = useNavigate();
   const { isLoggedIn, loading, error, user } = useSelector((state) => state.user);
-  const {personalTweets} = useSelector((state) => state.tweets)
-
-
+  const { personalTweets } = useSelector((state) => state.tweets)
+ 
 
 
   const profile = user;
 
-  const urlAfterSlash = pathname.substring(1);
 
   const tabs = [
     { label: "Tweets", path: `/profile/${user?.userName}` },
@@ -53,7 +52,7 @@ const Profile = () => {
   })
   const [openEdit, setOpenEdit] = useState(false);
 
-  
+
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -63,7 +62,7 @@ const Profile = () => {
       alert.error(error)
       dispatch(clearTweetsError())
     }
-  }, [isLoggedIn, user,openEdit,loading,error]);
+  }, [isLoggedIn, user, openEdit, loading, error]);
 
   const openEditClose = () => {
     setOpenEdit(!openEdit)
@@ -177,28 +176,31 @@ const Profile = () => {
                   {
                     urlAfterSlash === `profile/${user?.userName}` && (
                       // Render your desired component here
-                      <ProfileTweet />
+                      <ProfileTweet tweets={personalTweets} />
                     )
                   }
 
                   {
 
                     urlAfterSlash === "profile/likes" && (
-                      <ProfileTweet />
+                      <ProfileTweet tweets={personalTweets} />
+
                     )
                   }
 
                   {
 
                     urlAfterSlash === "profile/with_replies" && (
-                      <ProfileTweet />
+                      <ProfileTweet tweets={personalTweets} />
+
                     )
                   }
 
                   {
 
                     urlAfterSlash === "profile/media" && (
-                      <ProfileTweet />
+                        <ProfileTweet tweets={personalTweets} />
+
                     )
                   }
                 </div>

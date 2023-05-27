@@ -13,11 +13,11 @@ import {
 const router = express.Router();
 
 router.route("/tweets").post(isAuthenticatedUser, createTweet);
-router.route("/get/tweets/all").get(isAuthenticatedUser,getAllTweet);
+router.route("/tweets/all").get(isAuthenticatedUser,getAllTweet);
 router.route("/get/tweets/:params").get(isAuthenticatedUser,getTweetsById);
 router.route("/my/tweets/").get(isAuthenticatedUser,getPersonalTweets);
 router.route("/edit").put(isAuthenticatedUser, updateTweet);
-router.route("/delete").delete(isAuthenticatedUser, deleteTweet);
+router.route("/tweet/:id" ).delete(isAuthenticatedUser, deleteTweet);
 
 
 

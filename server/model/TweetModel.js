@@ -18,6 +18,17 @@ const tweetSchema = new Schema({
     type: Number,
     default: 0,
   },
+  userName:{
+     type: String,
+    ref: "User",
+    required: true,
+  
+  },
+  name:{
+     type: String,
+    required: true,
+
+  },
   image: {
     pubic_id: {
       type: String,

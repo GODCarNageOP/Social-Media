@@ -6,7 +6,7 @@ import { useAlert } from 'react-alert';
 import Loader from "../Loader";
 import TweetCard from './TweetsCard';
 
-const ProfileTweet = () => {
+const ProfileTweet = ({ tweets }) => {
     const alert = useAlert();
     const { personalTweets, loading, error } = useSelector((state) => state.tweets);
     const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const ProfileTweet = () => {
     const pathname = location.pathname;
     const urlAfterSlash = pathname.substring(1);
 
- 
+
     useEffect(() => {
         if (error) {
             alert.error(error);
@@ -22,23 +22,28 @@ const ProfileTweet = () => {
         }
 
         // Fetch personal tweets when the component mounts
-        dispatch(fetchPersonalTweets());
+        // dispatch(fetchPersonalTweets());
 
-    }, [dispatch, alert, error]);
+    }, [dispatch, alert]);
 
     return (
         <>
-            {loading ? (
-                <Loader />
-            ) : (
-                <div className="profile-tweet mt-2 w-full">
-                    <div className="flex flex-col gap-4 w-full">
-                        {personalTweets?.map((item) => (
-                            <TweetCard key={item.id} tweet={item} />
-                        ))}
+            {
+                loading ? (
+                    <Loader />
+                ) : (
+
+
+                    <div className="profile-tweet mt-2 w-full">
+                        <div className="flex flex-col gap-4 w-full">
+                            {tweets?.map((item) => (
+                                <TweetCard key={item.id} tweet={item} />
+                            ))}
+                        </div>
                     </div>
-                </div>
-            )}
+                )
+
+            }
         </>
     );
 };
