@@ -3,11 +3,13 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { userExists, userReducer } from "./redux/reducers/UserReducer";
 import { tweetReducer } from "./redux/reducers/TweetReducers";
+import { likeReducer } from "./redux/reducers/LikeReducers";
 
 
 const reducer = combineReducers({
     user: userReducer,
     tweets: tweetReducer,
+    likes:likeReducer
 
 })
 

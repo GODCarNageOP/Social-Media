@@ -11,9 +11,6 @@ const Messages = () => {
   const { userCreated, isLoggedIn, error, loading } = useSelector((state) => state.user)
   const Navigate = useNavigate();
 
-  if (!isLoggedIn) {
-    Navigate('/login')
-  }
 
   useEffect(() => {
 
@@ -21,10 +18,7 @@ const Messages = () => {
       alert.error(error)
       dispatch(clearUserErrors())
     }
-    if (isLoggedIn) {
-      Navigate('/profile')
-
-    }
+ 
 
     if (!isLoggedIn) {
       Navigate('/login')

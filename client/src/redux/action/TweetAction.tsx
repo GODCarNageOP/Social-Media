@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
+import { UPDATE_LIKES_SUCCESS, UPDATE_LIKES_FAILURE } from '../constants/TweetConstants';
 import {
     CREATE_TWEET_REQUEST,
     CREATE_TWEET_SUCCESS,
@@ -19,7 +20,8 @@ import {
     FETCH_OTHER_TWEETS_REQUEST,
     FETCH_OTHER_TWEETS_SUCCESS,
     FETCH_OTHER_TWEETS_FAILURE,
-    CLEAR_TWEET_ERRORS
+    CLEAR_TWEET_ERRORS,
+    UPDATE_LIKES_REQUEST
 } from '../constants/TweetConstants';
 
 export interface TweetData {
@@ -65,6 +67,26 @@ export const updateTweet = (tweetId: string, tweetData: TweetData) => async (dis
                 : error.message;
 
         dispatch({ type: UPDATE_TWEET_FAILURE, payload: errorMessage });
+    }
+};
+
+
+//udpdate Likes
+export const updateLikes = (tweetId: string) => async (dispatch: Dispatch) => {
+    try {
+        dispatch({ type: UPDATE_LIKES_REQUEST });
+
+        const { data } = await axios.put(`/api/v1/tweets/${tweetId}`);
+
+        dispatch({ type: UPDATE_LIKES_SUCCESS, payload: data });
+    } catch (error: any) {
+
+        const errorMessage =
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message;
+
+        dispatch({ type: UPDATE_LIKES_FAILURE, payload: errorMessage });
     }
 };
 

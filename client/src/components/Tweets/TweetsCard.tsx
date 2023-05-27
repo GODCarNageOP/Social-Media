@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./TweetCard.css";
 import profilePic from "../../assets/pofilePic.jpeg";
-import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import PushPinIcon from '@mui/icons-material/PushPin';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { TbMessageCircle2 } from 'react-icons/tb';
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-import GraphicEqIcon from '@mui/icons-material/GraphicEq';
+import BlockOutlinedIcon from "@mui/icons-material/BlockOutlined";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import PushPinIcon from "@mui/icons-material/PushPin";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { TbMessageCircle2 } from "react-icons/tb";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import GraphicEqIcon from "@mui/icons-material/GraphicEq";
 import { AiOutlineRetweet, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { MdOutlineGraphicEq } from "react-icons/md";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
@@ -15,13 +15,15 @@ import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDiss
 import { BsUpload, BsThreeDots } from "react-icons/bs";
 import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 
-import Checkbox from '@mui/material/Checkbox';
-import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
-import Favorite from '@mui/icons-material/Favorite';
-import { useSelector, useDispatch } from 'react-redux';
-import { deleteTweet } from "../../redux/action/TweetAction";
+import Checkbox from "@mui/material/Checkbox";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import Favorite from "@mui/icons-material/Favorite";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteTweet, updateTweet } from "../../redux/action/TweetAction";
 import { useLocation } from "react-router-dom";
 import Loader from "../Loader";
+import { addLike, deleteLike } from "../../redux/action/LikeAction";
+
 interface Tweet {
     name: string;
     userName: string;
@@ -43,12 +45,13 @@ interface TweetCardProps {
     tweet: Tweet;
 }
 
-const label = { inputProps: { 'aria-label': 'like ' } };
+const label = { inputProps: { "aria-label": "like " } };
 const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
     const [isMoreOpen, setIsMoreOpen] = useState(false);
     const moreRef = useRef<HTMLDivElement>(null);
-    const { user, loading, error } = useSelector((state) => state.user)
+    const { user, loading, error } = useSelector((state) => state.user);
     const id = tweet._id;
+    const dispatch = useDispatch();
 
     const handleMore = () => {
         setIsMoreOpen(!isMoreOpen);
@@ -66,21 +69,25 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
     if (diffInMinutes < 1) {
         formattedDate = `Less than a minute ago`;
     } else if (diffInHours < 1) {
-        formattedDate = `${diffInMinutes} minute${diffInMinutes === 1 ? '' : 's'} ago`;
+        formattedDate = `${diffInMinutes} minute${diffInMinutes === 1 ? "" : "s"
+            } ago`;
     } else if (diffInDays < 1) {
-        formattedDate = `${diffInHours} hour${diffInHours === 1 ? '' : 's'} ago`;
+        formattedDate = `${diffInHours} hour${diffInHours === 1 ? "" : "s"} ago`;
     } else if (diffInDays < 5) {
-        formattedDate = `${diffInDays} day${diffInDays === 1 ? '' : 's'} ago`;
+        formattedDate = `${diffInDays} day${diffInDays === 1 ? "" : "s"} ago`;
     } else {
         const month = (dateObj.getMonth() + 1).toString().padStart(2, "0");
         const day = dateObj.getDate().toString().padStart(2, "0");
         const year = dateObj.getFullYear().toString().slice(-2);
         formattedDate = `${month}/${day}/${year}`;
-    }   
+    }
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (moreRef.current && !moreRef.current.contains(event.target as Node)) {
+            if (
+                moreRef.current &&
+                !moreRef.current.contains(event.target as Node)
+            ) {
                 setIsMoreOpen(false);
             }
         };
@@ -92,124 +99,110 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
         };
     }, []);
 
+    const [numOfLikes, setNumOfLikes] = useState(tweet?.numOfLikes || 0);
+    const [isLiked, setIsLiked] = useState(tweet?.isLiked || false);
+
+    const addLikeFun = () => {
+        if (!isLiked) {
+            setNumOfLikes((prevLikes) => prevLikes + 1);
+            setIsLiked(true);
+            dispatch(addLike(id));
+        }
+    };
+
+    const removeLikeFun = () => {
+        if (isLiked) {
+            setNumOfLikes((prevLikes) => prevLikes - 1);
+            setIsLiked(false);
+            dispatch(deleteLike(id));
+        }
+    };
+
+
     return (
         <>
-            {
-                loading ? (
-                    <Loader />
-                ) : (
+            {loading ? (
+                <Loader />
+            ) : (
+                <div className="Tweets-card flex w-[565px] gap-2 jusitfy-between  hover:bg-gray-100 -mt-1">
+                    <div className="left flex items-center justify-center mt-2 tweet-profile  overflow-hidden rounded-full ml-2">
+                        <img src={profilePic} alt="" className="tweet-profile object-cover" />
+                    </div>
+                    <div className="center flex flex-col flex-1  mt-2">
+                        <div className="flex w-full   justify-between  sm:w-full">
+                            <div className="profile-details-tweets flex  items-center justify-center">
+                                <span className="font-bold text-sm hover:underline cursor-pointer">{tweet?.name}</span>
+                                <span className="text-gray-600 text-sm  sm:text-base ml-2"> @{tweet?.userName}</span>
+                                <span className="ml-3 text-gray-600">•</span>
+                                <span className="text-gray-600 text-sm sm:text-base ml-2">{formattedDate}</span>
+                            </div>
 
+                            <span className="cursor-pointer  tweet-icon hover:text-blue-500 text-gray-500 mr-2" onClick={() => handleMore()}>
+                                <BsThreeDots />
+                            </span>
 
-                    <div className="Tweets-card flex w-[565px] gap-2 jusitfy-between  hover:bg-gray-100 -mt-1">
-                        <div className="left flex items-center justify-center mt-2 tweet-profile  overflow-hidden rounded-full ml-2">
-                            <img src={profilePic} alt="" className="tweet-profile object-cover" />
-                        </div>
-                        <div className="center flex flex-col flex-1  mt-2">
-                            <div className="flex w-full   justify-between  sm:w-full">
-                                <div className="profile-details-tweets flex  items-center justify-center">
-                                    <span className="font-bold text-sm hover:underline cursor-pointer">{tweet?.name}</span>
-                                    <span className="text-gray-600 text-sm  sm:text-base ml-2"> @{tweet?.userName}</span>
-                                    <span className="ml-3 text-gray-600">•</span>
-                                    <span className="text-gray-600 text-sm sm:text-base ml-2">{formattedDate}</span>
+                            {isMoreOpen && (
+                                <div ref={moreRef} className="absolute right-0" onClick={() => handleMore()}>
+                                    <More id={id} tweet={tweet} user={user} />
                                 </div>
+                            )}
+                        </div>
+                        <div className="middle flex">
+                            <span>{tweet?.content}</span>
+                        </div>
 
-                                <span className="cursor-pointer  tweet-icon hover:text-blue-500 text-gray-500 mr-2" onClick={() => handleMore()}>
-
-                                    <BsThreeDots />
-                                </span>
-
-                                {/* <div className="relative w-full"> */}
-                                {isMoreOpen && (
-
-
-                                    <div ref={moreRef} className="absolute right-0" onClick={() => handleMore()}>
-
-                                        <More id={id} tweet={tweet} user={user} />
-                                    </div>
-                                )
-
-                                }
-                            </div>
-                            <div className="middle flex">
-                                <span>{tweet?.content}</span>
-                            </div>
-
-                            <div className="bottom mt-2">
-                                <div className="flex justify-between p-2 w-[85%] ">
-                                    <div className="flex gap-2 item-center justify-center ">
-
-
-
-                                        <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700">
-
-                                            <TbMessageCircle2 />
-                                        </span>
-                                        <span className="cursor-pointer flex items-center text-sm tweet-icon hover:text-blue-500 text-gray-700 ">
-
-                                            {tweet?.numOfComments}
-                                        </span>
-                                    </div>
-
-                                    <div className="flex gap-2 item-center justify-center">
-                                        <span className="cursor-pointer flex items-center  tweet-icon hover:text-blue-500 text-gray-700 ">
-
-                                            <AiOutlineRetweet />
-                                        </span>
-                                        <span className="cursor-pointer text-sm flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
-
-                                            {tweet?.numOfRetweets}
-
-                                        </span>
-                                    </div>
-
-                                    <div className="flex gap-2 item-center justify-center">
-
-
-                                        <span className="cursor-pointer flex items-center text-sm tweet-icon hover:text-blue-500 text-gray-700 ">
-
-                                            <Checkbox {...label} icon={<FavoriteBorder />} className="text-sm" checkedIcon={<Favorite />} />
-                                            {/* <Checkbox
-                                    {...label}
-                                    icon={<BookmarkBorderIcon />}
-                                    checkedIcon={<BookmarkIcon />}
-                                /> */}
-                                        </span>
-                                        <span className="cursor-pointer flex text-sm items-center tweet-icon hover:text-blue-500 text-gray-700 ">
-
-                                            {tweet?.numOfLikes}
-
-                                        </span>
-                                    </div>
-                                    <div className="flex gap-2 item-center justify-center">
-
-                                        <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
-                                            <MdOutlineGraphicEq />
-                                        </span>
-                                        <span className="cursor-pointer flex text-sm items-center font-thin tweet-icon hover:text-blue-500 text-gray-700 ">
-
-                                            {tweet?.views}
-
-                                        </span>
-                                    </div>
-
-                                    <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
-
-                                        <BsUpload />
+                        <div className="bottom mt-2">
+                            <div className="flex justify-between p-2 w-[85%] ">
+                                <div className="flex gap-2 item-center justify-center ">
+                                    <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700">
+                                        <TbMessageCircle2 />
+                                    </span>
+                                    <span className="cursor-pointer flex items-center text-sm tweet-icon hover:text-blue-500 text-gray-700 ">
+                                        {tweet?.numOfComments}
                                     </span>
                                 </div>
+
+                                <div className="flex gap-2 item-center justify-center">
+                                    <span className="cursor-pointer flex items-center  tweet-icon hover:text-blue-500 text-gray-700 ">
+                                        <AiOutlineRetweet />
+                                    </span>
+                                    <span className="cursor-pointer text-sm flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
+                                        {tweet?.numOfRetweets}
+                                    </span>
+                                </div>
+
+                                    <div className="flex gap-2 item-center justify-center">
+                                        <span
+                                            className="cursor-pointer flex items-center text-sm tweet-icon hover:text-blue-500 text-gray-700"
+                                            onClick={isLiked ? removeLikeFun : addLikeFun}
+                                        >
+                                            {isLiked ? <Favorite /> : <FavoriteBorder />}
+                                        </span>
+                                        <span className="cursor-pointer flex text-sm items-center tweet-icon hover:text-blue-500 text-gray-700">
+                                            {numOfLikes}
+                                        </span>
+                                    </div>
+                                <div className="flex gap-2 item-center justify-center">
+                                    <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
+                                        <MdOutlineGraphicEq />
+                                    </span>
+                                    <span className="cursor-pointer flex text-sm items-center font-thin tweet-icon hover:text-blue-500 text-gray-700 ">
+                                        {tweet?.views}
+                                    </span>
+                                </div>
+
+                                <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
+                                    <BsUpload />
+                                </span>
                             </div>
                         </div>
-                        <div className="right flex flex-6  items-s">
-
-                        </div>
                     </div>
-                )
-            }
+                    <div className="right flex flex-6  items-s"></div>
+                </div>
+            )}
         </>
-
     );
 };
-
 
 
 
@@ -232,6 +225,7 @@ const More = ({ id, tweet, user }) => {
     //     id
     // }
     const deleteTw = (id) => {
+
 
         dispatch(deleteTweet(id))
     }
