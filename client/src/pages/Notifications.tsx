@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import TabBar from '../components/Tabbar';
 import { clearUserErrors } from '../redux/action/UserAction';
 import { RootState } from '../redux/store';
@@ -42,7 +42,7 @@ const Notifications: React.FC = () => {
           <Loader />
         ) :
           (
-            <div className="notifications mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%]">
+            <div className="notifications mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%] border-x ml-[24%] -mr-1">
               <div className="notificationContainer flex mx-10 justify-between items-center mt-5">
                 <h1 className="text-2xl font-semibold cursor-pointer">Notifications</h1>
                 <Link to="/settings">

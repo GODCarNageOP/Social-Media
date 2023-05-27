@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import emailjs from '@emailjs/browser';
-import { useSelector } from 'react-redux';
-
+import { useAlert } from "react-alert"
 
 interface FormValues {
   name: string;
@@ -12,6 +11,9 @@ interface FormValues {
 }
 
 const TwitterBlue: React.FC = () => {
+
+const alert = useAlert();
+
   const formRef = useRef<HTMLFormElement>(null);
   const [form, setForm] = useState<FormValues>({
     name: '',
@@ -19,15 +21,7 @@ const TwitterBlue: React.FC = () => {
     message: '',
   });
   const [loading, setLoading] = useState<boolean>(false);
-  const Navigate = useNavigate();
-  const { isLoggedIn } = useSelector((state) => state.user)
 
-  useEffect(() => {
-
-    if (!isLoggedIn) {
-      Navigate('/login')
-    }
-  }, [isLoggedIn, Navigate])
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -47,7 +41,7 @@ const TwitterBlue: React.FC = () => {
       )
       .then(() => {
         setLoading(false);
-        alert('Thank you, I will get back to you ASAP !');
+        alert.success('Thank you, I will get back to you ASAP !');
         setForm({
           name: '',
           email: '',
@@ -57,7 +51,7 @@ const TwitterBlue: React.FC = () => {
       .catch((error:Error) => {
         setLoading(false);
         console.log(error);
-        alert('Something went wrong !');
+        alert.error('Something went wrong !');
       });
   };
 
@@ -67,15 +61,17 @@ const TwitterBlue: React.FC = () => {
   };
 
   return (
-    <div className="contact mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%]">
+    <div className="contact w-[50%] border-x ml-[24%] -mr-1">
+       <div className="homeContainer fixed bg-transparent w-[570px]">
       <div className="contactContainer flex mx-10 justify-between items-center mt-5">
         <h1 className="text-2xl font-semibold cursor-pointer">Contact</h1>
         <Link to="/settings">
           <SettingsOutlinedIcon className="hover:bg-gray-200 cursor-pointer hover:rounded-full" />
         </Link>
       </div>
-      <hr className="w-full mt-10" />
-      <div className="form mx-5">
+      <hr className="w-full mt-5" />
+      </div>
+      <div className="form mx-5 mt-28">
         <form ref={formRef} onSubmit={handleSubmit} className="mt-12 flex flex-col gap-8">
           <label className="flex flex-col">
             <span className="text-black font-medium mb-4">Your Name</span>

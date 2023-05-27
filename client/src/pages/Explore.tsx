@@ -2,9 +2,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import profilePic from '../assets/pofilePic.jpeg'
 
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import TrendingsCard from "../components/Trendings/TrendingsCard";
+//import TrendingsCard from "../components/Trendings/TrendingsCard";
 import Foryou from "../components/Trendings/Foryou";
 import Trending from "../components/Trendings/Trending";
 import News from "../components/Trendings/News";
@@ -24,7 +24,7 @@ const tabs = [
 ];
 const Explore = () => {
   const Navigate = useNavigate();
-  const { isLoggedIn } = useSelector((state) => state.user)
+  const { isLoggedIn } = useSelector((state:any) => state.user)
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -34,11 +34,12 @@ const Explore = () => {
   }, [Navigate, isLoggedIn])
 
   return (
-    <div className="explore mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%]">
+    <div className="explore mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%] border-x ml-[24%] -mr-1">
+      <div className="homeContainer fixed bg-transparent w-[570px]">
       <div className="relative">
         <ExploreTab />
       </div>
-
+      </div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import TabBar from '../components/Tabbar';
-import { useDispatch, useSelector } from "react-redux";
-import { fetchAllTweets } from '../redux/action/TweetAction';
+import { useSelector } from "react-redux";
+//import { fetchAllTweets } from '../redux/action/TweetAction';
 import ProfileTweet from "../components/Tweets/ProfileTweets";
 import Loader from "../components/Loader";
 import {useEffect} from 'react';
@@ -14,7 +14,7 @@ const Home = () => {
     // { label: "Tab 3", path: "/tab3" },
   ];
   const Navigate = useNavigate();
-  const { isLoggedIn,loading } = useSelector((state) => state.user)
+  const { isLoggedIn,loading } = useSelector((state:any) => state.user)
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -22,11 +22,11 @@ const Home = () => {
     }
   
   }, [isLoggedIn,Navigate])
-  const { allTweets, error,  } = useSelector((state) => state.tweets)
+  const { allTweets  } = useSelector((state:any) => state.tweets)
   const location = useLocation();
   const pathname = location.pathname;
   const urlAfterSlash = pathname.substring(1);
-  const dispatch = useDispatch();
+ // const dispatch = useDispatch();
 
   return (
     <>
@@ -34,7 +34,8 @@ const Home = () => {
         loading ? (
           <Loader />
         ) : (
-          <div className="home mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%]">
+          <div className="home mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%] border-x ml-[24%] -mr-1">
+             <div className="homeContainer fixed bg-transparent w-[570px]">
             <h1 className="text-2xl font-semibold my-1 p-4 cursor-pointer mx-10">Home</h1>
             <div className="homeNavbar flex justify-between h-16 flex-col gap-2">
               {/* <HomeTabs/> */}
@@ -57,6 +58,7 @@ const Home = () => {
 
 
 
+            </div>
             </div>
           </div>
         )
