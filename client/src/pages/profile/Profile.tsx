@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ProfileTweet from "../../components/Tweets/ProfileTweets";
 import TabBar from "../../components/Tabbar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/Loader";
 import { useAlert } from 'react-alert';
 import Slider from '../slider/Slider';
@@ -21,17 +21,19 @@ import EditProfile from "./EditProfile";
 
 const Profile = () => {
   const alert = useAlert();
+  const dispatch = useDispatch();
   const [openTab, setOpenTabs] = useState("Tweets");
   const location = useLocation();
   const pathname = location.pathname;
+  const urlAfterSlash = pathname.substring(1);
   const Navigate = useNavigate();
   const { isLoggedIn, loading, error, user } = useSelector((state) => state.user);
+  const { personalTweets } = useSelector((state) => state.tweets)
+ 
 
 
   const profile = user;
-  console.log(profile)
 
-  const urlAfterSlash = pathname.substring(1);
 
   const tabs = [
     { label: "Tweets", path: `/profile/${user?.userName}` },
@@ -39,6 +41,7 @@ const Profile = () => {
     { label: "Media", path: "/profile/media" },
     { label: "Likes", path: "/profile/likes" },
   ];
+
   const address = user?.country + "," + user?.state;
   const joined = user?.joined;
   const joinedDate = new Date(joined || '');
@@ -50,12 +53,16 @@ const Profile = () => {
   const [openEdit, setOpenEdit] = useState(false);
 
 
+
   useEffect(() => {
     if (!isLoggedIn) {
       Navigate('/login');
-
     }
-  }, [isLoggedIn, user,openEdit,loading,error]);
+    if (error) {
+      alert.error(error)
+      dispatch(clearTweetsError())
+    }
+  }, [isLoggedIn, user, openEdit, loading, error]);
 
   const openEditClose = () => {
     setOpenEdit(!openEdit)
@@ -169,28 +176,31 @@ const Profile = () => {
                   {
                     urlAfterSlash === `profile/${user?.userName}` && (
                       // Render your desired component here
-                      <ProfileTweet />
+                      <ProfileTweet tweets={personalTweets} />
                     )
                   }
 
                   {
 
                     urlAfterSlash === "profile/likes" && (
-                      <ProfileTweet />
+                      <ProfileTweet tweets={personalTweets} />
+
                     )
                   }
 
                   {
 
                     urlAfterSlash === "profile/with_replies" && (
-                      <ProfileTweet />
+                      <ProfileTweet tweets={personalTweets} />
+
                     )
                   }
 
                   {
 
                     urlAfterSlash === "profile/media" && (
-                      <ProfileTweet />
+                        <ProfileTweet tweets={personalTweets} />
+
                     )
                   }
                 </div>

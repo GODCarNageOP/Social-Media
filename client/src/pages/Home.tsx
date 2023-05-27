@@ -1,5 +1,11 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import TabBar from '../components/Tabbar';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllTweets } from '../redux/action/TweetAction';
+import ProfileTweet from "../components/Tweets/ProfileTweets";
+import Loader from "../components/Loader";
+import {useEffect} from 'react';
+
 
 const Home = () => {
   const tabs = [
@@ -7,14 +13,56 @@ const Home = () => {
     { label: "following", path: "/following" },
     // { label: "Tab 3", path: "/tab3" },
   ];
+  const Navigate = useNavigate();
+  const { isLoggedIn,loading } = useSelector((state) => state.user)
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      Navigate('/login')
+    }
+  
+  }, [isLoggedIn,Navigate])
+  const { allTweets, error,  } = useSelector((state) => state.tweets)
+  const location = useLocation();
+  const pathname = location.pathname;
+  const urlAfterSlash = pathname.substring(1);
+  const dispatch = useDispatch();
+
   return (
-    <div className="home mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%]">
-      <h1 className="text-2xl font-semibold my-1 p-4 cursor-pointer mx-10">Home</h1>
-      <div className="homeNavbar flex justify-between h-16">
-        {/* <HomeTabs/> */}
-        <TabBar tabs={tabs} />
-      </div>
-    </div>
+    <>
+      {
+        loading ? (
+          <Loader />
+        ) : (
+          <div className="home mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%]">
+            <h1 className="text-2xl font-semibold my-1 p-4 cursor-pointer mx-10">Home</h1>
+            <div className="homeNavbar flex justify-between h-16 flex-col gap-2">
+              {/* <HomeTabs/> */}
+              <TabBar tabs={tabs} />
+              {
+                urlAfterSlash === `home` && (
+                  // Render your desired component here
+                  <ProfileTweet tweets={allTweets} />
+                )
+              }
+
+              {
+
+                urlAfterSlash === "following" && (
+                  <ProfileTweet tweets={allTweets} />
+
+                )
+              }
+
+
+
+
+            </div>
+          </div>
+        )
+      }
+    </>
+
   );
 };
 

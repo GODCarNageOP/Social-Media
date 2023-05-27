@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import emailjs from '@emailjs/browser';
+import { useSelector } from 'react-redux';
 
 
 interface FormValues {
@@ -18,7 +19,15 @@ const TwitterBlue: React.FC = () => {
     message: '',
   });
   const [loading, setLoading] = useState<boolean>(false);
+  const Navigate = useNavigate();
+  const { isLoggedIn } = useSelector((state) => state.user)
 
+  useEffect(() => {
+
+    if (!isLoggedIn) {
+      Navigate('/login')
+    }
+  }, [isLoggedIn, Navigate])
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
