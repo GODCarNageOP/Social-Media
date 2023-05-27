@@ -104,7 +104,7 @@ export const userReducer = (state = initialState, action) => {
                 loading: false,
                 error: null,
                 user: action.payload.user,
-                isLoggedIn:true,
+               
             };
         case USER_SEND_CODE_SUCCESS:
             return {
@@ -168,6 +168,10 @@ export const userReducer = (state = initialState, action) => {
                 isUser: false,
 
             };
+
+
+
+            
         case USER_CLEAR_ERRORS:
             return {
                 ...state,

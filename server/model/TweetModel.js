@@ -31,6 +31,15 @@ const tweetSchema = new Schema({
     type: String,
     required: true,
   },
+  avatar: {
+    public_id: {
+      type: String,
+    },
+    url: {
+      type: String,
+      
+    },
+  },
   image: {
     pubic_id: {
       type: String,

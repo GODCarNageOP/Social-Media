@@ -11,7 +11,6 @@ import GraphicEqIcon from "@mui/icons-material/GraphicEq";
 import { AiOutlineRetweet, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { MdOutlineGraphicEq } from "react-icons/md";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
-
 import { BsUpload, BsThreeDots } from "react-icons/bs";
 import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 
@@ -126,7 +125,7 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
             ) : (
                 <div className="Tweets-card flex w-[565px] gap-2 jusitfy-between  hover:bg-gray-100 -mt-1">
                     <div className="left flex items-center justify-center mt-2 tweet-profile  overflow-hidden rounded-full ml-2">
-                        <img src={profilePic} alt="" className="tweet-profile object-cover" />
+                        <img src={tweet?.avatar.url} alt="" className="tweet-profile object-cover" />
                     </div>
                     <div className="center flex flex-col flex-1  mt-2">
                         <div className="flex w-full   justify-between  sm:w-full">

@@ -80,7 +80,7 @@ const EditProfile = ({ openTweet, setOpenTweet }) => {
                     <div className="flex gap-5 mt-3">
                         <div className="overflow-hidden rounded-full profile-pic-Write-tweet">
                             <img
-                                src={profilePic}
+                                src={user?.avatar.url||profilePic}
                                 className="object-cover w-full h-full  cursor-pointer"
                                 alt=""
                             />

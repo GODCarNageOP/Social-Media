@@ -24,6 +24,7 @@ export const createTweet = asyncHandler(async (req, res) => {
     image,
     userName,
     name,
+    avatar:userN?.avatar
   });
 
   await newTweet.save();

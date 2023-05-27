@@ -4,6 +4,7 @@ import profilePic from "../../assets/pofilePic.jpeg";
 import { TextField } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProfile } from '../../redux/action/UserAction';
+import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
 
 
 
@@ -82,7 +83,7 @@ for (let i = 1900; i <= 2023; i++) {
 }
 
 const EditProfile = ({ openEdits, setOpenEdits }) => {
-    const { user,loading } = useSelector((state) => state.user);
+    const { user, loading } = useSelector((state) => state.user);
     const [name, setName] = useState(user?.name);
     const dispatch = useDispatch();
     const [bio, setBio] = useState(user?.bio);
@@ -94,6 +95,7 @@ const EditProfile = ({ openEdits, setOpenEdits }) => {
     const [selectedMonth, setSelectedMonth] = useState(dobParts?.[0] || 'January');
     const [selectedDay, setSelectedDay] = useState(dobParts?.[1] || '1');
     const [selectedYear, setSelectedYear] = useState(dobParts?.[2] || '2000');
+    const [selectedImage, setSelectedImage] = useState(null); // Store the selected image file
 
     const locat = location?.split(',')
     const birth = selectedMonth + " " + selectedDay + " " + selectedYear;
@@ -108,6 +110,7 @@ const EditProfile = ({ openEdits, setOpenEdits }) => {
             country: locat[0],
             website,
             dob: birth,
+            avatar: selectedImage
 
         }
         dispatch(updateProfile(userData))
@@ -119,6 +122,18 @@ const EditProfile = ({ openEdits, setOpenEdits }) => {
     const openCloseEdit = () => {
         setOpenEdits(!openEdits)
     }
+
+    const handleImageChange = (e) => {
+        const reader = new FileReader();
+
+        reader.onload = () => {
+            if (reader.readyState === 2) {
+                setSelectedImage(reader.result);
+            }
+        };
+
+        reader.readAsDataURL(e.target.files[0]);
+    };
 
     return (
         <>
@@ -136,16 +151,32 @@ const EditProfile = ({ openEdits, setOpenEdits }) => {
                 <div className="flex flex-col mt-5 p-2">
                     <div className="cover-div h-52  bg-gray-300  cursor-pointer"></div>
 
-                    <div className=" relative h-fit">
+                    <div className="relative h-fit">
                         <div className="flex justify-between relative items-center w-full profile-absolute-div pl-4">
-                            <div className="profil-image w-[24%] left-5 rounded-full border-4 overflow-hidden  ">
-                                <img
-                                    src={profilePic}
-                                    className="object-cover h-full w-full  cursor-pointer"
-                                    alt=""
+                            <div className="profil-image relative w-[100px] h-[100px]  rounded-full border-4 overflow-hidden">
+                                <label htmlFor="image-upload" className="cursor-pointer">
+                                    <img
+
+
+
+                                        src={selectedImage ? selectedImage : user?.avatar.url}
+                                        className="object-cover h-full w-full cursor-pointer"
+                                        alt=""
+                                    />
+                                    <div className="absolute top-0 flex items-center justify-center cursor-pointer hover:bg-gray-600 opacity-0 hover:opacity-50 w-full h-full">
+                                        <span className="text-white">
+                                            <CameraAltOutlinedIcon />
+                                        </span>
+                                    </div>
+                                </label>
+                                <input
+                                    id="image-upload"
+                                    type="file"
+                                    accept="image/*"
+                                    className="hidden"
+                                    onChange={handleImageChange}
                                 />
                             </div>
-                           
                         </div>
                     </div>
 
