@@ -217,7 +217,8 @@ const WhoToFollow = () => {
 const TermsOfService = () => {
 
   return (
-    <div className="foot w-full mt-3 p-3 flex gap-2 flex-col text-gray-500 text-xs">
+    <div className="relative">
+    <div className="foot w-full mt-3 p-3 flex gap-2 flex-col text-gray-500 text-xs fixed">
       <div className="top flex justify-between  items-center">
         <span className="hover:underline cursor-pointer">
           Terms of Service
@@ -237,6 +238,7 @@ const TermsOfService = () => {
           2023 X Corp.
         </span>
       </div>
+    </div>
     </div>
   )
 }

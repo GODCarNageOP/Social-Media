@@ -50,7 +50,7 @@ const Login = () => {
                 ) : (
 
 
-                    <div className="w-full flex items-center justify-center  min-h-[100vh]  h-full login">
+                    <div className="w-[50%] flex items-center justify-center  min-h-[100vh]  h-full login border-x ml-[24%] -mr-1">
 
 
                         <div className="w-full  max-w-[600px] border-2  p-2 pb-9 flex gap-8 items-center justify-between min-h-[600px] border-1 border-solid border-gray-300  flex-col Login">
@@ -74,12 +74,12 @@ const Login = () => {
                             </button>
                             <Button value="Forgot Password?" class=" text-black " />
 
-                            <p>
+                            <p className=''>
                                 <span className='text-gray-500'>
                                     Don't have an account?
                                 </span>
 
-                                <Link to='/signup' className='text-blue-500 cursor-pointer hover:underline-dark-500'>
+                                <Link to='/signup' className='text-blue-500 cursor-pointer hover:underline-dark-500 ml-2'>
                                     Signup
 
                                 </Link>

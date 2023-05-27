@@ -63,7 +63,7 @@ const LoginPassword = () => {
                 ) : (
 
 
-                    <div className="w-full flex items-center justify-center  min-h-[100vh]  h-full login">
+                    <div className="w-[50%] flex items-center justify-center  min-h-[100vh]  h-full login border-x ml-[24%] -mr-1">
 
 
                         <div className="w-full  max-w-[600px] border-2  p-2 pb-9 flex gap-8 items-center justify-between min-h-[600px] border-1 border-solid border-gray-300  flex-col LoginPassword">
@@ -78,7 +78,7 @@ const LoginPassword = () => {
                             </div>
                             {/* <div className="flex"> */}
 
-                            <TextField placeholder='Phone,Email or Username' required type='password' value={password} onChange={(e) => setPassword(e.target.value)} className='w-full max-w-[450px]' id="outlined-basic" label="Password" variant="outlined" />
+                            <TextField placeholder='Password' required type='password' value={password} onChange={(e) => setPassword(e.target.value)} className='w-full max-w-[450px]' id="outlined-basic" label="Password" variant="outlined" />
                             {/* </div> */}
                             {/* <Input /> */}
                             <div  className="w-full max-w-[456px]" onClick={() => login()}>
@@ -91,7 +91,7 @@ const LoginPassword = () => {
                                     Don't have an account?
                                 </span>
 
-                                <Link to='/signup' className='text-blue-500 cursor-pointer hover:underline-dark-500'>
+                                <Link to='/signup' className='text-blue-500 cursor-pointer hover:underline-dark-500 ml-2'>
                                     Signup
 
                                 </Link>

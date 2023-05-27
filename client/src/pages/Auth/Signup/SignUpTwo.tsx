@@ -92,7 +92,7 @@ const SingUpTwo = () => {
             {
                 loading ? <Loader /> : (
 
-                    <div className="w-full flex items-center justify-center  min-h-[100vh]  h-full signup">
+                    <div className="w-[50%] flex items-center justify-center  min-h-[100vh]  h-full signup border-x ml-[24%] -mr-1">
 
 
                         <div className="w-full relative max-w-[600px] border-2  p-2 pb-9 flex gap-8 items-center justify-between min-h-[600px] border-1 border-solid border-gray-300  flex-col Step-2 ">

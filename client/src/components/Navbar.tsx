@@ -52,6 +52,7 @@ const Navbar = () => {
   return (
     <>
       <WriteTweet openTweet={openTweet} setOpenTweet={setOpenTweet} />
+      <div className="relative">
       <div className="navbar w-[13%] sm:flex sm:w-[10%] md:w-[10%] xl:w-[20%] flex flex-col h-full fixed">
         <Link to="/">
           <div className="logo items-center justify-center xl:items-start xl:justify-start h-[5%] flex gap-2 p-3">
@@ -160,8 +161,8 @@ const Navbar = () => {
         <div className="profile flex justify-center xl:justify-between  h-[10%] mx-2 items-center hover:bg-gray-200 hover:rounded-full p-3 cursor-pointer mt-10">
           <div className="profileContainer gap-3 flex items-center justify-center">
             <div
-              className="w-14 h-14 flex item-center justify-center    rounded-full overflow-hidden"
-              onClick={() => setOpen(!open)}
+              className="w-14 h-14 flex item-center justify-center  rounded-full overflow-hidden"
+              onClick={()=> setOpen(!open)}
             >
               <img src={yash} alt="" className="h-full w-full object-cover" />
             </div>
@@ -178,6 +179,7 @@ const Navbar = () => {
             <MoreHorizOutlinedIcon className="icon" />
           </div>
         </div>
+      </div>
       </div>
     </>
   );

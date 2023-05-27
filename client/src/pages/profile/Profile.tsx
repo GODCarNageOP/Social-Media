@@ -134,9 +134,9 @@ const Profile = () => {
                     </div>
                     <div className="flex gap-1 items-center">
                       <InsertLinkIcon />
-                      <span className="text-blue-500 truncate text-sm cursor-pointer hover:underline">
+                      <a className="text-blue-500 truncate text-sm cursor-pointer hover:underline" href={profile?.website}>
                         {profile?.website}
-                      </span>
+                      </a>
                     </div>
                   </div>
                   <div className="center flex flex-wrap items-center text-sm gap-2 mt-2">

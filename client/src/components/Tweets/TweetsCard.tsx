@@ -237,7 +237,7 @@ const More = ({ id, tweet, user }) => {
     }
 
     return (
-        <div className="overlay h-33 w-80 p-3  bg-white  shadow-lg border rounded-xl z-10 flex flex-col top-[465px] ml-[60px]">
+        <div className="overlay h-33 w-80 p-3  bg-white  shadow-lg border rounded-xl z-20 flex flex-col top-[465px] ml-[60px]">
             <div className="overlayContainer gap-8">
                 {
                     isAdmin && (
