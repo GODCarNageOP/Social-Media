@@ -15,7 +15,8 @@ const Lists = () => {
   }, [isLoggedIn, Navigate])
 
   return (
-    <div className="List mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%]">Lists</div>
+    <div className="lists w-[50%] border-x ml-[24%] -mr-1"></div>
+    
   )
 }
 export default Lists;

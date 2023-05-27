@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import { clearUserErrors } from '../redux/action/UserAction';
@@ -42,7 +42,7 @@ const Messages = () => {
         ) :
           (
 
-            <div className="Message mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%]">Messages</div>
+            <div className="Message mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%] border-x ml-[24%] -mr-1">Messages</div>
           )
       }
     </>

@@ -36,7 +36,7 @@ const Entertainment = () => {
     ]);
 
     return (
-        <div className="pl-4 pt-2 pr-4  flex flex-col gap-4">
+        <div className="py-4 pt-2   flex flex-col gap-4">
             {trendingItems.map((item, index) => (
                 <TrendingsCard
                     key={item.id}

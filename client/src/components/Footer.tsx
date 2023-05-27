@@ -5,6 +5,7 @@ import yash from "../assets/yashXD.jpg";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import { useState } from "react";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const [open1, setOpen1] = useState(false);
@@ -13,7 +14,7 @@ const Footer = () => {
   const [open4, setOpen4] = useState(false);
 
   return (
-    <div className="footer  w-[30%] flex flex-col h-full pl-2 pr-2">
+    <div className="footer ml-10 w-[30%] flex flex-col h-full pl-2 pr-2">
       <div className="search h-[3%] w-full rounded-full bg-gray-100 flex mt-3 items-center justify-start p-3 gap-2 ">
         <SearchIcon className="icon text-gray-500" />
         <input
@@ -145,22 +146,24 @@ const Footer = () => {
             <MoreHorizOutlinedIcon className="icon mr-2 text-gray-600 hover:bg-blue-200 hover:rounded-full hover:text-blue-400" />
           </div>
         </div>
-
-        <span className="p-3 text-blue-400 ml-2 cursor-pointer">Show More</span>
+        <Link to="/explore">
+          <div className="mb-3">
+            <span className="p-3 text-blue-400 ml-2 cursor-pointer">
+              Show More
+            </span>
+          </div>
+        </Link>
       </div>
 
       <WhoToFollow />
-
       <TermsOfService />
     </div>
   );
 };
 
-
 // who To Follow here
 
 const WhoToFollow = () => {
-
   return (
     <div className="follow mt-3  bg-gray-100 rounded-lg h-[30%] flex flex-col ">
       <h1 className="text-xl font-semibold p-3 mx-2">Who to follow</h1>
@@ -208,37 +211,36 @@ const WhoToFollow = () => {
       </div>
       <span className="p-3 text-blue-400 ml-2 cursor-pointer">Show More</span>
     </div>
-  )
-}
-
-
+  );
+};
 
 // I seperated Term Of service
 const TermsOfService = () => {
-
   return (
-    <div className="foot w-full mt-3 p-3 flex gap-2 flex-col text-gray-500 text-xs">
-      <div className="top flex justify-between  items-center">
-        <span className="hover:underline cursor-pointer">
-          Terms of Service
-        </span>
-        <span className="hover:underline cursor-pointer">Privacy Policy</span>
-        <span className="hover:underline cursor-pointer">Cookie Policy</span>
-      </div>
-      <div className="bottom flex justify-between items-center">
-        <span className="hover:underline cursor-pointer">Accessibilty</span>
-        <span className="hover:underline cursor-pointer">Ads info</span>
-        <span className="hover:underline flex items-center cursor-pointer">
-          More
-          <MoreHorizOutlinedIcon className="icon" />
-        </span>
-        <span className="hover:underline flex items-center cursor-pointer">
-          <CopyrightIcon className="icon" />
-          2023 X Corp.
-        </span>
+    <div className="relative">
+      <div className="foot w-full mt-3 p-3 flex gap-2 flex-col text-gray-500 text-xs fixed">
+        <div className="top flex justify-between  items-center">
+          <span className="hover:underline cursor-pointer">
+            Terms of Service
+          </span>
+          <span className="hover:underline cursor-pointer">Privacy Policy</span>
+          <span className="hover:underline cursor-pointer">Cookie Policy</span>
+        </div>
+        <div className="bottom flex justify-between items-center">
+          <span className="hover:underline cursor-pointer">Accessibilty</span>
+          <span className="hover:underline cursor-pointer">Ads info</span>
+          <span className="hover:underline flex items-center cursor-pointer">
+            More
+            <MoreHorizOutlinedIcon className="icon" />
+          </span>
+          <span className="hover:underline flex items-center cursor-pointer">
+            <CopyrightIcon className="icon" />
+            2023 X Corp.
+          </span>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Footer;

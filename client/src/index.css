@@ -21,7 +21,7 @@
   color: white;
 }
 
-.exploreNavbar {
+.tab-bar {
   border-bottom: 1px solid rgb(234, 234, 234);
 }
 
@@ -29,19 +29,7 @@
   border-bottom: 1px solid rgb(234, 234, 234);
 }
 
-.profile-tweet {
-  border-bottom: 1px solid rgb(234, 234, 234);
-}
-
-.navbar {
-  border-right: 1px solid rgb(234, 234, 234);
-}
-
-.footer {
-  border-left: 1px solid rgb(234, 234, 234);
-}
-
-.homeNavbar {
+.bookmarkContainer {
   border-bottom: 1px solid rgb(234, 234, 234);
 }
 
@@ -67,8 +55,7 @@
 .max-w-100 {
   max-width: 100%;
 }
-.night-mode {
-}
+
 .night-mode {
   /* Night mode styles */
   color: white;

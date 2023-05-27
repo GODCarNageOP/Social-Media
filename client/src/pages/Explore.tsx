@@ -2,9 +2,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import profilePic from '../assets/pofilePic.jpeg'
 
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import TrendingsCard from "../components/Trendings/TrendingsCard";
+//import TrendingsCard from "../components/Trendings/TrendingsCard";
 import Foryou from "../components/Trendings/Foryou";
 import Trending from "../components/Trendings/Trending";
 import News from "../components/Trendings/News";
@@ -24,7 +24,7 @@ const tabs = [
 ];
 const Explore = () => {
   const Navigate = useNavigate();
-  const { isLoggedIn } = useSelector((state) => state.user)
+  const { isLoggedIn } = useSelector((state:any) => state.user)
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -34,11 +34,12 @@ const Explore = () => {
   }, [Navigate, isLoggedIn])
 
   return (
-    <div className="explore mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%]">
-      <div className="relative">
+    <div className="explore mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%] border-x ml-[24%] -mr-1">
+      <div className="exploreContainer fixed bg-transparent w-[570px]">
+      <div className="relative w-[550px]">
         <ExploreTab />
       </div>
-
+      </div>
     </div>
   );
 };
@@ -53,7 +54,7 @@ const ExploreTab = () => {
     
 
         <div className="exploreContainer flex justify-between items-center">
-          <div className="search h-[5%] flex-1 rounded-full bg-gray-100 flex mt-3 items-center p-3 gap-2 mx-10 justify-start">
+          <div className="search h-[5%] flex-1 rounded-full bg-gray-100 flex mt-3 items-center p-3 gap-2 mx-10 justify-start mb-2">
             <div className=" sm:hidden profile-circle rounded-full overflow-hidden">
               <img src={profilePic} className="w-full h-full object-cover" alt="" />
               </div>
@@ -68,7 +69,7 @@ const ExploreTab = () => {
             <SettingsOutlinedIcon className="mr-10 mt-3 hover:bg-gray-200 cursor-pointer hover:rounded-full" />
           </Link>
         </div>
-        <TabBar tabs={tabs} />
+        <TabBar tabs={tabs}/>
     
 
       <div className="">
