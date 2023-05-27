@@ -35,9 +35,9 @@ const Home = () => {
           <Loader />
         ) : (
           <div className="home mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%] border-x ml-[24%] -mr-1">
-             <div className="homeContainer fixed bg-transparent w-[570px]">
+             <div className="homeContainer fixed bg-transparent w-[565px]">
             <h1 className="text-2xl font-semibold my-1 p-4 cursor-pointer mx-10">Home</h1>
-            <div className="homeNavbar flex justify-between h-16 flex-col gap-2">
+            <div className="homeNavbar flex justify-between h-16 flex-col">
               {/* <HomeTabs/> */}
               <TabBar tabs={tabs} />
               {

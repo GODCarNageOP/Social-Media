@@ -100,20 +100,20 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
                 ) : (
 
 
-                    <div className="Tweets-card p- flex w-full gap-2 jusitfy-between  hover:bg-gray-200">
-                        <div className="left flex items-center justify-center mt-2 tweet-profile  overflow-hidden rounded-full ">
-                            <img src={profilePic} alt="" className="tweet-profile object-cover " />
+                    <div className="Tweets-card flex w-[565px] gap-2 jusitfy-between  hover:bg-gray-100 -mt-1">
+                        <div className="left flex items-center justify-center mt-2 tweet-profile  overflow-hidden rounded-full ml-2">
+                            <img src={profilePic} alt="" className="tweet-profile object-cover" />
                         </div>
                         <div className="center flex flex-col flex-1  mt-2">
                             <div className="flex w-full   justify-between  sm:w-full">
-                                <div className="profile-details-tweets flex  items-start justify-center">
+                                <div className="profile-details-tweets flex  items-center justify-center">
                                     <span className="font-bold text-sm hover:underline cursor-pointer">{tweet?.name}</span>
-                                    <span className="text-gray-600 text-sm  sm:text-base  "> @{tweet?.userName}</span>
-                                    <span>.</span>
-                                    <span className="text-gray-600 text-sm sm:text-base ">{formattedDate}</span>
+                                    <span className="text-gray-600 text-sm  sm:text-base ml-2"> @{tweet?.userName}</span>
+                                    <span className="ml-3 text-gray-600">•</span>
+                                    <span className="text-gray-600 text-sm sm:text-base ml-2">{formattedDate}</span>
                                 </div>
 
-                                <span className="cursor-pointer  tweet-icon hover:text-blue-500 text-gray-500" onClick={() => handleMore()}>
+                                <span className="cursor-pointer  tweet-icon hover:text-blue-500 text-gray-500 mr-2" onClick={() => handleMore()}>
 
                                     <BsThreeDots />
                                 </span>

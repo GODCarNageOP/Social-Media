@@ -53,11 +53,11 @@ const EditProfile = ({ openTweet, setOpenTweet }) => {
 
     return (
         <>
-            <div className={`w-full m-auto p-5 pb-1 ${openTweet ? "Write-Tweet" : "none"} lg:mt-4 rounded-none lg:rounded-lg pb-4 mobile:min-h-screen sm:min-h-[100vh] md:min-h-0  lg:h-fit`}>
+            <div className={`w-full m-auto p-5 pb-1 ${openTweet ? "Write-Tweet" : "none"} lg:mt-4 lg:rounded-lg pb-4 mobile:min-h-screen sm:min-h-[100vh] md:min-h-0  lg:h-fit rounded-lg`}>
                 <div className="flex flex-col relative mt- p-2 pt-0">
                     <div className="flex justify-between w-full h-19 bg-white  sticky top-[-00px] h-18 stayTop">
                         <div className="flex gap-4 items-center">
-                            <span className="flex font-bold cursor-pointer" onClick={openCloseEdit}>
+                            <span className="flex font-bold cursor-pointer hover:bg-gray-200 hover:rounded-full" onClick={openCloseEdit}>
                                 <CloseIcon />
                             </span>
                         </div>
@@ -87,22 +87,20 @@ const EditProfile = ({ openTweet, setOpenTweet }) => {
                         </div>
                         <div className="flex flex-col gap-3 w-full ">
                             <div className="flex">
-                                <span className='text-blue-500   p-1 border-2 border-solid border-gray-400 rounded-full pl-2 pr-2 '>Everyone</span>
+                                <span className='text-blue-500  border-2 border-solid border-gray-400 rounded-full pl-2 pr-2 hover:bg-gray-100'>Everyone</span>
                             </div>
 
                             <div className="flex flex-col">
 
                                 <input
                                     id="outlined-multiline-static"
-                                    className='w-full border-0 font-medium text'
+                                    className='w-full border-0 font-medium text outline-none border-none'
                                     value={Tweet}
                                     onChange={(e) => setTweet(e.target.value)}
-
                                     placeholder='What is happening ?!' />
-
                                 <div className="flex gap-2 min-h-[100px] max-h-[400px] relative w-full">
 
-                                    <div className={`closeIcons text-gray-500 cursor-pointer absolute left-0 ${selectedImage ? "" : "none"} `} onClick={() => removeImage()}>
+                                    <div className={`closeIcons hover:bg-gray-100 hover:rounded-full cursor-pointer absolute left-0 ${selectedImage ? "" : "none"} `} onClick={() => removeImage()}>
                                         <CloseOutlinedIcon />
                                     </div>
                                     {selectedImage && (
@@ -121,7 +119,7 @@ const EditProfile = ({ openTweet, setOpenTweet }) => {
                 </div>
                 <div className="md:flex  lg:flex justify-between item-center  w-full mobile:hidden sm:hidden ">
                     <div className="flex items-center">
-                        <label htmlFor="imageUpload" className="text-blue-500 cursor-pointer flex items-center">
+                        <label htmlFor="imageUpload" className="text-blue-500 cursor-pointer flex items-center hover:bg-gray-200 hover:rounded-full">
                             <InsertPhotoOutlinedIcon />
                             <input
                                 id="imageUpload"
@@ -132,7 +130,7 @@ const EditProfile = ({ openTweet, setOpenTweet }) => {
                             />
                         </label>
                     </div>
-                    <span onClick={saveData} className='bg-blue-500 p-2 text-white pl-8 pr-8 rounded-full cursor-pointer '>
+                    <span onClick={saveData} className='bg-blue-500 p-2 text-white pl-8 pr-8 rounded-full cursor-pointer hover:bg-blue-600'>
                         Tweet
                     </span>
                 </div>

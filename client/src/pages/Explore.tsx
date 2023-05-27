@@ -35,8 +35,8 @@ const Explore = () => {
 
   return (
     <div className="explore mobile:w-[100%]  w-[80%]  lg:w-[60%] xl:w-[50%] border-x ml-[24%] -mr-1">
-      <div className="homeContainer fixed bg-transparent w-[570px]">
-      <div className="relative">
+      <div className="exploreContainer fixed bg-transparent w-[570px]">
+      <div className="relative w-[550px]">
         <ExploreTab />
       </div>
       </div>
@@ -54,7 +54,7 @@ const ExploreTab = () => {
     
 
         <div className="exploreContainer flex justify-between items-center">
-          <div className="search h-[5%] flex-1 rounded-full bg-gray-100 flex mt-3 items-center p-3 gap-2 mx-10 justify-start">
+          <div className="search h-[5%] flex-1 rounded-full bg-gray-100 flex mt-3 items-center p-3 gap-2 mx-10 justify-start mb-2">
             <div className=" sm:hidden profile-circle rounded-full overflow-hidden">
               <img src={profilePic} className="w-full h-full object-cover" alt="" />
               </div>
@@ -69,7 +69,7 @@ const ExploreTab = () => {
             <SettingsOutlinedIcon className="mr-10 mt-3 hover:bg-gray-200 cursor-pointer hover:rounded-full" />
           </Link>
         </div>
-        <TabBar tabs={tabs} />
+        <TabBar tabs={tabs}/>
     
 
       <div className="">
