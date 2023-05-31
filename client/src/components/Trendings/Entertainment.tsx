@@ -1,40 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TrendingsCard from './TrendingsCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTrendingByChoices } from '../../redux/action/TrendingAction';
+import Loader from '../Loader';
 
 const Entertainment = () => {
-    const [trendingItems] = useState([
-        {
-            id: 1,
-            title: "Lorem ipsum dolor sit amet",
-            description: "Consectetur adipiscing elit",
-            hashtags: ["#LoremIpsum", "#Entertainment"],
-            tweets: 12345,
-            retweets: 6789,
-            likes: 9876,
-        },
-        {
-            id: 2,
-            title: "Vestibulum sagittis",
-            description: "Praesent dapibus",
-            hashtags: ["#Vestibulum", "#Entertainment"],
-            tweets: 54321,
-            retweets: 9876,
-            likes: 5432,
-        },
-        // Add more trending items
-        {
-            id: 3,
-            title: "Aliquam ac turpis",
-            description: "Sed at tellus",
-            hashtags: ["#Aliquam", "#Entertainment"],
-            tweets: 8765,
-            retweets: 2345,
-            likes: 5678,
-        },
-        // Add more trending items
-        // ... Repeat the structure for the remaining 22 items
-    ]);
 
+
+
+    const dispatch = useDispatch();
+    const { trendingItems, loading } = useSelector((state) => state.trending)
+
+    useEffect(() => {
+
+        const choices = ["news"]
+        dispatch(getTrendingByChoices(choices))
+
+    }, [dispatch])
+
+    
     return (
         <div className="py-4 pt-2   flex flex-col gap-4">
             {trendingItems.map((item, index) => (

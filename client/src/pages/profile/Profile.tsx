@@ -57,11 +57,13 @@ const Profile = () => {
       alert.error(error);
       dispatch(clearTweetsError());
     }
+  
   }, [isLoggedIn, user, openEdit, loading, error]);
 
   const openEditClose = () => {
     setOpenEdit(!openEdit);
   };
+
 
   return (
     <>
@@ -100,9 +102,9 @@ const Profile = () => {
 
               <div className="profile-sec relative">
                 <div className="flex justify-between relative items-center w-full profile-absolute-div pl-4">
-                  <div className="profil-image w-[24%] left-5 rounded-full border-4 overflow-hidden  ">
+                    <div className="profil-image mobile:w-[50px] mobile:h-[50px] sm:h-[75px] sm:w-[75px] md:w-[100px] md:h-[100pxpx]   lg:w-[120px] lg:h-[120px] left-5 rounded-full border-4 overflow-hidden  ">
                     <img
-                      src={profilePic}
+                      src={user?.avatar.url||profilePic}
                       className="object-cover h-full w-full  cursor-pointer"
                       alt=""
                     />

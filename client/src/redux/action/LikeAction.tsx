@@ -9,6 +9,9 @@ import {
     GET_PERSONAL_LIKES_REQUEST,
     GET_PERSONAL_LIKES_SUCCESS,
     GET_PERSONAL_LIKES_FAILURE,
+    CHECK_USER_LIKED_TWEET_REQUEST,
+    CHECK_USER_LIKED_TWEET_FAILURE,
+    CHECK_USER_LIKED_TWEET_SUCCESS,
 } from "../constants/LikeConsants.tsx";
 
 import { Dispatch } from "redux";
@@ -76,6 +79,28 @@ export const getPersonalLikes = (userId: string) => async (dispatch: Dispatch) =
         dispatch({
             type: GET_PERSONAL_LIKES_FAILURE,
             payload: error.response.data.error,
+        });
+    }
+};
+
+
+
+export const checkUserLikedTweet = (tweetId) => async (dispatch) => {
+    try {
+        dispatch({ type: CHECK_USER_LIKED_TWEET_REQUEST });
+
+        const { data } = await axios.post(`/api/v1/like/check`,{tweetId});
+
+        dispatch({
+            type: CHECK_USER_LIKED_TWEET_SUCCESS,
+            payload: data.liked
+        });
+    } catch (error) {
+        dispatch({
+            type: CHECK_USER_LIKED_TWEET_FAILURE,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
         });
     }
 };

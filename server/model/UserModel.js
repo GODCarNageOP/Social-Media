@@ -19,6 +19,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
+      lowercase: true,
     },
     choices: [
       {
@@ -66,7 +67,7 @@ const userSchema = new Schema(
       {
         type: Schema.Types.ObjectId,
         ref: "Tweet",
-        
+
         required: true,
       },
     ],

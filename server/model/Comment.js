@@ -15,6 +15,13 @@ const commentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  numOfLikes:{
+type:number
+
+  },
+  numOfReplies:{
+
+  },
   createdAt: {
     type: Date,
     default: Date.now,

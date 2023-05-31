@@ -1,6 +1,7 @@
 import asyncHandler from "../middleware/asyncHandler.js";
 import User from "../model/UserModel.js";
 import crypto from "crypto";
+import cloudinary from "cloudinary";
 
 import CustomError from "../utils/CustomError.js";
 import { StatusCodes } from "http-status-codes";
@@ -82,6 +83,12 @@ export const registerUser = asyncHandler(async (req, res, next) => {
   // ... (code to create a new user and save it to the database)
 });
 
+
+
+
+
+
+
 // send otp
 export const sendCode = asyncHandler(async (req, res, next) => {
   const { email } = req.param;
@@ -117,6 +124,11 @@ export const sendCode = asyncHandler(async (req, res, next) => {
   });
 });
 
+
+
+
+
+
 //verifyOtp
 export const verifyOtp = asyncHandler(async (req, res, next) => {
   const { email, otp } = req.body;
@@ -149,6 +161,9 @@ export const verifyOtp = asyncHandler(async (req, res, next) => {
 
   // res.json({ success: true, message: "verified successfully", user });
 });
+
+
+
 
 //Login User Controller
 
@@ -228,22 +243,45 @@ export const updateProfile = asyncHandler(async (req, res, next) => {
     newUserData.isVerified = false;
   }
 
-  await User.findByIdAndUpdate(req.user.id, newUserData, {
+  if (avatar) {
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: "avatars",
+      width: 150,
+      crop: "scale",
+    });
+    newUserData.avatar = {
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
+    };
+  }
+
+  if (coverImage) {
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.coverImage, {
+      folder: "covers",
+      width: 1000,
+      crop: "scale",
+    });
+    newUserData.coverImage = {
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
+    };
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(req.user.id, newUserData, {
     new: true,
     runValidators: true,
     useFindAndModify: false,
   });
 
-  if (!user) {
+  if (!updatedUser) {
     return next(new CustomError("User Not Found", 404));
   }
 
   res.status(200).json({
     success: true,
-    user: user,
+    user: updatedUser,
   });
 });
-
 // get user profile
 export const getUserProfile = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.user.id);

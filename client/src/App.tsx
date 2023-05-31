@@ -28,19 +28,23 @@ import store from "./Store";
 import LoginPassword from "./pages/Auth/Loginpassword";
 import Slider from "./pages/slider/Slider";
 import { fetchPersonalTweets, fetchAllTweets } from './redux/action/TweetAction';
+import { getFollowers, getFollowing } from "./redux/action/FollowAction";
 function App() {
-  const { loading, error } = useSelector((state) => state.user)
+  const {isLoggedIn, loading, error } = useSelector((state) => state.user)
   const dispatch = useDispatch()
   useEffect(() => {
     store.dispatch(loadUser());
     dispatch(fetchAllTweets());
 
     dispatch(fetchPersonalTweets());
+    dispatch(getFollowing());
+    dispatch(getFollowers());
+
+
     if (error) {
       dispatch(clearUserErrors())
     }
-  }, [])
-
+  }, []);
   const Layout = () => {
     return (
       <>

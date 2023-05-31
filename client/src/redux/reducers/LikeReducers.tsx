@@ -1,4 +1,4 @@
-import { CLEAR_LIKE_ERROR } from '../constants/LikeConsants';
+import { CHECK_USER_LIKED_TWEET_FAILURE, CHECK_USER_LIKED_TWEET_REQUEST, CHECK_USER_LIKED_TWEET_SUCCESS, CLEAR_LIKE_ERROR } from '../constants/LikeConsants';
 import {
     ADD_LIKE_REQUEST,
     ADD_LIKE_SUCCESS,
@@ -21,6 +21,7 @@ const initialState: LikeState = {
     loading: false,
     error: null,
     personalLikes: [],
+    liked:false,
 };
 
 export const likeReducer = (state = initialState, action: any) => {
@@ -28,11 +29,14 @@ export const likeReducer = (state = initialState, action: any) => {
         case ADD_LIKE_REQUEST:
         case DELETE_LIKE_REQUEST:
         case GET_PERSONAL_LIKES_REQUEST:
+        case CHECK_USER_LIKED_TWEET_REQUEST:
             return {
                 ...state,
                 loading: true,
                 error: null,
             };
+        case CHECK_USER_LIKED_TWEET_SUCCESS:
+            return { ...state, loading: false, liked: action.payload };
         case ADD_LIKE_SUCCESS:
             return {
                 ...state,
@@ -50,11 +54,13 @@ export const likeReducer = (state = initialState, action: any) => {
                 loading: false,
                 personalLikes: action.payload,
             };
-            case CLEAR_LIKE_ERROR:
-                return {
-                    ...state,
-                    error:null
-                }
+        case CLEAR_LIKE_ERROR:
+            return {
+                ...state,
+                error: null
+            }
+        case CHECK_USER_LIKED_TWEET_FAILURE:
+            return { ...state, loading: false, error: action.payload };
         case ADD_LIKE_FAILURE:
         case DELETE_LIKE_FAILURE:
         case GET_PERSONAL_LIKES_FAILURE:
