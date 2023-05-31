@@ -86,7 +86,7 @@ export const checkIfUserLikedTweet = asyncHandler(async (req, res, next) => {
   // Check if the user has liked the tweet
   const like = await Like.findOne({ post: tweetId, "likedBy.user": userId });
 
-  console.log("liked",like,tweetId,userId);
+
   if (like) {
     res.status(200).json({ liked: true });
   } else {

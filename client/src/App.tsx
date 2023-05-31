@@ -28,6 +28,7 @@ import store from "./Store";
 import LoginPassword from "./pages/Auth/Loginpassword";
 import Slider from "./pages/slider/Slider";
 import { fetchPersonalTweets, fetchAllTweets } from './redux/action/TweetAction';
+import { getFollowers, getFollowing } from "./redux/action/FollowAction";
 function App() {
   const {isLoggedIn, loading, error } = useSelector((state) => state.user)
   const dispatch = useDispatch()
@@ -36,6 +37,10 @@ function App() {
     dispatch(fetchAllTweets());
 
     dispatch(fetchPersonalTweets());
+    dispatch(getFollowing());
+    dispatch(getFollowers());
+
+
     if (error) {
       dispatch(clearUserErrors())
     }

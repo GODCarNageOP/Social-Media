@@ -5,11 +5,8 @@ import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDiss
 interface Trendings {
     id: number,
     title: string,
-    description: string,
-    hashtags: string[],
-    tweets: number,
-    retweets: number,
-    likes: number,
+    numOfTweets: number,
+    
 
     // Rest of the profile object properties
 }
@@ -44,7 +41,7 @@ const TrendingsCard: React.FC<TrendingsFun> = ({ item }) => {
         <div className=' flex flex-col TrendindsCard'>
             <div className="flex relative justify-between">
                 <span className='font-thin text-gray-500   cursor-pointer'>
-                    {item?.hashtags[1]}
+                    Trending
                 </span>
                 <span className='text-gray-500 hover:text-blue-500 cursor-pointer' onClick={(e) => handleMore()}>
                     <MoreHorizOutlinedIcon />
@@ -64,12 +61,12 @@ const TrendingsCard: React.FC<TrendingsFun> = ({ item }) => {
                 {/* </div> */}
             </div>
             <span className='font-bold text-1xl'>
-                {
-                    item?.hashtags[0]
+                #{
+                    item?.title
                 }
             </span>
             <span className='font-thins text-gray-500'>
-                {item?.tweets} Tweets
+                {item?.numOfTweets} Tweets
             </span>
         </div>
     )

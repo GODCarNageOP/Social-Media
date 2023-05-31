@@ -1,56 +1,39 @@
 import React, { useState } from 'react';
 import TrendingsCard from './TrendingsCard';
+import { useSelector } from 'react-redux';
+import Loader from '../Loader';
 
 const Trending = () => {
-    const [trendingItems] = useState([
-        {
-            id: 1,
-            title: "Lorem ipsum dolor sit amet",
-            description: "Consectetur adipiscing elit",
-            hashtags: ["#LoremIpsum", "#Trending"],
-            tweets: 12345,
-            retweets: 6789,
-            likes: 9876,
-        },
-        {
-            id: 2,
-            title: "Vestibulum sagittis",
-            description: "Praesent dapibus",
-            hashtags: ["#Vestibulum", "#Trending"],
-            tweets: 54321,
-            retweets: 9876,
-            likes: 5432,
-        },
-        // Add more trending items
-        {
-            id: 3,
-            title: "Aliquam ac turpis",
-            description: "Sed at tellus",
-            hashtags: ["#Aliquam", "#Trending"],
-            tweets: 8765,
-            retweets: 2345,
-            likes: 5678,
-        },
-        // Add more trending items
-        // ... Repeat the structure for the remaining 22 items
-    ]);
+
+ 
+    const { trendingItems, loading } = useSelector((state) => state.trending)
+
 
     return (
-        <div className="pl-4 pt-2 pr-4 flex flex-col gap-4 pt-1">
+        <>
+            {
+                loading ? (
+                    <Loader />
+                ) : (
 
-            <p className='font-bold text-2xl'>India Trends</p>
-            <div className="flex flex-col gap-4">
+                    <div className="pl-4 pt-2 pr-4 flex flex-col gap-4 pt-1">
 
-                {trendingItems.map((item, index) => (
-                    <TrendingsCard
-                        key={item.id}
-                        item={item}
+                        <p className='font-bold text-2xl'>India Trends</p>
+                        <div className="flex flex-col gap-4">
 
-                    // Pass any additional props as needed
-                    />
-                ))}
-            </div>
-        </div>
+                            {trendingItems.map((item, index) => (
+                                <TrendingsCard
+                                    key={item.id}
+                                    item={item}
+
+                                // Pass any additional props as needed
+                                />
+                            ))}
+                        </div>
+                    </div>
+                )
+            }
+        </>
     );
 };
 

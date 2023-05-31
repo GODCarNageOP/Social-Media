@@ -1,10 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import TabBar from '../components/Tabbar';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 //import { fetchAllTweets } from '../redux/action/TweetAction';
 import ProfileTweet from "../components/Tweets/ProfileTweets";
 import Loader from "../components/Loader";
 import {useEffect} from 'react';
+import { getTrending } from "../redux/action/TrendingAction";
 
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
     { label: "following", path: "/following" },
     // { label: "Tab 3", path: "/tab3" },
   ];
+  const dispatch=useDispatch();
   const Navigate = useNavigate();
   const { isLoggedIn,loading } = useSelector((state:any) => state.user)
 
@@ -20,7 +22,7 @@ const Home = () => {
     Navigate('/login')
   }
   useEffect(() => {
-  
+  dispatch(getTrending())
   }, [isLoggedIn,Navigate])
   const { allTweets  } = useSelector((state:any) => state.tweets)
   const location = useLocation();

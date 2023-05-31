@@ -39,7 +39,7 @@ export const writeTweet = (tweetData: TweetData) => async (dispatch: Dispatch) =
 
         const { data } = await axios.post('/api/v1/tweets', tweetData);
 
-        dispatch({ type: CREATE_TWEET_SUCCESS, payload: data });
+        dispatch({ type: CREATE_TWEET_SUCCESS, payload: data.tweets });
     } catch (error: any) {
 
         const errorMessage =
@@ -58,7 +58,7 @@ export const updateTweet = (tweetId: string, tweetData: TweetData) => async (dis
 
         const { data } = await axios.put(`/api/v1/tweets/${tweetId}`, tweetData);
 
-        dispatch({ type: UPDATE_TWEET_SUCCESS, payload: data });
+        dispatch({ type: UPDATE_TWEET_SUCCESS, payload: data.tweet });
     } catch (error: any) {
 
         const errorMessage =
@@ -119,7 +119,7 @@ export const fetchPersonalTweets = () => async (dispatch: Dispatch) => {
 
         const { data } = await axios.get('/api/v1/my/tweets');
 
-        dispatch({ type: FETCH_PERSONAL_TWEETS_SUCCESS, payload: data });
+        dispatch({ type: FETCH_PERSONAL_TWEETS_SUCCESS, payload: data.tweets });
     } catch (error: any) {
 
         const errorMessage =

@@ -3,6 +3,7 @@ import "./TweetCard.css";
 import profilePic from "../../assets/pofilePic.jpeg";
 import BlockOutlinedIcon from "@mui/icons-material/BlockOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 import PushPinIcon from "@mui/icons-material/PushPin";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { TbMessageCircle2 } from "react-icons/tb";
@@ -13,7 +14,6 @@ import { MdOutlineGraphicEq } from "react-icons/md";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 import { BsUpload, BsThreeDots } from "react-icons/bs";
 import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
-
 import Checkbox from "@mui/material/Checkbox";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
@@ -21,7 +21,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { deleteTweet, updateTweet } from "../../redux/action/TweetAction";
 import { useLocation } from "react-router-dom";
 import Loader from "../Loader";
+
 import { addLike, checkUserLikedTweet, deleteLike } from "../../redux/action/LikeAction";
+import { checkFollow, clearFollowError, followUser, } from '../../redux/action/FollowAction';
 
 interface Tweet {
     name: string;
@@ -49,9 +51,12 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
     const [isMoreOpen, setIsMoreOpen] = useState(false);
     const moreRef = useRef<HTMLDivElement>(null);
     const { liked } = useSelector((state) => state?.likes);
-
-    const { user, loading, error } = useSelector((state) => state.user);
-    const id = tweet._id;
+    // const { isFollowing,following,followers } = useSelector((state) => state.follow)
+    const { following, error } = useSelector((state) => state.follow);
+    const { user, loading, } = useSelector((state) => state.user);
+    const id = tweet?._id;
+    console.log("folose", following)
+    const followId = tweet?.user;
     const dispatch = useDispatch();
 
     const handleMore = () => {
@@ -61,10 +66,24 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
     const dateObj = new Date(joined);
     const now = new Date();
 
+
+
+
+    useEffect(() => {
+        // Check if the logged-in user is following the user who posted the tweet
+        const loggedInUserId = user?._id;
+        // add null check for following
+
+        if (error) {
+            dispatch(clearFollowError())
+        }
+
+    }, [following, user]);
     const diffInMinutes = Math.floor((now - dateObj) / (1000 * 60));
     const diffInHours = Math.floor(diffInMinutes / 60);
     const diffInDays = Math.floor(diffInHours / 24);
 
+    // console.log("isfffsfd",isFollowing,tweet?.user===following?.following[0])
     let formattedDate;
 
     if (diffInMinutes < 1) {
@@ -101,7 +120,7 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [dispatch, tweet]);
-  
+
 
     const addLikeFun = () => {
         if (!isLiked) {
@@ -127,7 +146,7 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
             ) : (
                 <div className="Tweets-card flex w-[565px] gap-2 jusitfy-between  hover:bg-gray-100 -mt-1">
                     <div className="left flex items-center justify-center mt-2 tweet-profile  overflow-hidden rounded-full ml-2">
-                        <img src={tweet?.avatar.url} alt="" className="tweet-profile object-cover" />
+                        <img src={tweet?.avatar} alt="" className="tweet-profile object-cover" />
                     </div>
                     <div className="center flex flex-col flex-1  mt-2">
                         <div className="flex w-full   justify-between  sm:w-full">
@@ -144,7 +163,7 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
 
                             {isMoreOpen && (
                                 <div ref={moreRef} className="absolute right-0" onClick={() => handleMore()}>
-                                    <More id={id} tweet={tweet} user={user} />
+                                    <More id={id} tweet={tweet} following={following} user={user} />
                                 </div>
                             )}
                         </div>
@@ -172,17 +191,17 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
                                     </span>
                                 </div>
 
-                                    <div className="flex gap-2 item-center justify-center">
-                                        <span
-                                            className="cursor-pointer flex items-center text-sm tweet-icon hover:text-blue-500 text-gray-700"
-                                            onClick={isLiked ? removeLikeFun : addLikeFun}
-                                        >
-                                            {isLiked ? <Favorite /> : <FavoriteBorder />}
-                                        </span>
-                                        <span className="cursor-pointer flex text-sm items-center tweet-icon hover:text-blue-500 text-gray-700">
-                                            {numOfLikes}
-                                        </span>
-                                    </div>
+                                <div className="flex gap-2 item-center justify-center">
+                                    <span
+                                        className="cursor-pointer flex items-center text-sm tweet-icon hover:text-blue-500 text-gray-700"
+                                        onClick={isLiked ? removeLikeFun : addLikeFun}
+                                    >
+                                        {isLiked ? <Favorite /> : <FavoriteBorder />}
+                                    </span>
+                                    <span className="cursor-pointer flex text-sm items-center tweet-icon hover:text-blue-500 text-gray-700">
+                                        {numOfLikes}
+                                    </span>
+                                </div>
                                 <div className="flex gap-2 item-center justify-center">
                                     <span className="cursor-pointer flex items-center tweet-icon hover:text-blue-500 text-gray-700 ">
                                         <MdOutlineGraphicEq />
@@ -208,110 +227,110 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet }) => {
 
 
 
-const More = ({ id, tweet, user }) => {
 
+const More = ({ id, tweet, user }) => {
     const dispatch = useDispatch();
     const location = useLocation();
     const pathname = location.pathname;
     const urlAfterSlash = pathname.substring(1);
 
     let isAdmin = false;
-
-    if (tweet?.user === user?._id ) {
+    
+    if (tweet?.user === user?._id) {
         isAdmin = true;
     }
+    
+    const { isFollowed }=useSelector((state)=>state?.follow);
+    
+    const [isFollowing, setIsFollowing] = useState(isFollowed);
+    useEffect(() => {
+       
+        dispatch(checkFollow(tweet?.user))
+    }, [isFollowed,isFollowing,dispatch]);
 
-    // const id=
-    // const deleteId = {
-    //     id
-    // }
-    console.log("admin",isAdmin,tweet?.user,user?._id)
+    // Function to check if the user who tweeted is being followed
+
+    console.log("isFollowser",isFollowing,isFollowed)
+ 
     const deleteTw = (id) => {
+        dispatch(deleteTweet(id));
+    };
 
+    const follow = () => {
+        dispatch(followUser(tweet?.user));
+        setIsFollowing(!isFollowing)
 
-        dispatch(deleteTweet(id))
-    }
+    };
 
     return (
         <div className="overlay h-33 w-80 p-3  bg-white  shadow-lg border rounded-xl z-20 flex flex-col top-[465px] ml-[60px]">
             <div className="overlayContainer gap-8">
-                {
-                    isAdmin && (
+                {isAdmin && (
+                    <div
+                        onClick={() => deleteTw(id)}
+                        className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2"
+                    >
+                        <DeleteIcon />
+                        <h1>Delete</h1>
+                    </div>
+                )}
 
-                        <div onClick={() => deleteTw(id)} className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
-                            < DeleteIcon />
-                            <h1>Delete</h1>
-                        </div>
-                    )
-                }
-                {
-                    !isAdmin && (
+                {!isAdmin && !isFollowing && (
+                    <div
+                        onClick={() => follow()}
+                        className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2"
+                    >
+                        <PersonAddAltOutlinedIcon />
+                        <h1>Follow {tweet?.userName}</h1>
+                    </div>
+                )}
+                {!isAdmin && isFollowing && (
+                    <div
+                        onClick={() => follow()}
+                        className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2"
+                    >
+                        <PersonAddAltOutlinedIcon />
+                        <h1>UnFollow {tweet?.userName}</h1>
+                    </div>
+                )}
 
-                        <div className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
-                            <BlockOutlinedIcon />
-                            <h1>Follow to {tweet?.userName} </h1>
-                        </div>
-                    )
-                }
-                {
-                    isAdmin && (
+                {isAdmin && (
+                    <div className="bottom hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
+                        <PushPinIcon />
+                        <h1>Pin to Your Profile</h1>
+                    </div>
+                )}
 
-                        <div className="bottom hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
-                            <PushPinIcon />
-                            <h1>Pin to Your Profile</h1>
-                        </div>
-                    )
-                }
+                {isAdmin && (
+                    <div className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
+                        <ChatBubbleOutlineIcon />
+                        <h1>Change who can reply</h1>
+                    </div>
+                )}
 
-                {
-                    isAdmin && (
+                {isAdmin && (
+                    <div className="bottom hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
+                        <GraphicEqIcon />
+                        <h1>View Tweet Analytics</h1>
+                    </div>
+                )}
 
-                        <div className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
+                {!isAdmin && (
+                    <div className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
+                        <SentimentVeryDissatisfiedIcon />
+                        <h1>Not interested in this</h1>
+                    </div>
+                )}
 
-                            <ChatBubbleOutlineIcon />
-
-
-                            <h1>Changes who can reply</h1>
-                        </div>
-                    )
-                }
-
-
-
-                {
-                    isAdmin && (
-                        <div className="bottom hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
-                            <GraphicEqIcon />
-                            <h1>View Tweet Analsytic</h1>
-                        </div>
-
-                    )}
-
-
-                {
-                    !isAdmin && (
-
-                        <div className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
-                            <SentimentVeryDissatisfiedIcon />
-                            <h1>Not interested in this</h1>
-                        </div>
-                    )
-                }
-                {
-                    !isAdmin && (
-
-                        <div className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
-                            <BlockOutlinedIcon />
-                            <h1>Block to {tweet?.userName} </h1>
-                        </div>
-                    )
-                }
+                {!isAdmin && (
+                    <div className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2">
+                        <BlockOutlinedIcon />
+                        <h1>Block {tweet?.userName}</h1>
+                    </div>
+                )}
             </div>
         </div>
-    )
-}
-
-
-
+    );
+};
 
 export default TweetCard;

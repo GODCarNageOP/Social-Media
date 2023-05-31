@@ -1,48 +1,41 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TrendingsCard from './TrendingsCard';
-
-
-
-
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import { getTrending, getTrendingByChoices } from '../../redux/action/TrendingAction';
+import Loader from '../Loader';
 const Foryou = () => {
-    const [trendingItems] = useState([
-        {
-            id: 1,
-            title: "Lorem ipsum dolor sit amet",
-            description: "Consectetur adipiscing elit",
-            hashtags: ["LoremIpsum", "Trending"],
-            tweets: 12345,
-            retweets: 6789,
-            likes: 9876,
-        },
-        {
-            id: 2,
-            title: "Vestibulum sagittis",
-            description: "Praesent dapibus",
-            hashtags: ["Vestibulum", "Trending"],
-            tweets: 54321,
-            retweets: 9876,
-            likes: 5432,
-        },
-        // Add more trending items
-    ]);
+    const dispatch = useDispatch();
+    const { trendingItems, loading } = useSelector((state) => state.trending)
+
+    useEffect(() => {
+
+        dispatch(getTrending())
+
+    }, [dispatch])
+
 
     return (
-        <div className='pl-4 pt-2 pr-4  flex flex-col gap-4'>
-            {trendingItems.map((item) => (
-                <TrendingsCard
-                    key={item.id}
-                    item={item}
-                    // description={item.description}
-                    // hashtags={item.hashtags}
-                    // tweets={item.tweets}
-                    // retweets={item.retweets}
-                    // likes={item.likes}
-                />
-            ))}
-        </div>
+
+        <>
+            {
+                loading ? (
+                    <Loader />
+                ) : (
+                    <div className='pl-4 pt-2 pr-4  flex flex-col gap-4'>
+                        {trendingItems.map((item) => (
+                            <TrendingsCard
+                                key={item.id}
+                                item={item}
+                            // description={item.description}
+                            // hashtags={item.hashtags}
+                            // tweets={item.tweets}
+                            // retweets={item.retweets}
+                            // likes={item.likes}
+                            />
+                        ))}
+                    </div>
+                )}
+        </>
     );
 };
 

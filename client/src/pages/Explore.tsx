@@ -11,7 +11,8 @@ import News from "../components/Trendings/News";
 import Sports from "../components/Trendings/Sport";
 import Entertainment from "../components/Trendings/Entertainment";
 import TabBar from '../components/Tabbar';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getTrending } from "../redux/action/TrendingAction";
 
 
 const tabs = [
@@ -25,11 +26,13 @@ const tabs = [
 const Explore = () => {
   const Navigate = useNavigate();
   const { isLoggedIn } = useSelector((state:any) => state.user)
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!isLoggedIn) {
       Navigate('/login')
     }
+    dispatch(getTrending())
 
   }, [Navigate, isLoggedIn])
 

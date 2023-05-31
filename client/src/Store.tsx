@@ -4,12 +4,16 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { userExists, userReducer } from "./redux/reducers/UserReducer";
 import { tweetReducer } from "./redux/reducers/TweetReducers";
 import { likeReducer } from "./redux/reducers/LikeReducers";
+import followerReducer from "./redux/reducers/FollowReducer";
+import { trendingReducer } from "./redux/reducers/TrendingReducer";
 
 
 const reducer = combineReducers({
     user: userReducer,
     tweets: tweetReducer,
-    likes:likeReducer
+    likes:likeReducer,
+    follow:followerReducer,
+    trending:trendingReducer
 
 })
 

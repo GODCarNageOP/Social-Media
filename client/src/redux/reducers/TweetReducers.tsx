@@ -23,6 +23,9 @@ import {
 const initialState = {
     loading: false,
     error: null,
+    allTweets:[],
+    personalTweets: [],
+
 
 };
 
@@ -45,7 +48,7 @@ export const tweetReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                personalTweets: action.payload.tweet,
+                personalTweets: action.payload,
 
 
             };
@@ -77,7 +80,7 @@ export const tweetReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                personalTweets: action.payload.tweets,
+                personalTweets: action.payload,
             };
         case FETCH_ALL_TWEETS_SUCCESS:
             return {
