@@ -18,12 +18,14 @@ import Checkbox from "@mui/material/Checkbox";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import { useSelector, useDispatch } from "react-redux";
+import AddIcon from '@mui/icons-material/Add';
 import { deleteTweet, updateTweet } from "../../redux/action/TweetAction";
 import { useLocation } from "react-router-dom";
 import Loader from "../Loader";
 
 import { addLike, checkUserLikedTweet, deleteLike } from "../../redux/action/LikeAction";
 import { checkFollow, clearFollowError, followUser, } from '../../redux/action/FollowAction';
+import { addBookmark } from "../../redux/action/Bookmarkaction";
 
 interface Tweet {
     name: string;
@@ -235,27 +237,30 @@ const More = ({ id, tweet, user }) => {
     const urlAfterSlash = pathname.substring(1);
 
     let isAdmin = false;
-    
+
     if (tweet?.user === user?._id) {
         isAdmin = true;
     }
-    
-    const { isFollowed }=useSelector((state)=>state?.follow);
-    
+
+    const { isFollowed } = useSelector((state) => state?.follow);
+
     const [isFollowing, setIsFollowing] = useState(isFollowed);
     useEffect(() => {
-       
+
         dispatch(checkFollow(tweet?.user))
-    }, [isFollowed,isFollowing,dispatch]);
+    }, [isFollowed, isFollowing, dispatch]);
 
     // Function to check if the user who tweeted is being followed
 
-    console.log("isFollowser",isFollowing,isFollowed)
- 
+    console.log("isFollowser", isFollowing, isFollowed)
+
     const deleteTw = (id) => {
         dispatch(deleteTweet(id));
     };
 
+    const bookmark = () => {
+        dispatch(addBookmark(id));
+    };
     const follow = () => {
         dispatch(followUser(tweet?.user));
         setIsFollowing(!isFollowing)
@@ -284,6 +289,17 @@ const More = ({ id, tweet, user }) => {
                         <h1>Follow {tweet?.userName}</h1>
                     </div>
                 )}
+
+
+                <div
+                    onClick={() => bookmark()}
+                    className="top hover:bg-gray-100 font-medium text-base h-10 p-3 cursor-pointer flex gap-2"
+                >
+                    <AddIcon />
+                    <h1>Add This to Bookmark </h1>
+                </div>
+
+
                 {!isAdmin && isFollowing && (
                     <div
                         onClick={() => follow()}

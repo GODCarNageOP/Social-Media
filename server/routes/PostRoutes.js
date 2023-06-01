@@ -9,6 +9,7 @@ import {
   getTweetsById,
   updateTweet,
   updateLikes,
+  getTweetsByPostId,
 } from "../controller/TwitterController.js";
 
 const router = express.Router();
@@ -20,6 +21,8 @@ router.route("/my/tweets/").get(isAuthenticatedUser,getPersonalTweets);
 router.route("/edit").put(isAuthenticatedUser, updateTweet);
 router.route("/tweet/:id" ).delete(isAuthenticatedUser, deleteTweet);
 router.route("/update/likes/:id").put(isAuthenticatedUser, updateLikes);
+router.route("/tweet/").post(isAuthenticatedUser, getTweetsByPostId);
+
 
 
 

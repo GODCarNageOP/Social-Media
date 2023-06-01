@@ -10,6 +10,7 @@ import postRouter from "./routes/PostRoutes.js";
 import likeRouter from "./routes/LikeRoutes.js";
 import followRouter from "./routes/FollowRoutes.js";
 import TrendingRouter from "./routes/TrendingRoutes.js";
+import bookmarkRouter from "./routes/BookmarkRoutes.js";
 dotenv.config({ path: "config/config.env" });
 
 const app = express();
@@ -24,6 +25,8 @@ app.use("/api/v1", userRouter);
 app.use("/api/v1", postRouter);
 app.use("/api/v1", followRouter);
 app.use("/api/v1", TrendingRouter);
+app.use("/api/v1", bookmarkRouter);
+
 
 app.use("/api/v1", likeRouter);
 

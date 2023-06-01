@@ -17,8 +17,7 @@ const Notifications: React.FC = () => {
   );
   const tabs = [
     { label: 'All', path: '/notifications' },
-    { label: 'Verified', path: '/notifications/verified' },
-    { label: 'Mentions', path: '/notifications/mentions' },
+   
   ];
 
   useEffect(() => {

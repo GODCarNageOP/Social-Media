@@ -1,6 +1,7 @@
 import express from "express";
 import { getTrending, getTrendingByChoices } from "../controller/TwitterController.js";
 const router = express.Router();
+import isAuthenticatedUser from "../middleware/auth.js";
 
 
 

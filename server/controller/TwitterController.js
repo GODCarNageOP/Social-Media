@@ -107,6 +107,14 @@ export const getTweetsById = asyncHandler(async (req, res) => {
   });
 });
 
+export const getTweetsByPostId = asyncHandler(async (req, res) => {
+  const { postId } = req.body;
+  console.log("postId", postId);
+  const tweets = await Tweet.findById(postId);
+  console.log("tweets", tweets);
+  res.json(tweets);
+});
+
 //get pesonal Tweets
 export const getPersonalTweets = asyncHandler(async (req, res) => {
   const user = req.user.id;

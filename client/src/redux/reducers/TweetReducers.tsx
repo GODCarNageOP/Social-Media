@@ -1,4 +1,4 @@
-import { CLEAR_TWEET_ERRORS, UPDATE_LIKES_FAILURE, UPDATE_LIKES_REQUEST, UPDATE_LIKES_SUCCESS } from '../constants/TweetConstants';
+import { CLEAR_TWEET_ERRORS, UPDATE_LIKES_FAILURE, UPDATE_LIKES_REQUEST, UPDATE_LIKES_SUCCESS, GET_TWEETS_BY_SUCCESS, GET_TWEETS_BY_FAILURE } from '../constants/TweetConstants';
 import {
     CREATE_TWEET_REQUEST,
     CREATE_TWEET_SUCCESS,
@@ -18,14 +18,16 @@ import {
     FETCH_OTHER_TWEETS_REQUEST,
     FETCH_OTHER_TWEETS_SUCCESS,
     FETCH_OTHER_TWEETS_FAILURE,
+    GET_TWEETS_BY_REQUEST,
+
 } from '../constants/TweetConstants';
 
 const initialState = {
     loading: false,
     error: null,
-    allTweets:[],
+    allTweets: [],
     personalTweets: [],
-
+    tweetsById: {},
 
 };
 
@@ -38,6 +40,7 @@ export const tweetReducer = (state = initialState, action) => {
         case FETCH_ALL_TWEETS_REQUEST:
         case FETCH_OTHER_TWEETS_REQUEST:
         case UPDATE_LIKES_REQUEST:
+        case GET_TWEETS_BY_REQUEST:
             return {
                 ...state,
                 loading: true,
@@ -52,6 +55,12 @@ export const tweetReducer = (state = initialState, action) => {
 
 
             };
+        case GET_TWEETS_BY_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                tweetsById: action.payload
+            }
         case UPDATE_LIKES_SUCCESS:
             return {
                 ...state,
@@ -101,6 +110,8 @@ export const tweetReducer = (state = initialState, action) => {
         case FETCH_ALL_TWEETS_FAILURE:
         case FETCH_OTHER_TWEETS_FAILURE:
         case UPDATE_LIKES_FAILURE:
+        case GET_TWEETS_BY_FAILURE:
+
             return {
                 ...state,
                 loading: false,
