@@ -6,6 +6,7 @@ import { tweetReducer } from "./redux/reducers/TweetReducers";
 import { likeReducer } from "./redux/reducers/LikeReducers";
 import followerReducer from "./redux/reducers/FollowReducer";
 import { trendingReducer } from "./redux/reducers/TrendingReducer";
+import { bookmarkReducer } from "./redux/reducers/BookmarReducer";
 
 
 const reducer = combineReducers({
@@ -13,7 +14,8 @@ const reducer = combineReducers({
     tweets: tweetReducer,
     likes:likeReducer,
     follow:followerReducer,
-    trending:trendingReducer
+    trending:trendingReducer,
+    bookmark: bookmarkReducer
 
 })
 

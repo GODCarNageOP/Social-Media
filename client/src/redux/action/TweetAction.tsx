@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
 import { UPDATE_LIKES_SUCCESS, UPDATE_LIKES_FAILURE } from '../constants/TweetConstants';
+import { GET_TRENDING_REQUEST } from '../constants/TrendingConstants';
 import {
     CREATE_TWEET_REQUEST,
     CREATE_TWEET_SUCCESS,
@@ -21,14 +22,17 @@ import {
     FETCH_OTHER_TWEETS_SUCCESS,
     FETCH_OTHER_TWEETS_FAILURE,
     CLEAR_TWEET_ERRORS,
-    UPDATE_LIKES_REQUEST
+    UPDATE_LIKES_REQUEST,
+    GET_TWEETS_BY_REQUEST,
+    GET_TWEETS_BY_SUCCESS,
+    GET_TWEETS_BY_FAILURE,
 } from '../constants/TweetConstants';
 
 export interface TweetData {
     content: string;
     image: string[];
-    
-    
+
+
 }
 
 
@@ -97,10 +101,10 @@ export const deleteTweet = (id) => async (dispatch: Dispatch) => {
 
 
         console.log(`deleting`, id)
-    //    const deletes= await axios.delete(`/api/v1/tweet/delete`,id);
+        //    const deletes= await axios.delete(`/api/v1/tweet/delete`,id);
         const { data } = await axios.delete(`/api/v1/tweet/${id}`);
 
-        dispatch({ type: DELETE_TWEET_SUCCESS, payload:data?.message});
+        dispatch({ type: DELETE_TWEET_SUCCESS, payload: data?.message });
     } catch (error: any) {
 
         const errorMessage =
@@ -151,11 +155,29 @@ export const fetchAllTweets = () => async (dispatch: Dispatch) => {
 };
 
 // Fetch other tweets
-export const fetchOtherTweets = (userId:string) => async (dispatch: Dispatch) => {
+export const fetchOtherTweets = (userId: string) => async (dispatch: Dispatch) => {
     try {
         dispatch({ type: FETCH_OTHER_TWEETS_REQUEST });
 
         const { data } = await axios.get(`/api/v1/tweets/${userId}`);
+
+        dispatch({ type: FETCH_OTHER_TWEETS_SUCCESS, payload: data });
+    } catch (error: any) {
+        const errorMessage =
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message;
+
+        dispatch({ type: FETCH_OTHER_TWEETS_FAILURE, payload: errorMessage });
+    }
+};
+
+
+export const getTweetsById = (postId: string) => async (dispatch: Dispatch) => {
+    try {
+        dispatch({ type: GET_TRENDING_REQUEST });
+
+        const { data } = await axios.post(`/api/v1/tweet`, { postId });
 
         dispatch({ type: FETCH_OTHER_TWEETS_SUCCESS, payload: data });
     } catch (error: any) {
